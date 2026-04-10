@@ -35,3 +35,10 @@ proporcion_IRAGE_2024 <- round((Casos_IRAGE_2024/Casos_totales_2024)*100.1)
 
 data3 <- data %>% filter(CLASIFICACION_MANUAL != "Caso invalidado por epidemiología" & 
                            ANIO_MIN_INTERNACION == 2026)
+Casos_IRAG_2026 <- sum (data3$CLASIFICACION_MANUAL== "Infección respiratoria aguda grave (IRAG)",
+                        ra.rm= TRUE)
+Casos_IRAE_2026 <- sum(data3$CLASIFICACION_MANUAL=="IRAG extendida", ra.rm = TRUE)
+Casos_Totales_2026 <- sum(Casos_IRAE_2026 + Casos_IRAG_2026)
+
+proporcion_IRAG_2026 <- round((Casos_IRAG_2026/Casos_Totales_2026)*100.1)
+proporcion_IRAGE_2026 <- round((Casos_IRAE_2026/Casos_Totales_2026)*100.1)
