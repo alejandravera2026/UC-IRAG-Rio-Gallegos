@@ -88,4 +88,4 @@ Casos_Totales_2026 <- sum(Casos_IRAE_2026 + Casos_IRAG_2026)
 
 proporcion_IRAG_2026 <- round((Casos_IRAG_2026/Casos_Totales_2026)*100.1)
 proporcion_IRAGE_2026 <- round((Casos_IRAE_2026/Casos_Totales_2026)*100.1)
->>>>>>> 303e7ff12d632917e72bdfb03d6617ab0fc47b3b
+
