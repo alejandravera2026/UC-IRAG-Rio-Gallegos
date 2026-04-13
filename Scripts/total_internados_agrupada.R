@@ -7,6 +7,8 @@ unique(agrupada$NOMBREEVENTOAGRP)
 evento_internados_totales <- agrupada %>%
   filter(NOMBREEVENTOAGRP == "Pacientes internados por todas las causas")
 
+
+
 tabla_internados_totales <- evento_internados_totales %>%
   group_by(SEMANA,ANIO)%>%
   summarise(Total = sum(Total, na.rm = TRUE), .groups = "drop")
