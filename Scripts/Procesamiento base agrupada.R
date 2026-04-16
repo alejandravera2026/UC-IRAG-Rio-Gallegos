@@ -4,7 +4,7 @@
 
 agrupada <-agrupada [-1,]
 
-str(data_agrupada)
+str(agrupada)
 
 # Selecciono columnas a converir a numeric
 
@@ -34,7 +34,7 @@ agrupada <- agrupada %>% select(-any_of(columnas_eliminar)) %>%
 
 #Pivoteo de datos a formato largo (longer) para agrupar por SE
 
-agrupada <- agrupada %>% pivot_longer(cols = "0 a 2 m":ncol(data_agrupada),
+agrupada <- agrupada %>% pivot_longer(cols = "0 a 2 m":ncol(agrupada),
                                       names_to = "GRUPO_ETARIO",
                                       values_to = "CASOS") 
 
@@ -63,6 +63,9 @@ agrupada_2026 <- agrupada_2026 %>%
   )
 
 
+# Filtro eventos de interés
+agrupada_2026 <- agrupada_2026 %>% filter(NOMBREEVENTOAGRP %in% evento_agrupado)
+
 #Renombro columnas para que coincidan con el drive agrupado y poder unir bases de datos agrupadas
 
 agrupada_2026 <- agrupada_2026 %>% rename ("CASOS" = "CANTIDAD",
@@ -72,7 +75,7 @@ agrupada_2026 <- agrupada_2026 %>% rename ("CASOS" = "CANTIDAD",
 
 #Uno bases de datos: drive agrupado y exportación SNVS
 
-agrupada <- agrupada %>% rbind(data_agrupada_2026)
+agrupada <- agrupada %>% rbind(agrupada_2026)
 
 
 #===========================================
