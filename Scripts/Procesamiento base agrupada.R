@@ -64,7 +64,18 @@ agrupada_2026 <- agrupada_2026 %>%
 
 
 # Filtro eventos de interés
-agrupada_2026 <- agrupada_2026 %>% filter(NOMBREEVENTOAGRP %in% evento_agrupado)
+
+agrupada_2026 <- agrupada_2026 %>% filter(NOMBRE_EVENTO_AGRP %in% evento_agrupado)
+
+#Filtro grupo de edad
+
+agrupada_2026 <- agrupada_2026 %>% filter(GRUPO != "Todos los rangos")
+
+#Unifico categorías de grupo de edad
+
+agrupada_2026 <- agrupada_2026 %>%
+  mutate(GRUPO = str_replace_all(GRUPO, ">= a 75", ">= a 75 años"),
+         GRUPO = str_replace_all(GRUPO, "Edad sin esp.", "Sin especificar"))
 
 #Renombro columnas para que coincidan con el drive agrupado y poder unir bases de datos agrupadas
 
