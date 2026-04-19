@@ -47,12 +47,25 @@ data4 <- data  %>%
 data4
 
 
-# Menor de 2 años
+# Menor de 2 a 15 años
 
+Menor_2_a_15_años<- data %>%
+  filter(EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO <=15) %>%
+  count(COMORBILIDAD) %>%
+  mutate(porcentaje= n/sum(n)) %>%
+  gt () %>%
+  fmt_percent(columns = porcentaje, decimals = 1)
 
+Menor_2_a_15_años
+  
+# De 16 a > 75 años
 
+De_16_a_mayor_75 <- data %>%
+  filter(EDAD_DIAGNOSTICO >=16 & EDAD_DIAGNOSTICO > 75) %>%
+  count(COMORBILIDAD) %>%
+  mutate(porcentaje= n/sum(n)) %>%
+  gt () %>%
+  fmt_percent(columns = porcentaje, decimals = 1)
 
-#Entre 2 a 60 años
+De_16_a_mayor_75  
 
-
-# Mayor de 60 años
