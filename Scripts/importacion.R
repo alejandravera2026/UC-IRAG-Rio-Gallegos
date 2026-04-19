@@ -2,10 +2,10 @@
 
 data <- read.csv2("Data/UC_IRAG_EST20892.csv",sep = ";", encoding = "latin1")
 
-agrupada <- read_xlsx("Data/agrupada excel 2024.xlsx")
+agrupada <- read_xlsx("Data/UC_IRAG_AGRUPADA.xlsx")
 
 #Cambié nombre de archivo
-agrupada_2026 <-data_agrupada_2026 <- read.csv("Data/AG_UC_IRAG_2026.csv", sep = ";", encoding = "latin1")
+agrupada_2026 <- data_agrupada_2026 <- read.csv("Data/AG_UC_IRAG_[EST20892]_2026_04_08.csv", sep = ";", encoding = "latin1")
 
 
 # ===== PARÁMETROS TEMPORALES PARA EL ANÁLISIS ======
