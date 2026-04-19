@@ -5,6 +5,18 @@ data <- data %>% filter(CLASIFICACION_MANUAL != "Caso invalidado por epidemiolog
 
 colnames(data)
 
+#filtro hasta la semana la semana 8 de 2026
+
+ANIO_MINIMO <- 2024
+
+SEMANA_MINIMA <- 18
+
+ANIO_MAXIMO <- 2026
+
+SEMANA_MAXIMA <- 8
+
+
+
 
 
 data <- data %>%
