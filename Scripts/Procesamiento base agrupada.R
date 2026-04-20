@@ -128,6 +128,8 @@ tabla_resumen <- tabla_resumen %>% mutate(PROPORCION_IRAG = round(
   PROPORCION_FALLECIDOS = round(
     (FALLECIDOS_IRAG/`Defunciones totales`)*100,1))
 
+tabla_resumen <- tabla_resumen %>% 
+  mutate(PROPORCION_FALLECIDOS_OTRAS_CAUSAS = 100 - PROPORCION_FALLECIDOS)
 
 #================================================================================
 # 📊 Grafico interactivo proporcion de casos de IRAG e IRAGe entre los internados   
@@ -162,6 +164,8 @@ curva_internaciones_irag <-highchart() %>%
     name = "IRAGe",
     color = "#beaed4")
 
+curva_internaciones_irag
+
 # Total de fallecidos por todas las causas y total de irag e irag e
 # ESA TABLA SOLO MUESTRA LAS PROPORCIONES, PERO NO MUESTRA EL TOTAL DE FALLECIDOS QUE NO HAY CASOS DE IRAG E IRAG E
 
@@ -182,7 +186,7 @@ curva_fallecidos_irag <-highchart() %>%
   hc_credits(text = "Fuente: Elaboración propia en base a datos del SNVS 2.0", 
              enabled = TRUE) %>% 
   hc_add_series(
-    data = tabla_resumen$PROPORCION_FALLECIDOS,
+    data = tabla_resumen$PROPORCION_FALLECIDOS_OTRAS_CAUSAS,
     name = "Otras causas",
     color = "lightgrey") %>%
   hc_add_series(
