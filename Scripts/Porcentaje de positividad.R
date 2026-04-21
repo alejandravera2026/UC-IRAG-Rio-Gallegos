@@ -33,8 +33,9 @@ ggplot(positividad_se, aes(x = SEPI, y= PORCENTAJE_POSITIVIDAD, group = 1 )) +
   scale_x_discrete(breaks = function(x) x[seq(1,length(x), by = 4)]) +
   labs(title ="Porcentaje de positividad por SE y por año",
        caption = "Fuente SNVS 2.0",
-       X = "Semana epidemiológica",
-       y = "% Positividad",
-       color = "Año") +
+       x = "Semana por semana y por año",
+       y = "% Positividad") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
