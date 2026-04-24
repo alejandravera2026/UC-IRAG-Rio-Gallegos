@@ -81,7 +81,7 @@ curva_fallecidos_irag <-highchart() %>%
     name = "Otras causas",
     color = "lightgrey") %>%
   hc_add_series(
-    data = tabla_resumen$FALLECIDOS_IRAG,
+    data = tabla_resumen$PROPORCION_FALLECIDOS,
     name = "FALLECIDOS POR IRAG E IRAG EXTENDIDA",
     color = "#7fc97f")
 
