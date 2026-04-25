@@ -9,7 +9,17 @@ colnames(data)#Busco mis variables
 
 unique (data$CUIDADO_INTENSIVO)
 
+unique (data$FECHA_CUI_INTENSIVOS)
+
 unique(data$CLASIFICACION_MANUAL)
+
+data <- data %>% 
+  filter (CLASIFICACION_MANUAL!="Caso invalidado por epidemiología")
+
+#=================================================================================
+#==================================================================================
+# IRAG =============================================================================
+#======================================================================================
 
 data <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
 
@@ -18,7 +28,7 @@ irag_uci <- data %>%
 
 irag_uci <- irag_uci %>% # Resumo 
   group_by(`CUIDADO_INTENSIVO`) %>%  
-  summarise(Casos_irag = n(), .groups = "drop") %>% 
+  summarise(Casos = n(), .groups = "drop") %>% 
   mutate(
     Porcentaje = round((Casos / sum(Casos)) * 100,1)
   ) %>%
@@ -27,11 +37,18 @@ irag_uci <- irag_uci %>% # Resumo
 
 print(irag_uci)
 
-#====================================================================================================
-uci_si <- data %>% filter(CUIDADO_INTENSIVO=="SI")
+#=================================================================================
+#==================================================================================
+# IRAGE =============================================================================
+#======================================================================================
 
-uci_si <- uci_si %>% # Resumo crónicas por gedad
-  group_by(`CLASIFICACION_MANUAL`) %>%  
+data <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
+
+irage_uci <- data %>% 
+  filter(CLASIFICACION_MANUAL=="IRAG extendida")
+
+irage_uci <- irage_uci %>% # Resumo 
+  group_by(`CUIDADO_INTENSIVO`) %>%  
   summarise(Casos = n(), .groups = "drop") %>% 
   mutate(
     Porcentaje = round((Casos / sum(Casos)) * 100,1)
@@ -39,4 +56,6 @@ uci_si <- uci_si %>% # Resumo crónicas por gedad
   arrange(desc(Porcentaje)) %>%   # primero ordena
   adorn_totals(where = "row")     # después agrega Total
 
-print(uci_si)
+print(irage_uci)
+
+#====================================================================================================
