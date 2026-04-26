@@ -1,61 +1,264 @@
+#========================================================
+# OBJETIVO 7
+# Estimar la proporción de IRAG e IRAGE
+# que requieren ingreso a cuidados intensivos (UCI)
+# por semana epidemiológica
+#========================================================
 
-# Objetivo 7: estimar la proporción de irag e irag e que requieren ingreso a cuidados intensivos
+#--------------------------------------------------------
+# 1. Parámetros del período de análisis
+#--------------------------------------------------------
 
-#Procesamiento de base individual
+ANIO_MINIMO <- 2024
+SEMANA_MINIMA <- 18
+ANIO_MAXIMO <- 2026
+SEMANA_MAXIMA <- 8
 
-str(data)
+#--------------------------------------------------------
+# 2. Limpieza inicial
+#--------------------------------------------------------
 
-colnames(data)#Busco mis variables
+data <- data %>%
+  filter(
+    CLASIFICACION_MANUAL != "Caso invalidado por epidemiología"
+  )
 
-unique (data$CUIDADO_INTENSIVO)
+#--------------------------------------------------------
+# 3. Selección de variables
+#--------------------------------------------------------
 
-unique (data$FECHA_CUI_INTENSIVOS)
+uci <- data %>%
+  select(
+    CLASIFICACION_MANUAL,
+    CUIDADO_INTENSIVO,
+    FECHA_CUI_INTENSIVOS,
+    SEPI_MIN_INTERNACION,
+    ANIO_MIN_INTERNACION
+  )
 
-unique(data$CLASIFICACION_MANUAL)
+#--------------------------------------------------------
+# 4. Filtro por período de estudio
+#--------------------------------------------------------
 
-data <- data %>% 
-  filter (CLASIFICACION_MANUAL!="Caso invalidado por epidemiología")
+uci <- uci %>%
+  filter(
+    (
+      ANIO_MIN_INTERNACION > ANIO_MINIMO |
+        (
+          ANIO_MIN_INTERNACION == ANIO_MINIMO &
+            SEPI_MIN_INTERNACION >= SEMANA_MINIMA
+        )
+    ) &
+      (
+        ANIO_MIN_INTERNACION < ANIO_MAXIMO |
+          (
+            ANIO_MIN_INTERNACION == ANIO_MAXIMO &
+              SEPI_MIN_INTERNACION <= SEMANA_MAXIMA
+          )
+      )
+  )
 
-#=================================================================================
-#==================================================================================
-# IRAG =============================================================================
-#======================================================================================
+#========================================================
+#====================== IRAG ============================
+#========================================================
 
-cuidado_intensivo <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
-
-irag_uci <- cuidado_intensivo %>% 
-  filter(CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)")
-
-irag_uci <- irag_uci %>% # Resumo 
-  group_by(`CUIDADO_INTENSIVO`) %>%  
-  summarise(Casos = n(), .groups = "drop") %>% 
-  mutate(
-    Porcentaje = round((Casos / sum(Casos)) * 100,1)
+uci_irag <- uci %>% # Agrupo casos de IRAG por condición de UCI
+  filter(
+    CLASIFICACION_MANUAL == "Infección respiratoria aguda grave (IRAG)"
   ) %>%
-  arrange(desc(Porcentaje)) %>%   # primero ordena
-  adorn_totals(where = "row")     # después agrega Total
-
-print(irag_uci)
-
-#=================================================================================
-#==================================================================================
-# IRAGE =============================================================================
-#======================================================================================
-
-cuidado_intensivo <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
-
-irage_uci <- cuidado_intensivo %>% 
-  filter(CLASIFICACION_MANUAL=="IRAG extendida")
-
-irage_uci <- irage_uci %>% # Resumo 
-  group_by(`CUIDADO_INTENSIVO`) %>%  
-  summarise(Casos = n(), .groups = "drop") %>% 
-  mutate(
-    Porcentaje = round((Casos / sum(Casos)) * 100,1)
+  group_by(
+    ANIO_MIN_INTERNACION,
+    SEPI_MIN_INTERNACION,
+    CUIDADO_INTENSIVO
   ) %>%
-  arrange(desc(Porcentaje)) %>%   # primero ordena
-  adorn_totals(where = "row")     # después agrega Total
+  summarise(
+    Casos = n(),
+    .groups = "drop"
+  )
 
-print(irage_uci)
+#------------------ Grafico proporción de IRAG por semana ------------------------
 
-#====================================================================================================
+ggplot(
+  uci_irag %>%
+    filter(CUIDADO_INTENSIVO %in% c("SI", "NO")),
+  aes(
+    x = SEPI_MIN_INTERNACION,
+    y = Casos,
+    fill = CUIDADO_INTENSIVO
+  )
+) +
+  geom_col(position = "fill") +
+  facet_wrap(~ANIO_MIN_INTERNACION) +
+  scale_y_continuous(labels = percent) +
+  labs(
+    title = "Proporción de internados en UCI por IRAG por semana epidemiológica",
+    subtitle = "Infección Respiratoria Aguda Grave",
+    x = "Semana epidemiológica",
+    y = "Proporción",
+    fill = "Cuidado Intensivo"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold")
+  )
+
+#========================================================
+#=================== IRAG EXTENDIDA =====================
+#========================================================
+
+uci_irage <- uci %>% # Agrupo casos de IRAGE por condición de UCI
+  filter(
+    CLASIFICACION_MANUAL == "IRAG extendida"
+  ) %>%
+  group_by(
+    ANIO_MIN_INTERNACION,
+    SEPI_MIN_INTERNACION,
+    CUIDADO_INTENSIVO
+  ) %>%
+  summarise(
+    Casos = n(),
+    .groups = "drop"
+  )
+
+#---------------- Grafico IRAG Extendida por semana ----------------
+
+ggplot(
+  uci_irage %>%
+    filter(CUIDADO_INTENSIVO %in% c("SI", "NO")),
+  aes(
+    x = SEPI_MIN_INTERNACION,
+    y = Casos,
+    fill = CUIDADO_INTENSIVO
+  )
+) +
+  geom_col(position = "fill") +
+  facet_wrap(~ANIO_MIN_INTERNACION) +
+  scale_y_continuous(labels = percent) +
+  labs(
+    title = "Proporción de internados en UCI por IRAGE por semana epidemiológica",
+    subtitle = "IRAG Extendida",
+    x = "Semana epidemiológica",
+    y = "Proporción",
+    fill = "Cuidado Intensivo"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold")
+  )
+
+#========================================================
+# OPCIÓN EXTRA: IRAG
+# Gráfico interactivo con Highcharter
+#========================================================
+
+highchart() %>%
+  hc_chart(type = "column") %>%
+  
+  hc_plotOptions(
+    column = list(
+      stacking = "percent"
+    )
+  ) %>%
+  
+  # Primero NO (queda arriba)
+  hc_add_series(
+    name = "NO",
+    data = uci_irag %>%
+      arrange(SEPI_MIN_INTERNACION) %>%
+      filter(CUIDADO_INTENSIVO == "NO") %>%
+      pull(Casos)
+  ) %>%
+  
+  # Después SI (queda abajo)
+  hc_add_series(
+    name = "SI",
+    data = uci_irag %>%
+      arrange(SEPI_MIN_INTERNACION) %>%
+      filter(CUIDADO_INTENSIVO == "SI") %>%
+      pull(Casos)
+  ) %>%
+  
+  hc_xAxis(
+    categories = uci_irag %>%
+      arrange(SEPI_MIN_INTERNACION) %>%
+      distinct(SEPI_MIN_INTERNACION) %>%
+      pull(SEPI_MIN_INTERNACION),
+    
+    title = list(
+      text = "Semana epidemiológica"
+    )
+  ) %>%
+  
+  hc_yAxis(
+    title = list(
+      text = "Proporción"
+    )
+  ) %>%
+  
+  hc_title(
+    text = "Proporción de internados en UCI por IRAG"
+  ) %>%
+  
+  hc_subtitle(
+    text = "Gráfico interactivo"
+  )
+
+#========================================================
+# OPCIÓN EXTRA: IRAGE
+# Gráfico interactivo con Highcharter
+#========================================================
+
+highchart() %>%
+  hc_chart(type = "column") %>%
+  
+  hc_plotOptions(
+    column = list(
+      stacking = "percent"
+    )
+  ) %>%
+  
+  # Primero NO (queda arriba)
+  hc_add_series(
+    name = "NO",
+    data = uci_irage %>%
+      arrange(SEPI_MIN_INTERNACION) %>%
+      filter(CUIDADO_INTENSIVO == "NO") %>%
+      pull(Casos)
+  ) %>%
+  
+  # Después SI (queda abajo)
+  hc_add_series(
+    name = "SI",
+    data = uci_irag %>%
+      arrange(SEPI_MIN_INTERNACION) %>%
+      filter(CUIDADO_INTENSIVO == "SI") %>%
+      pull(Casos)
+  ) %>%
+  
+  hc_xAxis(
+    categories = uci_irag %>%
+      arrange(SEPI_MIN_INTERNACION) %>%
+      distinct(SEPI_MIN_INTERNACION) %>%
+      pull(SEPI_MIN_INTERNACION),
+    
+    title = list(
+      text = "Semana epidemiológica"
+    )
+  ) %>%
+  
+  hc_yAxis(
+    title = list(
+      text = "Proporción"
+    )
+  ) %>%
+  
+  hc_title(
+    text = "Proporción de internados en UCI por IRAG"
+  ) %>%
+  
+  hc_subtitle(
+    text = "Gráfico interactivo"
+  )
+
