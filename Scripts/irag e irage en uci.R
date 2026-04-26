@@ -21,9 +21,9 @@ data <- data %>%
 # IRAG =============================================================================
 #======================================================================================
 
-data <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
+cuidado_intensivo <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
 
-irag_uci <- data %>% 
+irag_uci <- cuidado_intensivo %>% 
   filter(CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)")
 
 irag_uci <- irag_uci %>% # Resumo 
@@ -42,9 +42,9 @@ print(irag_uci)
 # IRAGE =============================================================================
 #======================================================================================
 
-data <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
+cuidado_intensivo <- data %>% select(CLASIFICACION_MANUAL,CUIDADO_INTENSIVO,FECHA_CUI_INTENSIVOS,SEPI_MIN_INTERNACION,ANIO_MIN_INTERNACION)
 
-irage_uci <- data %>% 
+irage_uci <- cuidado_intensivo %>% 
   filter(CLASIFICACION_MANUAL=="IRAG extendida")
 
 irage_uci <- irage_uci %>% # Resumo 
