@@ -179,4 +179,5 @@ ggplot(grafico_fallecido, aes(x = factor(EDAD_UC_IRAG), y = Porcentaje, fill = C
         plot.title = element_text(face = "bold")) +
   guides(fill = guide_legend(ncol = 1))
 
+
   
