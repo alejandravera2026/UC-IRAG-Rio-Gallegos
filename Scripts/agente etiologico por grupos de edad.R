@@ -180,4 +180,3 @@ ggplot(grafico_fallecido, aes(x = factor(EDAD_UC_IRAG), y = Porcentaje, fill = C
   guides(fill = guide_legend(ncol = 1))
 
   
-  
