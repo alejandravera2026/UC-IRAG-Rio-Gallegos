@@ -18,8 +18,5 @@ library(readr)
 library(lubridate)
 library(stringr)
 
-
-library (janitor)
-
-library(forcats)
-
+library(janitor)
+library(patchwork)
