@@ -79,7 +79,7 @@ unique(data$EDAD_UC_IRAG)
 
 entre_seis_y_23_meses <- c("6 a 11 Meses", "12 a 23 Meses")
 
-mayoreS_65_años <- c("65 a 69 Años", "70 a 74 Años", "75 y más Años")
+mayores_65_años <- c("65 a 69 Años", "70 a 74 Años", "75 y más Años")
 
 # Se estudia los vacunados por dos grupos de edad
 
@@ -119,6 +119,125 @@ vacunacion_mayores_65 <- vacunacion %>%
 
 vacunacion_mayores_65
 
+## Representación gráfica de vacunación
+
+## Antigripal Materna
+
+vacunacion_materna_grafico <- vacunacion %>%
+  filter(EDAD_UC_IRAG %in% menores_seis_meses) %>%
+  filter(VAC_ANTIGRIPAL_MATERNA != "SIN DATO") %>%
+  mutate(Vac_Materna_Antigripal = case_when(VAC_ANTIGRIPAL_MATERNA %in% c("CONSTATADA", "REFERIDA") ~ "VACUNADA",
+                                            VAC_ANTIGRIPAL_MATERNA == "MADRE NO VACUNADA" ~ "NO VACUNADA",
+                                            TRUE ~ NA_character_)) %>%
+  filter(!is.na(Vac_Materna_Antigripal)) %>%
+  count(EDAD_UC_IRAG, Vac_Materna_Antigripal) %>%
+  group_by(EDAD_UC_IRAG) %>%
+  mutate(porcentaje = n/ sum(n)) %>%
+  ungroup()
+
+  ggplot(vacunacion_materna_grafico, aes( x = EDAD_UC_IRAG, y = porcentaje, fill = Vac_Materna_Antigripal)) +
+  geom_col() +
+  geom_text(aes(label = scales::percent(porcentaje, 0.1)),
+            position = position_stack(vjust = 0.5),
+            color = "white", size = 4, fontface = "bold") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("VACUNADA" = "#1E88E5",
+                               "NO VACUNADA" = "#FB8C00")) +
+    labs(title = "Cobertura de vacunación materna antigripal", 
+         x = "",
+         y = "%",
+         caption = "Fuente SNVS 2.0") +
+    theme_minimal()
+  
+## Vacunación materna VSR
+  vacunacion_materna_vsr_grafico <- vacunacion %>%
+    filter(EDAD_UC_IRAG %in% menores_seis_meses) %>%
+    filter(VAC_VSR!= "SIN DATO") %>%
+    mutate(Vac_Materna_VSR = case_when(VAC_VSR %in% c("SE 36", "SE 35", "SE 32",
+                                                      "SE 34", "SE DESCONOCIDA") ~ "VACUNADA",
+                                              VAC_VSR == "MADRE NO VACUNADA" ~ "NO VACUNADA",
+                                              TRUE ~ NA_character_)) %>%
+    filter(!is.na(Vac_Materna_VSR)) %>%
+    count(EDAD_UC_IRAG, Vac_Materna_VSR) %>%
+    group_by(EDAD_UC_IRAG) %>%
+    mutate(porcentaje = n/ sum(n)) %>%
+    ungroup()
+  
+  ggplot(vacunacion_materna_vsr_grafico, aes( x = EDAD_UC_IRAG, y = porcentaje, fill = Vac_Materna_VSR)) +
+    geom_col() +
+    geom_text(aes(label = scales::percent(porcentaje, 0.1)),
+              position = position_stack(vjust = 0.5),
+              color = "white", size = 4, fontface = "bold") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_fill_manual(values = c("VACUNADA" = "#1E88E5",
+                                 "NO VACUNADA" = "#FB8C00")) +
+    labs(title = "Cobertura de vacunación materna VSR", 
+         x = "",
+         y = "%",
+         caption = "Fuente SNVS 2.0") +
+    theme_minimal()
+
+## Vacunación antigripal de 6 meses a 23 meses y mayores de 65 años
+  
+unique(vacunacion$VAC_ANTIGRIPAL)
+
+vacunacion_antigripal_grafico <- vacunacion %>%
+  filter(EDAD_UC_IRAG %in% entre_seis_y_23_meses) %>%
+  filter(VAC_ANTIGRIPAL != "SIN DATO") %>%
+  mutate(vacunacion_antigripal = case_when(VAC_ANTIGRIPAL %in% c("CONSTATADA", "REFERIDA")~ "VACUNA ANTIGRIPAL",
+                                           VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO ANTIGRIPAL",
+                                           TRUE ~NA_character_)) %>%
+  filter(!is.na(vacunacion_antigripal)) %>%
+  count(EDAD_UC_IRAG,vacunacion_antigripal) %>%
+  group_by(EDAD_UC_IRAG) %>%
+  mutate(porcentaje = n/sum(n))%>%
+  ungroup()
+
+ggplot(vacunacion_antigripal_grafico, aes( x = EDAD_UC_IRAG, y = porcentaje, fill = vacunacion_antigripal)) +
+  geom_col() +
+  geom_text(aes(label = scales::percent(porcentaje, 0.1)),
+            position = position_stack(vjust = 0.5),
+            color = "white", size = 4, fontface = "bold") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("VACUNA ANTIGRIPAL" = "#1E88E5",
+                               "NO VACUNADO ANTIGRIPAL" = "#FB8C00")) +
+  labs(title = "Cobertura de vacunación antigripal en niños de sies meses a 23 meses internados por IRAG e IRAG extendida", 
+       x = "",
+       y = "%",
+       caption = "Fuente SNVS 2.0") +
+  theme_minimal()
+
+vacunacion_antigripal_grafico_mayores <- vacunacion %>%
+  filter(EDAD_UC_IRAG %in% mayores_65_años) %>%
+  filter(VAC_ANTIGRIPAL != "SIN DATO") %>%
+  mutate(vacunacion_antigripal = case_when(VAC_ANTIGRIPAL %in% c("CONSTATADA", "REFERIDA")~ "VACUNA ANTIGRIPAL",
+                                           VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO ANTIGRIPAL",
+                                           TRUE ~NA_character_)) %>%
+  filter(!is.na(vacunacion_antigripal)) %>%
+  count(EDAD_UC_IRAG,vacunacion_antigripal) %>%
+  group_by(EDAD_UC_IRAG) %>%
+  mutate(porcentaje = n/sum(n))%>%
+  ungroup()
+
+ggplot(vacunacion_antigripal_grafico_mayores, aes( x = EDAD_UC_IRAG, y = porcentaje, fill = vacunacion_antigripal)) +
+  geom_col() +
+  geom_text(aes(label = scales::percent(porcentaje, 0.1)),
+            position = position_stack(vjust = 0.5),
+            color = "white", size = 4, fontface = "bold") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("VACUNA ANTIGRIPAL" = "#1E88E5",
+                               "NO VACUNADO ANTIGRIPAL" = "#FB8C00")) +
+  labs(title = "Cobertura de vacunación antigripal mayores de 65 años internados por IRAG e IRAG extendida", 
+       x = "",
+       y = "%",
+       caption = "Fuente SNVS 2.0") +
+  theme_minimal()
+
+
+
+  
+  
+  
 
 
 
