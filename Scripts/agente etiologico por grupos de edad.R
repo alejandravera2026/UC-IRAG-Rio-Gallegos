@@ -19,17 +19,14 @@ grafico_virus <- agente_etiologico_10 %>%
                 names_to = "Virus",
                 values_to ="Resultado") %>%
   filter(Resultado != "Sin resultado") %>%
-  mutate(Categoria = case_when(Virus == "INFLUENZA_FINAL" & Resultado == "Negativo" ~ "Influenza Negativo",
-                               Virus == "INFLUENZA_FINAL" & Resultado != "Negativo" ~ Resultado,
-                               Virus == "VSR_FINAL" & Resultado == "Negativo" ~ "VSR Negativo",
+  filter(Resultado != "Negativo") %>%
+  mutate(Categoria = case_when( Virus == "INFLUENZA_FINAL" & Resultado != "Negativo" ~ Resultado,
                                Virus == "VSR_FINAL" & Resultado == "VSR" ~ "VSR",
                                Virus == "VSR_FINAL" & Resultado == "VSR A" ~ "VSR A",
                                Virus == "VSR_FINAL" & Resultado == "VSR B" ~ "VSR B",
-                               Virus == "COVID_19_FINAL" & Resultado == "Negativo" ~ "COVID 19 Negativo",
                                Virus == "COVID_19_FINAL" & Resultado == "Positivo" ~ "COVID 19 Positivo",
                                TRUE ~ NA_character_)) %>%
-  mutate(Categoria =fct_relevel(Categoria, "Influenza Negativo", "VSR Negativo", "COVID 19 Negativo")) %>%
-  filter(!is.na(Categoria)) %>%
+    filter(!is.na(Categoria)) %>%
   #Cuento categoria por grupo de edad
   count(EDAD_UC_IRAG, Categoria) %>%
   # porcentaje del total de determinaciones por grupo de edad
@@ -42,12 +39,9 @@ grafico_virus <- agente_etiologico_10 %>%
   geom_text(aes(label = ifelse(Porcentaje > 3, paste0(round(Porcentaje, 0), "%"),"")),
             position = position_stack(vjust = 0.5),
             size = 2.5, color = "white") +
-  scale_fill_manual(values = c("Influenza Negativo" = "#d9d9d9",
-                               "VSR Negativo" = "#bdbdbd",
-                               "COVID 19 Negativo"= "#969696",
-                               "Influenza A H1N1" = "#e41a1c",
+  scale_fill_manual(values = c("Influenza A H1N1" = "#e41a1c",
                                "Influenza A H3N2" = "#377eb8",
-                               "Influenza A (sin subtipificar" = "#4daf4a",
+                               "Influenza A (sin subtipificar)" = "#4daf4a",
                                "Influenza B Victoria" = "#984ea3",
                                "Influenza B (sin linaje)" = "#ff7f00",
                                "Influenza positivo-Sin Tipo" = "#ffff33",
@@ -76,16 +70,13 @@ grafico_uti <- agente_etiologico_10 %>%
                names_to = "Virus",
                values_to ="Resultado") %>%
   filter(Resultado != "Sin resultado") %>%
-  mutate(Categoria = case_when(Virus == "INFLUENZA_FINAL" & Resultado == "Negativo" ~ "Influenza Negativo",
-                               Virus == "INFLUENZA_FINAL" & Resultado != "Negativo" ~ Resultado,
-                               Virus == "VSR_FINAL" & Resultado == "Negativo" ~ "VSR Negativo",
+  filter(Resultado != "Negativo") %>%
+  mutate(Categoria = case_when(Virus == "INFLUENZA_FINAL" & Resultado != "Negativo" ~ Resultado,
                                Virus == "VSR_FINAL" & Resultado == "VSR" ~ "VSR",
                                Virus == "VSR_FINAL" & Resultado == "VSR A" ~ "VSR A",
                                Virus == "VSR_FINAL" & Resultado == "VSR B" ~ "VSR B",
-                               Virus == "COVID_19_FINAL" & Resultado == "Negativo" ~ "COVID 19 Negativo",
                                Virus == "COVID_19_FINAL" & Resultado == "Positivo" ~ "COVID 19 Positivo",
                                TRUE ~ NA_character_)) %>%
-  mutate(Categoria =fct_relevel(Categoria, "Influenza Negativo", "VSR Negativo", "COVID 19 Negativo")) %>%
   filter(!is.na(Categoria)) %>%
   #Cuento categoria por grupo de edad
   count(EDAD_UC_IRAG, Categoria) %>%
@@ -99,12 +90,9 @@ ggplot(grafico_uti, aes(x = factor(EDAD_UC_IRAG), y = Porcentaje, fill = Categor
   geom_text(aes(label = ifelse(Porcentaje > 3, paste0(round(Porcentaje, 0), "%"),"")),
             position = position_stack(vjust = 0.5),
             size = 2.5, color = "white") +
-  scale_fill_manual(values = c("Influenza Negativo" = "#d9d9d9",
-                               "VSR Negativo" = "#bdbdbd",
-                               "COVID 19 Negativo"= "#969696",
-                               "Influenza A H1N1" = "#e41a1c",
+  scale_fill_manual(values = c("Influenza A H1N1" = "#e41a1c",
                                "Influenza A H3N2" = "#377eb8",
-                               "Influenza A (sin subtipificar" = "#4daf4a",
+                               "Influenza A (sin subtipificar)" = "#4daf4a",
                                "Influenza B Victoria" = "#984ea3",
                                "Influenza B (sin linaje)" = "#ff7f00",
                                "Influenza positivo-Sin Tipo" = "#ffff33",
@@ -132,17 +120,14 @@ grafico_fallecido <- agente_etiologico_10 %>%
                names_to = "Virus",
                values_to ="Resultado") %>%
   filter(Resultado != "Sin resultado") %>%
-  mutate(Categoria = case_when(Virus == "INFLUENZA_FINAL" & Resultado == "Negativo" ~ "Influenza Negativo",
-                               Virus == "INFLUENZA_FINAL" & Resultado != "Negativo" ~ Resultado,
-                               Virus == "VSR_FINAL" & Resultado == "Negativo" ~ "VSR Negativo",
+  filter(Resultado != "Negativo") %>%
+  mutate(Categoria = case_when(Virus == "INFLUENZA_FINAL" & Resultado != "Negativo" ~ Resultado,
                                Virus == "VSR_FINAL" & Resultado == "VSR" ~ "VSR",
                                Virus == "VSR_FINAL" & Resultado == "VSR A" ~ "VSR A",
                                Virus == "VSR_FINAL" & Resultado == "VSR B" ~ "VSR B",
-                               Virus == "COVID_19_FINAL" & Resultado == "Negativo" ~ "COVID 19 Negativo",
                                Virus == "COVID_19_FINAL" & Resultado == "Positivo" ~ "COVID 19 Positivo",
                                TRUE ~ NA_character_)) %>%
-  mutate(Categoria =fct_relevel(Categoria, "Influenza Negativo", "VSR Negativo", "COVID 19 Negativo")) %>%
-  filter(!is.na(Categoria)) %>%
+   filter(!is.na(Categoria)) %>%
   #Cuento categoria por grupo de edad
   count(EDAD_UC_IRAG, Categoria) %>%
   # porcentaje del total de determinaciones por grupo de edad
@@ -155,12 +140,9 @@ ggplot(grafico_fallecido, aes(x = factor(EDAD_UC_IRAG), y = Porcentaje, fill = C
   geom_text(aes(label = ifelse(Porcentaje > 3, paste0(round(Porcentaje, 0), "%"),"")),
             position = position_stack(vjust = 0.5),
             size = 2.5, color = "white") +
-  scale_fill_manual(values = c("Influenza Negativo" = "#d9d9d9",
-                               "VSR Negativo" = "#bdbdbd",
-                               "COVID 19 Negativo"= "#969696",
-                               "Influenza A H1N1" = "#e41a1c",
+  scale_fill_manual(values = c("Influenza A H1N1" = "#e41a1c",
                                "Influenza A H3N2" = "#377eb8",
-                               "Influenza A (sin subtipificar" = "#4daf4a",
+                               "Influenza A (sin subtipificar)" = "#4daf4a",
                                "Influenza B Victoria" = "#984ea3",
                                "Influenza B (sin linaje)" = "#ff7f00",
                                "Influenza positivo-Sin Tipo" = "#ffff33",
