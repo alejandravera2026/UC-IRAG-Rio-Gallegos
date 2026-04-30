@@ -6,7 +6,7 @@ tipo_virus <- data %>%
 # Filtro los sin resultados
 
 tipo_virus <- tipo_virus %>%
-     filter(INFLUENZA_FINAL != "Sin resultado", COVID_19_FINAL != "Sin resultado", VSR_FINAL != "Sinr resultado")
+     filter(INFLUENZA_FINAL != "Sin resultado", COVID_19_FINAL != "Sin resultado", VSR_FINAL != "Sin  resultado")
  # Selecciono año y semana de estudio
 
 ANIO_MINIMO <- 2024
