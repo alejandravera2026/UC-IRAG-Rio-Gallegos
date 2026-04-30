@@ -26,15 +26,14 @@ vacunacion <- data %>%
 
 unique(vacunacion$EDAD_UC_IRAG)
 
-# Se crea un vector de menores de 6 meses vacunacion materna
+menores_seis_meses <- c("0 a 2 Meses", "3 a 5 Meses")
 
-menores_seis_meses <-c("0 a 2 Meses", "3 a 5 Meses")
 
 #Primero aplico a la vacunación materna antigripal
 
 vacunacion_materna <- vacunacion %>%
-  filter(EDAD_UC_IRAG %in% menores_seis_meses) %>%
   filter(VAC_ANTIGRIPAL_MATERNA!= "SIN DATO") %>%
+  filter(EDAD_UC_IRAG %in% menores_seis_meses) %>%
   mutate(Vac_Materna_Antigripal = case_when(VAC_ANTIGRIPAL_MATERNA %in% c("CONSTATADA", "REFERIDA") ~ "VACUNADA",
                                  VAC_ANTIGRIPAL_MATERNA == "MADRE NO VACUNADA" ~ "NO VACUNADA",
                                  TRUE ~ NA_character_)) %>%
@@ -47,31 +46,32 @@ vacunacion_materna <- vacunacion %>%
 
 vacunacion_materna
 
-  
-
-
-
 # Ahora aplico a la vacunación materna por VSR
 
 unique(vacunacion$VAC_VSR)
+unique(vacunacion$EDAD_UC_IRAG)
 
-vacunacion_materna_VSR <- vacunacion %>%
-  filter(EDAD_UC_IRAG %in% menores_seis_meses) %>%
+vacunacion_materna_vsr <- vacunacion %>%
   filter(VAC_VSR!= "SIN DATO") %>%
-  mutate(vac_materna_VSR= case_when(VAC_VSR %in% c("SE 34", "SE 36", "SE 35", "SE 32", "SE DESCONOCIDA") ~ "VACUNADA",
-                                 VAC_VSR == "MADRE NO VACUNADA" ~ "NO VACUNADA",
-                                 TRUE ~ NA_character_)) %>%
-  filter(!is.na(vac_materna_VSR)) %>%
-  count(EDAD_UC_IRAG, vac_materna_VSR) %>%
+  filter(EDAD_UC_IRAG %in% menores_seis_meses)%>%
+  mutate(vacuna_materna_sincicial = case_when(VAC_VSR %in% c("SE 36", "SE 35", "SE 32",
+                                                            "SE 34", "SE DESCONOCIDA") ~
+                                                "MADRE VACUNADA",
+                                              VAC_VSR == "MADRE NO VACUNADA" ~ "NO VACUNADA VSR",
+         TRUE ~ NA_character_)) %>%
+  mutate(menor_seis = case_when(EDAD_UC_IRAG %in% c("0 a 2 Meses", "3 a 5 Meses")~ "Menor de seis meses",
+                                TRUE ~ NA_character_))%>%
+  filter(!is.na(vacuna_materna_sincicial)) %>%
+  count(EDAD_UC_IRAG, vacuna_materna_sincicial) %>%
   group_by(EDAD_UC_IRAG) %>%
   mutate(porcentaje = n/sum(n)) %>%
+  ungroup() %>%
   gt () %>%
-  fmt_percent(columns = porcentaje, decimals = 1)
+  fmt_percent(porcentaje, decimals = 1)
   
-vacunacion_materna_VSR 
-
-# ESTUDIO LOS NIÑOS VACUNADOS DE 6 A 23 MESES Y ADULTOS MAYORES DE 60 AÑOS
-
+  vacunacion_materna_vsr
+  
+# ESTUDIO LOS NIÑOS VACUNADOS DE 6 A 23 MESES Y ADULTOS MAYORES DE 60 AÑOd
 unique(data$VAC_ANTIGRIPAL)
 unique(data$EDAD_UC_IRAG)
 
@@ -79,7 +79,7 @@ unique(data$EDAD_UC_IRAG)
 
 entre_seis_y_23_meses <- c("6 a 11 Meses", "12 a 23 Meses")
 
-mayoreS_60_años <- c("60 a 64 Años", "65 a 69 Años", "70 a 74 Años", "75 y más Años")
+mayoreS_65_años <- c("65 a 69 Años", "70 a 74 Años", "75 y más Años")
 
 # Se estudia los vacunados por dos grupos de edad
 
@@ -101,10 +101,10 @@ vacunacion_6_23_meses <- vacunacion %>%
 vacunacion_6_23_meses
   
 
-# Mayores de 60
+# Mayores de 65 años
 
-vacunacion_mayores_60 <- vacunacion %>%
-  filter(EDAD_UC_IRAG %in% mayoreS_60_años) %>%
+vacunacion_mayores_65 <- vacunacion %>%
+  filter(EDAD_UC_IRAG %in% mayoreS_65_años) %>%
   filter(VAC_ANTIGRIPAL!= "SIN DATO") %>%
   mutate(vac_antigripal_adultos= case_when(VAC_ANTIGRIPAL %in% c("CONSTATADA", "REFERIDA") ~ "VACUNADO",
                                    VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO",
@@ -117,7 +117,7 @@ vacunacion_mayores_60 <- vacunacion %>%
   fmt_percent(porcentaje, decimals = 1)
 
 
-vacunacion_mayores_60
+vacunacion_mayores_65
 
 
 
