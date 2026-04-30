@@ -1,27 +1,4 @@
 
-#===============================================================
-# ⚠️ Calculo porporciones sobre la base agrupada
-#===============================================================
-
-# Creo variable fallecidos por IRAG e IRAGe 
-
-tabla_resumen <- tabla_resumen %>% mutate(FALLECIDOS_IRAG = (`Defunciones por IRAG` + `Defunciones por IRAG extendida`))
-
-# Proporcion IRAG e IRAGe sobre ingresos totales
-
-colnames(tabla_resumen)
-
-tabla_resumen <- tabla_resumen %>% mutate(PROPORCION_IRAG = round(
-  (`Casos de IRAG entre los internados`/`Pacientes internados por todas las causas`)*100,1),
-  PROPORCION_IRAGE = round(
-    (`Casos de IRAG extendida entre los internados`/`Pacientes internados por todas las causas`)*100,1),
-  PROPORCION_INTERNADOS_OTRAS_CAUSAS = (100-(PROPORCION_IRAG + PROPORCION_IRAGE)),
-  PROPORCION_FALLECIDOS = round(
-    (FALLECIDOS_IRAG/`Defunciones totales`)*100,1))
-
-tabla_resumen <- tabla_resumen %>% 
-  mutate(PROPORCION_FALLECIDOS_OTRAS_CAUSAS = 100 - PROPORCION_FALLECIDOS)
-
 #================================================================================
 # 📊 Grafico interactivo proporcion de casos de IRAG e IRAGe entre los internados   
 #================================================================================
