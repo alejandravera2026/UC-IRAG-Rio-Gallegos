@@ -101,6 +101,7 @@ ggplot(grafico_uti, aes(x = factor(EDAD_UC_IRAG), y = Porcentaje, fill = Categor
                                "VSR B" = "#D32F2F",
                                "COVID 19 Positivo" = "#C2185b"), name = "Agente etiológico") +
   labs(title = "Distribución de los agentes etiológicos en cuidados intensivos por grupos de edad",
+       subtitle = "Período: Desde semana 18/2024 hasta semana 8/2026",
        caption = "Fuente SNVS 2.0",
        x= "Grupos de Edad",
        y = "Porcentaje de determinaciones",
@@ -151,6 +152,7 @@ ggplot(grafico_fallecido, aes(x = factor(EDAD_UC_IRAG), y = Porcentaje, fill = C
                                "VSR B" = "#D32F2F",
                                "COVID 19 Positivo" = "#C2185b"), name = "Agente etiológico") +
   labs(title = "Distribución de los agentes etiológicos en pacientes fallecidos por grupos de edad",
+       subtitle = "Përíodo: Desde semana 18/2024 hasta semana 8/2026",
        caption = "Fuente SNVS 2.0",
        x= "Grupos de Edad",
        y = "Porcentaje de determinaciones",
