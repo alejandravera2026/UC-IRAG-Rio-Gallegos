@@ -23,9 +23,20 @@ columnas_eliminar <- c("PROVINCIA","FECHAREGISTROENCABEZADO","ORIGEN","USUARIORE
 
 #Selecciono eventos de interés para el análisis de la base agrupada
 
+unique(agrupada$NOMBREEVENTOAGRP)
+
+agrupada <- agrupada %>% 
+  mutate(NOMBREEVENTOAGRP = str_replace_all(NOMBREEVENTOAGRP,
+                                                                        
+                            "Casos de IRAG EXTENDIDA entre los ingresados a UCI",
+                                                                        
+                            "Casos de IRAG extendida entre los ingresados a UCI"))
+
 evento_agrupado <- c("Pacientes internados por todas las causas","Casos de IRAG entre los internados",
                      "Casos de IRAG extendida entre los internados","Defunciones por IRAG","Defunciones por IRAG extendida",
-                     "Defunciones totales")
+                     "Defunciones totales","Pacientes ingresados a UCI","Casos de IRAG entre los ingresados a UCI","Casos de IRAG extendida entre los ingresados a UCI")
+
+
 
 #Aplico los filtros indicados
 
@@ -107,3 +118,4 @@ tabla_resumen <- tabla_resumen %>% mutate(SEPI = paste(ANIO,"-",SEMANA))
 
 tabla_resumen <- tabla_resumen %>% pivot_wider(names_from = NOMBREEVENTOAGRP,
                                                values_from = CASOS)
+
