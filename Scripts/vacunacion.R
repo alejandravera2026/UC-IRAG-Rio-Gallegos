@@ -143,7 +143,7 @@ vacunacion_materna_grafico <- vacunacion %>%
   scale_y_continuous(labels = scales::percent) +
   scale_fill_manual(values = c("VACUNADA" = "#1E88E5",
                                "NO VACUNADA" = "#FB8C00")) +
-    labs(title = "Cobertura de vacunación materna antigripal", 
+    labs(title = "Cobertura de vacunación materna antigripal en niños menores de seis meses internados por IRAG e IRAG extendida", 
          x = "",
          y = "%",
          caption = "Fuente SNVS 2.0") +
@@ -171,7 +171,7 @@ vacunacion_materna_grafico <- vacunacion %>%
     scale_y_continuous(labels = scales::percent) +
     scale_fill_manual(values = c("VACUNADA" = "#1E88E5",
                                  "NO VACUNADA" = "#FB8C00")) +
-    labs(title = "Cobertura de vacunación materna VSR", 
+    labs(title = "Cobertura de vacunación materna VSR en niños menores de seis meses internados por IRAG e IRAG extendida", 
          x = "",
          y = "%",
          caption = "Fuente SNVS 2.0") +
@@ -201,7 +201,7 @@ ggplot(vacunacion_antigripal_grafico, aes( x = EDAD_UC_IRAG, y = porcentaje, fil
   scale_y_continuous(labels = scales::percent) +
   scale_fill_manual(values = c("VACUNA ANTIGRIPAL" = "#1E88E5",
                                "NO VACUNADO ANTIGRIPAL" = "#FB8C00")) +
-  labs(title = "Cobertura de vacunación antigripal en niños de sies meses a 23 meses internados por IRAG e IRAG extendida", 
+  labs(title = "Cobertura de vacunación antigripal en niños de seis meses a 23 meses internados por IRAG e IRAG extendida", 
        x = "",
        y = "%",
        caption = "Fuente SNVS 2.0") +
