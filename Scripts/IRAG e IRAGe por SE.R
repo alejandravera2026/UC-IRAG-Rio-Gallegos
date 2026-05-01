@@ -1,21 +1,28 @@
-#Curva casos de IRAG e IRAGe por SE
+#========================================================================
+# Objetivo 1:Distribución temporal de los casos de IRAG  e IRAG extendida 
+#=========================================================================
 
-# Aplico criterios de exclusión
-
+# Primero se visualiza lo que figura en Clasificación Manual utilizando la función
+#unique
+  
 unique(data$CLASIFICACION_MANUAL)
+
+# Se elimina casos invalidados por epidemiología utilizando función filter
 
 data <- data %>% filter (CLASIFICACION_MANUAL != "Caso invalidado por epidemiología")
 
 # Completo semanas epidemiológicas y creo variable SEPI (une año con SE)
+
 data <- data %>% complete(ANIO_MIN_INTERNACION,
                           SEPI_MIN_INTERNACION = 1:52,
                           fill = list(n = 0)) %>%
   mutate(SEPI= paste(ANIO_MIN_INTERNACION,"-",str_pad(SEPI_MIN_INTERNACION,2,pad= "0")))
 
-
 #=========================================
 # ===== PARAMETROS TEMPORALES =====
 #=========================================
+
+#Se convierte a variable a numérica a las variables ANIO_MIN_INTERNACION Y SEPI_MIN_INTERNACION
 
 data$ANIO_FECHA_MINIMA <- as.numeric (data$ANIO_MIN_INTERNACION)
 
