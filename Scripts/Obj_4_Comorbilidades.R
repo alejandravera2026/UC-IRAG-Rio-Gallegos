@@ -37,6 +37,7 @@ tabla_comorbilidad_grupo_edad <- tabla_comorbilidad_grupo %>%
     EDAD_DIAGNOSTICO >= 65 ~ "Mayor de 65 años",
     TRUE ~ NA_character_))
 
+
 # Chequear si quedó bien ese grupo etario resumen
 
 table(tabla_comorbilidad_grupo_edad$grupo_etario_resumen, useNA = "always")
