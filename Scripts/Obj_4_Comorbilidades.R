@@ -31,11 +31,13 @@ tabla_comorbilidad_grupo <- tabla_comorbilidad_grupo %>%
 tabla_comorbilidad_grupo_edad <- tabla_comorbilidad_grupo %>%
   filter(COMORBILIDAD %in% c("SI", "NO"))%>%
   mutate(grupo_etario_resumen = case_when(
-    EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO < 2 ~ "Menor de dos años",
+    EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO < 2 ~ "Menor de 2 años",
     EDAD_DIAGNOSTICO >= 2 & EDAD_DIAGNOSTICO < 15 ~ "2 a 14 años",
     EDAD_DIAGNOSTICO >= 15 & EDAD_DIAGNOSTICO < 65 ~ "15 a 64 años",
     EDAD_DIAGNOSTICO >= 65 ~ "Mayor de 65 años",
     TRUE ~ NA_character_))%>%
+  mutate(grupo_etario_resumen = factor(grupo_etario_resumen, levels = c(
+    "Menor de 2 años", "2 a 14 años", "15 a 64 años", "Mayor de 65 años"))) 
 
 #Chequear si quedó bien ese grupo etario resumen
 
@@ -53,7 +55,7 @@ tabla_comorbilidad_grupo_edad <- tabla_comorbilidad_grupo_edad %>%
   count(grupo_etario_resumen,COMORBILIDAD) %>%
   group_by(grupo_etario_resumen) %>%
   mutate(Porcentaje = round(n/sum(n)*100.1 ),
-         label= paste0(Porcentaje, "%"))%>%
+         label= paste0(Porcentaje, "%")) %>%
 
 ggplot(aes(x = grupo_etario_resumen, y = Porcentaje, fill = COMORBILIDAD)) +
   geom_col(width = 0.7) +
