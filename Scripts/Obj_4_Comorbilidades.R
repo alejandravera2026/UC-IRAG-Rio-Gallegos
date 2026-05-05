@@ -31,20 +31,20 @@ tabla_comorbilidad_grupo <- tabla_comorbilidad_grupo %>%
 tabla_comorbilidad_grupo_edad <- tabla_comorbilidad_grupo %>%
   filter(COMORBILIDAD %in% c("SI", "NO"))%>%
   mutate(grupo_etario_resumen = case_when(
-    EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO < 2 ~ "0 a 2 años",
+    EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO < 2 ~ "Menor de dos años",
     EDAD_DIAGNOSTICO >= 2 & EDAD_DIAGNOSTICO < 15 ~ "2 a 14 años",
     EDAD_DIAGNOSTICO >= 15 & EDAD_DIAGNOSTICO < 65 ~ "15 a 64 años",
     EDAD_DIAGNOSTICO >= 65 ~ "Mayor de 65 años",
-    TRUE ~ NA_character_))
+    TRUE ~ NA_character_))%>%
 
-
-# Chequear si quedó bien ese grupo etario resumen
+#Chequear si quedó bien ese grupo etario resumen
 
 table(tabla_comorbilidad_grupo_edad$grupo_etario_resumen, useNA = "always")
 
 # Chequear la comorbilidad cuantos sin datos
 
 table(tabla_comorbilidad_grupo_edad$COMORBILIDAD, useNA = "always")
+
 
 # Se elabora la tabla de presencia o no de comorbilidad por grupos de edad
 # establecidos
@@ -53,7 +53,7 @@ tabla_comorbilidad_grupo_edad <- tabla_comorbilidad_grupo_edad %>%
   count(grupo_etario_resumen,COMORBILIDAD) %>%
   group_by(grupo_etario_resumen) %>%
   mutate(Porcentaje = round(n/sum(n)*100.1 ),
-         label= paste0(Porcentaje, "%")) %>%
+         label= paste0(Porcentaje, "%"))%>%
 
 ggplot(aes(x = grupo_etario_resumen, y = Porcentaje, fill = COMORBILIDAD)) +
   geom_col(width = 0.7) +
