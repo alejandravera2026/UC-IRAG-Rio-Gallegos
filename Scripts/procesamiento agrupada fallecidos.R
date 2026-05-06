@@ -63,3 +63,32 @@ curva_fallecidos_irag <-highchart() %>%
     color = "#7fc97f")
 
 curva_fallecidos_irag
+
+# Total de ingresados a UCI por todas las causas y total de irag e irag e
+
+curva_uci_irag_irage <-highchart() %>%
+  hc_chart(type= "column") %>%
+  hc_plotOptions(column = list(stacking = "percent",
+                               pointPadding = 0.1,   
+                               groupPadding = 0.05,  
+                               borderWidth = 0)) %>%
+  hc_xAxis(
+    categories = tabla_resumen$SEPI, #categorías en eje X
+    title = list(text = "Año - Semana")) %>%  #título del eje X) 
+  hc_yAxis(
+    title = list(text = "Porcentaje de ingresados a UCI"),
+    labels = list(format = "{value}%"),
+    max = 100) %>%
+  hc_credits(text = "Fuente: Elaboración propia en base a datos del SNVS 2.0", 
+             enabled = TRUE) %>% 
+  hc_add_series(
+    data = tabla_resumen$PROPORCION_UCI_OTRAS_CAUSAS,
+    name = "Otras causas",
+    color = "lightgrey") %>%
+  hc_add_series(
+    data = tabla_resumen$PROPORCION_IRAG_IRAGE_UCI,
+    name = "INGRESADOS A UCI POR IRAG E IRAG EXTENDIDA",
+    color = "#7fc97f")
+
+curva_uci_irag_irage
+
