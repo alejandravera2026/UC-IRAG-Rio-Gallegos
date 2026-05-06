@@ -62,7 +62,7 @@ ggplot(aes(x = grupo_etario_resumen, y = Porcentaje, fill = COMORBILIDAD)) +
   geom_text(aes(label = label),
             position = position_stack(vjust = 0.5),
             color = "white", size = 4.5 , fontface = "bold") +
-  scale_fill_manual(values = c("NO" = "#252c61","SI" = "#c44228"),
+  scale_fill_manual(values = c("NO" = "#BCBEC0","SI" = "#FDB913"),
                     name = "Comorbilidad") +
   scale_y_continuous(labels = function(x) paste0(x, "%"),
                      limits = c (0, 101), expand =  c(0 , 0)) +
@@ -75,4 +75,5 @@ ggplot(aes(x = grupo_etario_resumen, y = Porcentaje, fill = COMORBILIDAD)) +
         axis.title.x = element_text(size = 11))
 
 tabla_comorbilidad_grupo_edad
+
 
