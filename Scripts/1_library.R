@@ -81,7 +81,7 @@ pacman::p_load(
 # b- Guardar los logos que estan en el drive compartido 
 # c- Ejecutar las siguientes líneas de código.  
 
- logo_gobierno <- "Logos/Escudo.png"
+ logo_gobierno <- "Logos/escudo.png"
 
  logo_hospital <- "Logos/hospital.png" 
  
