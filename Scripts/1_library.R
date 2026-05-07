@@ -58,14 +58,14 @@ pacman::p_load(
    )
  
  colores_comorbilidad <- c(
-   "Sin comorbilidad" = gris, 
-   "Con comorbilidad" = amarillo
+   "Sin comorbilidad" = "gris", 
+   "Con comorbilidad" = "amarillo"
    )
    
  colores_vacunacion <- c(
-   "Vacunado" = verde_epi,
-   "Influenza" = naranja_epi,
-   "VSR" = gris
+   "No Vacunado" = "gris",
+   "Influenza" = "#f7941e",
+   "VSR" = "verde_epi"
  )
  
  colores_virus <- c(
