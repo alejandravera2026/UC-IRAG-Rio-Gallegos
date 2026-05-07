@@ -29,62 +29,6 @@ pacman::p_load(
 )
 
 
-# 2- IDENTIDAD VISUAL INSTITUCIONAL  --------------------------------------
-
-# Colores institucionales principales Gobierno de Santa Cruz 
-
- azul <- "#252C61" 
- celeste <- "#7EC8E6"
- amarillo <- "#FDB913"
- gris <- "#BCBEC0"
-
-# Colores extendidos para uso epidemiológico controlado
- 
- verde_epi <- "#009E73"
- rojo_epi <- "#C62828"
- naranja_epi <- "#E69f00"
- 
-#  Paletas de uso específico
- 
- colores_irag <- c(
-   "IRAG"= azul,
-   "IRAGE"= celeste
-   )
- 
- colores_severidad <- c(
-   "No ingreso a UTI" = gris,
-   "Ingreso a UTI" = amarillo,
-   "Fallecido" = rojo_epi
-   )
- 
- colores_comorbilidad <- c(
-   "Sin comorbilidad" = gris, 
-   "Con comorbilidad" = amarillo
-   )
-   
- colores_vacunacion <- c(
-   "Vacunado" = verde_epi,
-   "Influenza" = naranja_epi,
-   "VSR" = gris
- )
- 
- colores_virus <- c(
-   "SARS-CoV-2" = rojo_epi,
-   "Influenza" = naranja_epi, 
-   "VSR" = verde_epi
- )
- 
- 
-# 3- LOGOS INSTITUCIONALES  -----------------------------------------------
-
-# a- Crear una carpeta que se llame "Logos" 
-# b- Guardar los logos que estan en el drive compartido 
-# c- Ejecutar las siguientes líneas de código.  
-
- logo_gobierno <- "Logos/escudo.png"
-
- logo_hospital <- "Logos/hospital.png" 
- 
 
  
  
