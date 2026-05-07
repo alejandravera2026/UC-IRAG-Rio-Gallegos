@@ -23,8 +23,8 @@ pacman::p_load(
   stringr,      # trabajo con texto
   janitor,      # limpieza de nombres / tablas
   patchwork,    # combinar gráficos 
-  png,
-  grid
+  png,          # exportación de imágenes .png   
+  grid          # organización y diseño gráfico 
 )
 
 
