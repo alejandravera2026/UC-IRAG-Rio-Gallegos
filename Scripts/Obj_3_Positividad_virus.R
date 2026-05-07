@@ -2,6 +2,17 @@
 # Objetivo 3 - Porcentaje de positividad
 # SARS - Cov2, Influenza y VSR
 #=============================================
+
+#==============================================================================
+# Se arma una gráfica solamente el total de positivos para virus por semana y año
+#==============================================================================
+
+# Se crea una base de positividad por semana epidemiológica y por año
+
+# Se filtran los sin resultados y los negativos
+
+# Se crea un pivot longer 
+
 unique(data$INFLUENZA_FINAL)
 
 positividad_se <- data %>%
@@ -36,25 +47,27 @@ ggplot(positividad_se, aes(x = SEPI, y= PORCENTAJE_POSITIVIDAD, group = 1 )) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
+#===========================================================================
+# Se arma otro gráfico de positividad por SE y tipo de virus
+#===========================================================================
 
-# Positividad por SE y virus
+#Se arma otra base y se selecciona las  variables a estudiar
 
-#Selecciono variables
-
-positividad_se <- data %>% select(ANIO_MIN_INTERNACION,SEPI_MIN_INTERNACION,
+positividad_virus <- data %>% select(ANIO_MIN_INTERNACION,SEPI_MIN_INTERNACION,
                                   VSR_FINAL,INFLUENZA_FINAL,COVID_19_FINAL)
 
 
-#Completo SE y creo variable SEPI
-positividad_se <- positividad_se %>% complete(ANIO_MIN_INTERNACION,
+#Se Completa SE y se crea variable SEPI
+
+positividad_virus <- positividad_virus %>% complete(ANIO_MIN_INTERNACION,
                                               SEPI_MIN_INTERNACION = 1:52,
                                               fill = list(n = 0)) %>%
   mutate(SEPI= paste(ANIO_MIN_INTERNACION,"-",str_pad(SEPI_MIN_INTERNACION,2,pad= "0")))
 
 
-#Filtro según periodo de estudio
+#Se Filtra según período de estudio
 
-positividad_se <- positividad_se %>%
+positividad_virus <- positividad_virus %>%
   filter(
     
     #Desde el inicio del periodo de análisis
@@ -69,7 +82,7 @@ positividad_se <- positividad_se %>%
 
 # Pasamos a formato largo (pivot longer)
 
-positividad_se <- positividad_se %>%
+positividad_virus <- positividad_virus %>%
   pivot_longer(cols = c(INFLUENZA_FINAL, COVID_19_FINAL, VSR_FINAL),
                names_to = "Agente", values_to = "resultado") %>%
   filter(resultado != "Sin resultado") %>%
@@ -82,7 +95,7 @@ positividad_se <- positividad_se %>%
 
 # Calculamos positividad por virus y semana
 
-positividad_se <- positividad_se %>%
+positividad_virus <- positividad_virus %>%
   group_by(SEPI, Agente) %>%
   summarise(
     ESTUDIADOS = n(),
@@ -92,8 +105,9 @@ positividad_se <- positividad_se %>%
   mutate(POSITIVIDAD = round(POSITIVOS/ESTUDIADOS *100,1))
 
 
-#Pasamos a formato ancho (pivot wider) para gráfico interactivo
-positividad_se <- positividad_se %>% pivot_wider(names_from = Agente,
+#Se pasa a formato ancho (pivot wider) para gráfico interactivo
+
+positividad_virus <- positividad_virus %>% pivot_wider(names_from = Agente,
                                                  values_from = POSITIVIDAD,
                                                  values_fill = 0)
 
@@ -102,9 +116,8 @@ positividad_se <- positividad_se %>% pivot_wider(names_from = Agente,
 
 positividad_lineas <- highchart() %>%
   hc_chart(type= "line") %>%
-  hc_title(text="Porccentaje de positividad para SARS Cov 2, Influenza y VSR") %>%
   hc_xAxis(title = list(text = "SE - Año"),
-           categories = positividad_se$SEPI) %>%
+           categories = positividad_virus$SEPI) %>%
   hc_yAxis(
     title = list(text = "Porcentaje de positividad"),
     min = 0,
@@ -113,14 +126,15 @@ positividad_lineas <- highchart() %>%
     labels = list(format = "{value}%")
   )  %>%
   hc_add_series(name = "Influenza", 
-                data = positividad_se$Influenza,
-                color = "#252C61") %>%
+                data = positividad_virus$Influenza,
+                color = "#f7941e") %>%
   hc_add_series(name = "VSR", 
-                data = positividad_se$VSR,
-                color = "#c44228" ) %>%
-  hc_add_series(name = "SARS-Cov-2", 
-                data = positividad_se$`SARS-CoV-2`,
-                color = "#7a9E7E" )
+                data = positividad_virus$VSR,
+                color = "#00a651" ) %>%
+  hc_add_series(name = "SARS-CoV-2",
+                data = positividad_virus$`SARS-CoV-2`,
+                color = "#C62828" )
 
 
 positividad_lineas
+
