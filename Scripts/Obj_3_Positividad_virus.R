@@ -137,4 +137,3 @@ positividad_lineas <- highchart() %>%
 
 
 positividad_lineas
-
