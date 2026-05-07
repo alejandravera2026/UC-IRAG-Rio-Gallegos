@@ -1,7 +1,6 @@
 # =============================================================================
 # SCRIPTS 1 - CONFIGURACIÓN GENERAL
 # UNIDAD CENTINELA DE INFECCIONES RESPIRATORIAS AGUDAS 
-# Librerías, identidad visual y recursos gráficos
 # =============================================================================
 
 # 1- LIBRERÍAS ------------------------------------------------------------
