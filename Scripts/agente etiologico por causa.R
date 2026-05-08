@@ -80,12 +80,12 @@ agente_etiologico_cuidados <- agente_etiologico_cuidados %>% pivot_wider(names_f
 
 positividad_cuidados <- highchart() %>%
   hc_chart(type= "bar") %>%
-  hc_title(text = "Distribución de agentes etiológicos por grupos de edad en cuidados intensivos")
+  hc_title(text = "Distribución de agentes etiológicos por grupos de edad en cuidados intensivos") %>%
   hc_xAxis(
     categories = levels(agente_etiologico_cuidados$grupo_etario_resumen),
     title = list(text = "Grupo de edad")) %>%
-    hc_add_yAxis(
-      title = text = "Porcentaje"),
+  hc_yAxis(
+    title = (list = "Porcentaje"),
     max = 100,
     tickInterval = 10,
     labels = list(format = "{value}%")
@@ -99,8 +99,7 @@ positividad_cuidados <- highchart() %>%
   hc_add_series(name = "SARS-CoV-2",
                 data = positividad_virus$`SARS-CoV-2`,
                 color = "#C62828" )
-  hc_yAxis(title = list(text= "Grupos de edad"), 
-           categories = agente_etiologico_cuidados$grupo_etario_resumen)
+  
 
 
-positividad_lineas  
+positividad_cuidados
