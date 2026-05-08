@@ -126,12 +126,14 @@ tabla_resumen <- tabla_resumen %>% pivot_wider(names_from = NOMBREEVENTOAGRP,
 
 # Creo variable fallecidos por IRAG e IRAGe 
 
-tabla_resumen <- tabla_resumen %>% mutate(FALLECIDOS_IRAG = (`Defunciones por IRAG` + `Defunciones por IRAG extendida`))
-
+tabla_resumen <- tabla_resumen %>% mutate(FALLECIDOS_IRAG = (`Defunciones por IRAG` + `Defunciones por IRAG extendida`),
+                                         UCI_IRAG_IRAGE = (`Casos de IRAG entre los ingresados a UCI`+`Casos de IRAG extendida entre los ingresados a UCI`)) # Agrego la columna ingresados a UCI por IRAG e IRAGE
+                                          
 # Proporcion IRAG e IRAGe sobre ingresos totales
 
 colnames(tabla_resumen)
 
+<<<<<<< HEAD
 tabla_resumen <- tabla_resumen %>%
   mutate(PROPORCION_IRAG= round(
   (`Casos de IRAG entre los internados`/`Pacientes internados por todas las causas`)*100.1)) %>%
@@ -176,3 +178,16 @@ curva_casos <-highchart() %>%
 curva_casos
 
    
+=======
+tabla_resumen <- tabla_resumen %>% 
+  mutate(PROPORCION_IRAG = round((`Casos de IRAG entre los internados`/`Pacientes internados por todas las causas`)*100,1),
+         PROPORCION_IRAGE = round((`Casos de IRAG extendida entre los internados`/`Pacientes internados por todas las causas`)*100,1),
+         PROPORCION_INTERNADOS_OTRAS_CAUSAS = (100-(PROPORCION_IRAG + PROPORCION_IRAGE)),
+         PROPORCION_FALLECIDOS = round((FALLECIDOS_IRAG/`Defunciones totales`)*100,1),
+         PROPORCION_IRAG_IRAGE_UCI =round((UCI_IRAG_IRAGE/`Pacientes ingresados a UCI`)*100,1))
+
+tabla_resumen <- tabla_resumen %>% 
+  mutate (PROPORCION_FALLECIDOS_OTRAS_CAUSAS = 100 - PROPORCION_FALLECIDOS,
+         PROPORCION_UCI_OTRAS_CAUSAS = 100 - PROPORCION_IRAG_IRAGE_UCI) # Agrego proporciones relacionadas a UCI
+
+>>>>>>> 7e5240e492e48524a813bca48d2b82d8a9a12fb9

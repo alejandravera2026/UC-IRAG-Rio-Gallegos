@@ -1,7 +1,6 @@
 # =============================================================================
 # SCRIPTS 1 - CONFIGURACIÓN GENERAL
 # UNIDAD CENTINELA DE INFECCIONES RESPIRATORIAS AGUDAS 
-# Librerías, identidad visual y recursos gráficos
 # =============================================================================
 
 # 1- LIBRERÍAS ------------------------------------------------------------
@@ -24,11 +23,12 @@ pacman::p_load(
   stringr,      # trabajo con texto
   janitor,      # limpieza de nombres / tablas
   patchwork,    # combinar gráficos 
-  png,
-  grid
+  png,          # exportación de imágenes .png   
+  grid          # organización y diseño gráfico 
 )
 
 
+<<<<<<< HEAD
 # 2- IDENTIDAD VISUAL INSTITUCIONAL  --------------------------------------
 
 # Colores institucionales principales Gobierno de Santa Cruz 
@@ -85,6 +85,8 @@ pacman::p_load(
 
  logo_hospital <- "Logos/hospital.png" 
  
+=======
+>>>>>>> 7e5240e492e48524a813bca48d2b82d8a9a12fb9
 
  
  
