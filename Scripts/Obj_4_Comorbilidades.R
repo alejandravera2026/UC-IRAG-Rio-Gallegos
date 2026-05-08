@@ -7,7 +7,6 @@
 unique(data$COMORBILIDAD)
 
 tabla_comorbilidad_grupo <- data %>%
-  filter(CLASIFICACION_MANUAL != "Caso invalidado por epidemiologia") %>%
   mutate(COMORBILIDAD = case_when(
     PRESENCIA_COMORBILIDADES == 1  ~ "SI", 
     PRESENCIA_COMORBILIDADES == 2  ~ "NO",
@@ -23,7 +22,7 @@ sum(is.na(tabla_comorbilidad_grupo$COMORBILIDAD))
 colnames(tabla_comorbilidad_grupo)
 
 tabla_comorbilidad_grupo <- tabla_comorbilidad_grupo %>%
-  select(SEPI_MIN_INTERNACION, ANIO_MIN_INTERNACION, EDAD_DIAGNOSTICO, COMORBILIDAD)
+  select(EDAD_DIAGNOSTICO, COMORBILIDAD)
 
 
 # Se crea tabla de comorbilidad por grupo de edad establecidos
