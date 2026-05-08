@@ -17,7 +17,7 @@ pacman::p_load(
   writexl,      # exportar archivos .xlsx
   gt,           # tablas 
   gtable,       # tablas
-  tidyverse,    # colección de paquetes tidy
+  tidyverse,    # colección de paquetes tidye
   ggplot2,      # gráficos
   highcharter,  # gráficos interactivos
   tidyr,        # ordenamiento de datos 
@@ -42,7 +42,7 @@ pacman::p_load(
  
  verde_epi <- "#009E73"
  rojo_epi <- "#C62828"
- naranja_epi <- "#E69f00"
+ naranja_epi <- "#f7941e"
  
 #  Paletas de uso específico
  
