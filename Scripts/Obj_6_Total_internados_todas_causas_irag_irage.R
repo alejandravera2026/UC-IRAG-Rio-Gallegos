@@ -133,49 +133,25 @@ tabla_resumen <- tabla_resumen %>% mutate(FALLECIDOS_IRAG = (`Defunciones por IR
 
 colnames(tabla_resumen)
 
+tabla_resumen <- tabla_resumen %>% mutate(
+  PROPORCION_IRAG = round(
+  (`Casos de IRAG entre los internados`/`Pacientes internados por todas las causas`)*100,1),
+  PROPORCION_IRAGE = round(
+    (`Casos de IRAG extendida entre los internados`/`Pacientes internados por todas las causas`)*100,1),
+  PROPORCION_INTERNADOS_OTRAS_CAUSAS = (100-(PROPORCION_IRAG + PROPORCION_IRAGE)),
+  PROPORCION_FALLECIDOS = round(
+    (FALLECIDOS_IRAG/`Defunciones totales`)*100,1),
+  PROPORCION_FALLECIDOS_OTRAS_CAUSAS = (100 - PROPORCION_FALLECIDOS),
+  IRAG_UCI = round(
+    (`Casos de IRAG entre los ingresados a UCI`/`Pacientes ingresados a UCI`)*100,1),
+  IRAGE_UCI = round(
+    (`Casos de IRAG extendida entre los ingresados a UCI`/`Pacientes ingresados a UCI`)*100,1),
+  PROPORCION_UCI_OTRAS_CAUSAS = (100-(IRAG_UCI + IRAGE_UCI))
+)
 
-tabla_resumen <- tabla_resumen %>%
-  mutate(PROPORCION_IRAG= round(
-  (`Casos de IRAG entre los internados`/`Pacientes internados por todas las causas`)*100.1)) %>%
-  mutate(PROPORCION_IRAGE = round(
-    (`Casos de IRAG extendida entre los internados`/`Pacientes internados por todas las causas`)*100.1)) %>%
-  mutate(PROPORCION_INTERNADOS_OTRAS_CAUSAS = (100- (PROPORCION_IRAG + PROPORCION_IRAGE)))
-  
-#===============================================================================  
-# Realizo la curva internados por todas las causas e internados por IRAG e IRAGe
-# de acuerdo a las proporciones calculadas
-#================================================================================
+# Para eliminar de los gráficos las semanas con errores de carga
 
-curva_casos <-highchart() %>%
-  hc_chart(type= "column") %>%
-  hc_plotOptions(column = list(stacking = "percent",
-                               pointPadding = 0.1,   
-                               groupPadding = 0.05,  
-                               borderWidth = 0)) %>%
-  hc_xAxis(
-    categories = tabla_resumen$SEPI, #categorías en eje X
-    title = list(text = "Año - Semana")) %>%  #título del eje X) 
-  hc_yAxis(
-    title = list(text = "Porcentaje de total de internados por todas las causas y por IRAG e IRAGe"),
-    labels = list(format = "{value}%"),
-    max = 100) %>%
-  hc_credits(text = "Fuente: Elaboración propia en base a datos del SNVS 2.0", 
-             enabled = TRUE) %>% 
-  hc_add_series(
-    data = tabla_resumen$PROPORCION_INTERNADOS_OTRAS_CAUSAS,
-    name = "Otras causas",
-    color = "lightgrey") %>%
-  hc_add_series(
-    data = tabla_resumen$PROPORCION_IRAG,
-    name = "INTERNADOS POR IRAG",
-    color = "#252C61") %>%
-  hc_add_series(
-    data = tabla_resumen$PROPORCION_IRAGE,
-    name = "INTERNADOS POR IRAGE",
-    color = "#7EC8E6"
-  )
+tabla_resumen <- tabla_resumen %>% filter(PROPORCION_UCI_OTRAS_CAUSAS >= 0)
 
-curva_casos
 
-  
 
