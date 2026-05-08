@@ -5,32 +5,8 @@
 #Se crea una base para el análisis
 
 agente_etiologico_causa <- data %>%
-  select(SEPI_MIN_INTERNACION, ANIO_MIN_INTERNACION,EDAD_DIAGNOSTICO, INFLUENZA_FINAL, VSR_FINAL, COVID_19_FINAL,
+  select(SEPI,EDAD_DIAGNOSTICO, INFLUENZA_FINAL, VSR_FINAL, COVID_19_FINAL,
          CUIDADO_INTENSIVO, FALLECIDO)
-
-
-
-# Se completa y crea la variable SEPI
-
-agente_etiologico_causa <- agente_etiologico_causa %>%
-  complete(ANIO_MIN_INTERNACION,
-        SEPI_MIN_INTERNACION = 1:52,
-        fill = list(n = 0)) %>%
-  mutate(SEPI= paste(ANIO_MIN_INTERNACION,"-",str_pad(SEPI_MIN_INTERNACION,2,pad= "0")))
-
-
-# Se define periodo de estudio
-
-agente_etiologico_causa <- agente_etiologico_causa %>%
-  filter(
-    
-    #Desde el inicio del periodo de análisis
-    (ANIO_MIN_INTERNACION > ANIO_MINIMO | 
-       (ANIO_MIN_INTERNACION == ANIO_MINIMO & SEPI_MIN_INTERNACION >= SEMANA_MINIMA)) &
-      
-      # Hasta el final del periodo de análisis
-      (ANIO_MIN_INTERNACION< ANIO_MAXIMO | 
-         (ANIO_MIN_INTERNACION == ANIO_MAXIMO & SEPI_MIN_INTERNACION <= SEMANA_MAXIMA)))
 
 # Se crea los grupos de edad para el análisis
 
