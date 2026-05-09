@@ -35,16 +35,13 @@ data <- data %>%
       as.numeric(SEPI_MIN_INTERNACION)
   )
 
-
-# Verificación inicial de estructura  -------------------------------------
+# Verificación inicial de estructura
 
 str(data$ANIO_MIN_INTERNACION)
 str(data$SEPI_MIN_INTERNACION)
 
 
 # 4- PARÁMETROS TEMPORALES PARA EL ANÁLISIS -------------------------------
-
-# Parámetros establecidos según el plan de análisis
 
 ANIO_MINIMO <- 2024
 SEMANA_MINIMA <- 18
