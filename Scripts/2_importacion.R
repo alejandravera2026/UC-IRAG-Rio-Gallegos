@@ -25,7 +25,24 @@ names(agrupada)
 names(agrupada_2026)
 
 
-# 3- PARÁMETROS TEMPORALES PARA EL ANÁLISIS -------------------------------
+# 3- NORMALIZACIÓN DE VARIABLES -------------------------------------------
+
+data <- data %>% 
+  mutate(
+    ANIO_MIN_INTERNACION=
+      as.numeric(ANIO_MIN_INTERNACION),
+    SEPI_MIN_INTERNACION = 
+      as.numeric(SEPI_MIN_INTERNACION)
+  )
+
+
+# Verificación inicial de estructura  -------------------------------------
+
+str(data$ANIO_MIN_INTERNACION)
+str(data$SEPI_MIN_INTERNACION)
+
+
+# 4- PARÁMETROS TEMPORALES PARA EL ANÁLISIS -------------------------------
 
 # Parámetros establecidos según el plan de análisis
 
@@ -36,6 +53,6 @@ ANIO_MAXIMO <- 2026
 SEMANA_MAXIMA <- 8
 
 
-# 4- VERIFICACIÓN DE ARCHIVOS CARGADOS ------------------------------------
+# 5- VERIFICACIÓN DE ARCHIVOS CARGADOS ------------------------------------
 
 ls()
