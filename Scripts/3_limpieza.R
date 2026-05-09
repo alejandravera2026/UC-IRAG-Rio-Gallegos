@@ -51,10 +51,8 @@ data <- data %>%
 str(data)
 
 
-# Selecciono variables no utilizadas en el plan  --------------------------
+# Creo una nueva base  ----------------------------------------------------
 
-
-
-
-
+data_principal <- data%>%
+  select()
 
