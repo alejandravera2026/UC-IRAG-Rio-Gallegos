@@ -45,11 +45,12 @@ data <- data %>%
           SEPI_MIN_INTERNACION >= SEMANA_MINIMA)) &
       (ANIO_MIN_INTERNACION< ANIO_MAXIMO | 
          (ANIO_MIN_INTERNACION == ANIO_MAXIMO & 
-            SEPI_MIN_INTERNACION <= SEMANA_MAXIMA))
-  )
-
-<<<<<<< HEAD
-=======
+            SEPI_MIN_INTERNACION <= SEMANA_MAXIMA)))
+    
+    
+    
+    
+    
 str(data)
 
 
@@ -57,5 +58,4 @@ str(data)
 
 data_principal <- data%>%
   select()
->>>>>>> 838b0e10e580757d8df62603df4f3225c44c84d0
 
