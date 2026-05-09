@@ -176,5 +176,3 @@ highchart() %>%
     data = tabla_resumen$PROPORCION_FALLECIDOS_OTRAS_CAUSAS,
     color = "#90a4ae") %>%
   hc_tooltip(shared = TRUE, valueSuffix ="%")
-
-
