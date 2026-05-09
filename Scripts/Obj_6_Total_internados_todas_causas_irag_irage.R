@@ -178,4 +178,3 @@ highchart() %>%
   hc_tooltip(shared = TRUE, valueSuffix ="%")
 
 
-
