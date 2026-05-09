@@ -12,31 +12,7 @@ unique(data$INFLUENZA_FINAL)
 
 #Se arma otra base y se selecciona las  variables a estudiar
 
-positividad_virus <- data %>% select(ANIO_MIN_INTERNACION,SEPI_MIN_INTERNACION,
-                                  VSR_FINAL,INFLUENZA_FINAL,COVID_19_FINAL)
-
-
-#Se Completa SE y se crea variable SEPI
-
-positividad_virus <- positividad_virus %>% complete(ANIO_MIN_INTERNACION,
-                                              SEPI_MIN_INTERNACION = 1:52,
-                                              fill = list(n = 0)) %>%
-  mutate(SEPI= paste(ANIO_MIN_INTERNACION,"-",str_pad(SEPI_MIN_INTERNACION,2,pad= "0")))
-
-
-#Se Filtra según período de estudio
-
-positividad_virus <- positividad_virus %>%
-  filter(
-    
-    #Desde el inicio del periodo de análisis
-    (ANIO_MIN_INTERNACION > ANIO_MINIMO | 
-       (ANIO_MIN_INTERNACION == ANIO_MINIMO & SEPI_MIN_INTERNACION >= SEMANA_MINIMA)) &
-      
-      # Hasta el final del periodo de análisis
-      (ANIO_MIN_INTERNACION< ANIO_MAXIMO | 
-         (ANIO_MIN_INTERNACION == ANIO_MAXIMO & SEPI_MIN_INTERNACION <= SEMANA_MAXIMA))
-  )
+positividad_virus <- data %>% select(SEPI,VSR_FINAL,INFLUENZA_FINAL,COVID_19_FINAL)
 
 
 # Pasamos a formato largo (pivot longer)
