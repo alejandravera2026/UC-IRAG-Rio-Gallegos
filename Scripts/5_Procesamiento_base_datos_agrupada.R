@@ -149,6 +149,7 @@ tabla_resumen <- tabla_resumen %>% mutate(
   PROPORCION_UCI_OTRAS_CAUSAS = (100-(IRAG_UCI + IRAGE_UCI))
 )
 
+
 # Para eliminar de los gráficos las semanas con errores de carga
 
 tabla_resumen <- tabla_resumen %>% filter(PROPORCION_UCI_OTRAS_CAUSAS >= 0)
