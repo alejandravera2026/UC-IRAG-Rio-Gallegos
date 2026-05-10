@@ -5,7 +5,7 @@
 
 
 # 1- COPIO BASE ANALÍTICA -------------------------------------------------
-# luego de copiar ya no tocamos la data_principal
+# Luego de copiar, no modificamos la base analítica principal
 
 data_analisis <- data_principal
 
@@ -14,7 +14,7 @@ data_analisis <- data_principal
 
 data_analisis <- data_principal %>%
   mutate(
-    grupo_etario=case_when(
+    grupo_etario = case_when(
       EDAD_DIAGNOSTICO < 2 ~ "< 2 años",
       EDAD_DIAGNOSTICO >= 2 &
         EDAD_DIAGNOSTICO <= 14 ~ "2-14 años",
