@@ -11,9 +11,8 @@ colnames(data)
 # Selecciono columnas a estudiar
 #===============================================================================
 
-vacunacion <- data %>%
-  select(EDAD_UC_IRAG, VAC_ANTIGRIPAL, VAC_ANTIGRIPAL_MATERNA, VAC_VSR, CLASIFICACION_MANUAL)
-
+vacunacion <- data_principal %>%
+  select(EDAD_UC_IRAG, VAC_ANTIGRIPAL, VAC_ANTIGRIPAL_MATERNA, VAC_VSR, CLASIFICACION_MANUAL) 
 # Armo un vector para agrupar los grupos de edad de menores de 6 meses
 
 menores_seis_meses <- c("0 a 2 Meses", "3 a 5 Meses")
@@ -122,7 +121,6 @@ vacunacion_6_23_meses <- vacunacion %>%
   filter(EDAD_UC_IRAG %in% entre_seis_y_23_meses) %>%
   mutate(vac_antigripal_niños= case_when(VAC_ANTIGRIPAL %in% c("CONSTATADA", "REFERIDA") ~ "VACUNADO",
                                     VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO",
-                                    VAC_ANTIGRIPAL =="SIN DATO"~ "SIN DATO",
                                     TRUE ~ NA_character_)) %>%
   filter(!is.na(vac_antigripal_niños)) %>%
   count(EDAD_UC_IRAG, vac_antigripal_niños) %>%
