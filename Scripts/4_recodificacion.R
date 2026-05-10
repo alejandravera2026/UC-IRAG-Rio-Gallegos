@@ -40,7 +40,7 @@ colSums(is.na(data_analisis))
 
 table(data_analisis$grupo_etario, useNA = "ifany")
 
-  # Calculamos porcentajes por grupo etarios
+  # Calculamos porcentajes por grupo etario
 
 prop.table(table(data_analisis$grupo_etario))*100
 
