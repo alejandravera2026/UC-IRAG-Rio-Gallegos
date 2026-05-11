@@ -4,41 +4,30 @@
 # ===========================================================================
 
 
-# Elimina casos invalidados por epidemiología -----------------------------
+# 1- ELIMINO "Casos invalidados por epidemiología" ------------------------
 
-data <- data %>%
+data1 <- data %>%
   filter(
     CLASIFICACION_MANUAL != "Caso invalidado por epidemiología"
   )
 
 
-# Completo semanas epidemiológicas y creo variable SEPI -------------------
+# 2- CREO VARIABLE SEPI ---------------------------------------------------
 
-data <- data %>% complete(ANIO_MIN_INTERNACION,
-                          SEPI_MIN_INTERNACION = 1:52,
-                          fill = list(n = 0)) %>%
-  mutate(SEPI= paste(ANIO_MIN_INTERNACION,"-",
-                     str_pad(SEPI_MIN_INTERNACION,2,pad= "0")
-                     )
-         )
-
-
-# Normalización de variables y filtrado temporal --------------------------
-
-data$ANIO_FECHA_MINIMA <- as.numeric (data$ANIO_MIN_INTERNACION)
-
-data$SEPI_FECHA_MINIMA <- as.numeric (data$SEPI_MIN_INTERNACION)
+data1 <- data1 %>%
+  mutate(
+    SEPI= paste(
+    ANIO_MIN_INTERNACION,
+    "-",
+    str_pad(SEPI_MIN_INTERNACION,2,pad=
+              "0")
+    )
+    )
 
 
-# Verifico si las variables estan como NUMÉRICAS --------------------------
+# 3- FILTRO PERIODO A ANALIZAR  -------------------------------------------
 
-str(data$ANIO_MIN_INTERNACION)
-str(data$SEPI_MIN_INTERNACION)
-
-
-# Filtro período a analizar -----------------------------------------------
-
-data <- data %>%
+data1 <- data1 %>%
   filter(
     (ANIO_MIN_INTERNACION > ANIO_MINIMO | 
        (ANIO_MIN_INTERNACION == ANIO_MINIMO & 
@@ -51,11 +40,27 @@ data <- data %>%
     
     
     
-str(data)
+str(data1)
 
 
-# Creo una nueva base  ----------------------------------------------------
+# 4- CREO BASE ANALÍTICA PRINCIPAL LIMPIA ---------------------------------
+# data = base original trabajada
+# data_principal = base analítica limpia
 
+data_principal <- data1
+
+# 5- CONTROL FINAL DE BASE ANALÍTICA --------------------------------------
+
+glimpse(data_principal)
+
+dim(data_principal)
+
+table(data_principal$CLASIFICACION_MANUAL)
+
+table(data_principal$ANIO_MIN_INTERNACION)
+
+str(data_principal)
 data_principal <- data%>%
   select()
+
 
