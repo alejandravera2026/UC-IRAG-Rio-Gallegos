@@ -8,7 +8,7 @@
 # Realizo la curva internados por todas las causas e internados por IRAG e IRAGe
 # de acuerdo a las proporciones calculadas
 #================================================================================
-
+##
 curva_internaciones_irag <-highchart() %>%
   hc_chart(type= "column") %>%
   hc_plotOptions(column = list(stacking = "percent",
