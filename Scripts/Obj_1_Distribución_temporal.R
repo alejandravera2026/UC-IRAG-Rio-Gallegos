@@ -1,27 +1,35 @@
-#========================================================================
-# Objetivo 1:Distribución temporal de los casos de IRAG  e IRAG extendida 
-#=========================================================================
+#============================================================================
+# SCRIPT 5 - OBJETIVO 1 - DISTRIBUCIÓN TEMPORAL 
+# UNIDAD CENTINELA DE INFECCIONES RESPIRATORIAS AGUDAS
+#============================================================================
 
-#===============================================
-# ===== CASOS POR SE Y ANIO =====
-#===============================================
 
-#Agrupo casos por año y semana epidemiológica
-casos_semana_anio <- data %>% group_by(SEPI,CLASIFICACION_MANUAL) %>%
+# 1- BASE DE TRABAJO ------------------------------------------------------
+
+# Para este objetivo se utiliza la base analítica que se generó 
+# en el SCRIPTS 4
+
+data_obj1 <- data_analisis
+
+
+# CASOS POR SE Y ANIO -----------------------------------------------------
+ # Agrupo casos por año y semana epidemiológica
+
+casos_semana_anio <- data_obj1 %>% 
+  group_by(SEPI,CLASIFICACION_MANUAL) %>%
   summarise(CASOS = n()) %>%
   ungroup() %>%
   arrange(SEPI) 
 
+ # Paso datos a formato ancho (wider) para hacer curva interactiva
 
-# Paso datos a formato ancho (wider) para hacer curva interactiva
+casos_semana_anio <- casos_semana_anio %>% 
+  pivot_wider(names_from = CLASIFICACION_MANUAL,
+              values_from = CASOS,
+              values_fill = 0) 
 
-casos_semana_anio <- casos_semana_anio %>% pivot_wider(names_from = CLASIFICACION_MANUAL,
-                                                       values_from = CASOS,
-                                                       
-                                                       values_fill = 0) 
-#====================================================
-# 📊 Curva interactiva casos de irag e irage por SE
-#===================================================
+
+# CURVA INTERACTIVA CASOS DE IRAG E IRAGE ---------------------------------
 
 curva_interactiva <-highchart() %>%
   hc_chart(type= "column") %>%
@@ -42,6 +50,6 @@ curva_interactiva <-highchart() %>%
   hc_add_series(
     data = casos_semana_anio$`IRAG extendida`,
     name = "IRAG extendida",
-    color = "#C44228") 
+    color = "#7EC8E6")
 
 curva_interactiva
