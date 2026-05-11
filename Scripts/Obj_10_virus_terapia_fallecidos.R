@@ -52,6 +52,42 @@ agente_etiologico_cuidados <- agente_etiologico_causa %>%
 #Grafico 
 #=======================================================================================
 
+highchart() %>%
+  hc_chart(type = "bar", inverted = TRUE) %>%
+  hc_title (text = "Positividad por agente etiológico  y grupo de edad en cuidados intensivos") %>%
+  hc_xAxis(
+    categories = levels(agente_etiologico_cuidados$grupo_etario_resumen),
+    title = list(text = " Grupo etario")) %>%
+  hc_yAxis(
+    title = list(text = "Positividad"),
+    max = 50,
+    labels = list(format= "{value}%")) %>%
+  hc_add_series(
+    name = "Influenza",
+    data = agente_etiologico_cuidados%>%
+      filter(Agente == "Influenza") %>% pull (POSITIVIDAD),
+    color = "#f7941e") %>%
+  hc_add_series(
+    name = "SARS-CoV-2",
+    data = agente_etiologico_cuidados %>%
+      filter(Agente == "SARS-CoV-2") %>% pull (POSITIVIDAD),
+    color = "#C62828") %>%
+  hc_add_series(
+    name = "VSR",
+    data = agente_etiologico_cuidados %>%
+      filter(Agente == "VSR") %>% pull (POSITIVIDAD),
+    color = "#00a651") %>%
+  hc_plotOptions(
+    bar = list(
+      dataLabels = list(enabled = TRUE, format = "{y}%"),
+      groupPadding = 0.1,
+      pointPadding = 0.05)) %>%
+  hc_legend(
+    title = list(text = "Agente etiológico"),
+    align = "center",
+    verticalAlign = "bottom"
+    ) %>%
+  hc_tooltip(shared = TRUE, valueSuffix = "%")
 
 
 

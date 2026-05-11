@@ -12,7 +12,8 @@ unique(data$INFLUENZA_FINAL)
 
 #Se arma otra base y se selecciona las  variables a estudiar
 
-positividad_virus <- data %>% select(SEPI,VSR_FINAL,INFLUENZA_FINAL,COVID_19_FINAL)
+positividad_virus <- data_principal %>% 
+  select(SEPI,VSR_FINAL,INFLUENZA_FINAL,COVID_19_FINAL)
 
 
 # Pasamos a formato largo (pivot longer)
