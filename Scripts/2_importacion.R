@@ -53,3 +53,4 @@ SEMANA_MAXIMA <- 8
 # 5- VERIFICACIÓN DE ARCHIVOS CARGADOS ------------------------------------
 
 ls()
+
