@@ -45,7 +45,7 @@ table(data_analisis$grupo_etario, useNA = "ifany")
 prop.table(table(data_analisis$grupo_etario))*100
 
 
-jjj
+
 
 
 
