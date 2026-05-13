@@ -154,4 +154,4 @@ tabla_resumen <- tabla_resumen %>% mutate(
 
 tabla_resumen <- tabla_resumen %>% filter(PROPORCION_UCI_OTRAS_CAUSAS >= 0)
 
-# procesamiento
+

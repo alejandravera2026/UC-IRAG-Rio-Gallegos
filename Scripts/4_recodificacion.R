@@ -7,12 +7,10 @@
 # 1- COPIO BASE ANALÍTICA -------------------------------------------------
 # Luego de copiar, no modificamos la base analítica principal
 
-data_analisis <- data_principal
-
 
 # 2- CREACIÓN DE GRUPOS ETARIOS SEGÚN VIGILANCIA UCIRAG -------------------
 
-data_analisis <- data_principal %>%
+data <- data %>%
   mutate(
     grupo_etario = case_when(
       EDAD_DIAGNOSTICO < 2 ~ "< 2 años",
@@ -25,24 +23,25 @@ data_analisis <- data_principal %>%
     )
   )
 
+unique(data$grupo_etario)
 
 # 3- CONTROLES BÁSICOS DE BASE ANALÍTICA ----------------------------------
 
   # Analizamos dimensiones de la base analítica
 
-dim(data_analisis)
+dim(data)
 
   # Verificamos datos faltantes por variable
 
-colSums(is.na(data_analisis))
+colSums(is.na(data))
 
   # Observamos la distribución de grupos etarios
 
-table(data_analisis$grupo_etario, useNA = "ifany")
+table(data$grupo_etario, useNA = "ifany")
 
   # Calculamos porcentajes por grupo etario
 
-prop.table(table(data_analisis$grupo_etario))*100
+prop.table(table(data$grupo_etario))*100
 
 
 

@@ -9,7 +9,7 @@
 # Para este objetivo se utiliza la base analítica que se generó 
 # en el SCRIPTS 4
 
-data_obj1 <- data_analisis
+data_obj1 <- data
 
 
 # CASOS POR SE Y ANIO -----------------------------------------------------

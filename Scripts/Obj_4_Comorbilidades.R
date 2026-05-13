@@ -6,7 +6,7 @@
 
 unique(data$COMORBILIDAD)
 
-tabla_comorbilidad_grupo <- data_principal %>%
+tabla_comorbilidad_grupo <- data %>%
   mutate(COMORBILIDAD = case_when(
     PRESENCIA_COMORBILIDADES == 1  ~ "SI", 
     PRESENCIA_COMORBILIDADES == 2  ~ "NO",

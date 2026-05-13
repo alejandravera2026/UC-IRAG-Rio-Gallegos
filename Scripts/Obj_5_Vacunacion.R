@@ -11,7 +11,7 @@ colnames(data)
 # Selecciono columnas a estudiar
 #===============================================================================
 
-vacunacion <- data_principal %>%
+vacunacion <- data %>%
   select(EDAD_UC_IRAG, VAC_ANTIGRIPAL, VAC_ANTIGRIPAL_MATERNA, VAC_VSR, CLASIFICACION_MANUAL) 
 # Armo un vector para agrupar los grupos de edad de menores de 6 meses
 
