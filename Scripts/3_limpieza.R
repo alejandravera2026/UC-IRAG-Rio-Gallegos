@@ -11,7 +11,6 @@ data <- data %>%
     CLASIFICACION_MANUAL != "Caso invalidado por epidemiología"
   )
 
-
 # 2- CREO VARIABLE SEPI ---------------------------------------------------
 
 data <- data %>%
@@ -24,7 +23,6 @@ data <- data %>%
     )
     )
 
-
 # 3- FILTRO PERIODO A ANALIZAR  -------------------------------------------
 
 data <- data %>%
@@ -36,16 +34,11 @@ data <- data %>%
          (ANIO_MIN_INTERNACION == ANIO_MAXIMO & 
             SEPI_MIN_INTERNACION <= SEMANA_MAXIMA)))
     
-    
-    
-    
-    
 str(data)
 
 
-# 4- CREO BASE ANALÍTICA PRINCIPAL LIMPIA ---------------------------------
-# data = base original trabajada
-# data_principal = base analítica limpia
+# 4- CREO BASE LIMPIA -----------------------------------------------------
+  # data = base original limpia
 
 data <- data
 
