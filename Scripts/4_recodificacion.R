@@ -51,9 +51,7 @@ prop.table(table(data$grupo_etario))*100
 
 # 4- CREACIÓN DE CATEGORÍAS PARA VACUNACIÓN -------------------
 
-# Aplicacion de vacuna VSR
-
-aplicacion_vsr <- c("SE 32","SE 33", "SE 34","SE 35", "SE 36", "SE DESCONOCIDA")
+aplicacion_vsr <- c("SE 32", "SE 33", "SE 34", "SE 35","SE 36", "SE DESCONOCIDA")
 
 # Categorías de vacunacion
 
@@ -63,15 +61,14 @@ no_vacunado <- c("MADRE NO VACUNADA","NO VACUNADO")
 
 # APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL MATERNA Y VSR 
 
-data <- data %>% mutate (VAC_MATERNA_VSR = 
-                           case_when(VAC_VSR %in% aplicacion_vsr ~ "VACUNADA",
+data <- data %>%
+  mutate (VAC_MATERNA_VSR = case_when
+          (VAC_VSR %in% aplicacion_vsr ~ "VACUNADA",
                                      VAC_VSR %in% no_vacunado ~ "NO VACUNADA",
-                                      TRUE ~ "SIN DATO"),
-                                     
-                         VAC_ANTIGRIPAL_MATERNA = 
-                           case_when(VAC_ANTIGRIPAL_MATERNA == "MADRE NO VACUNADA" ~ "NO VACUNADA",
-                                     VAC_ANTIGRIPAL_MATERNA %in% vacunado ~ "VACUNADA",
-                                     TRUE ~ VAC_ANTIGRIPAL_MATERNA))
+                                      TRUE ~ "SIN DATO"))%>%
+  mutate (VAC_ANTIGRIPAL_MATERNA = case_when(VAC_ANTIGRIPAL_MATERNA == "MADRE NO VACUNADA" ~ "NO VACUNADA",
+                                             VAC_ANTIGRIPAL_MATERNA %in% vacunado ~ "VACUNADA",
+                                             TRUE ~ "SIN DATO"))
 
 # APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL  
 
