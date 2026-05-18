@@ -40,7 +40,7 @@ vacunacion_materna <- vacunacion %>%
                     name = "Vacunacion materna antigripal") +
   scale_y_continuous(labels = function(x) paste0(x, "%"),
                      limits = c (0, 101), expand =  c(0 , 0)) +
-  labs(title = "Porcentaje de cobertura de vacunación materna antigripal en menores de seis meses",
+  labs(title = "Porcentaje de vacunación materna antigripal en menores de seis meses",
        x = "Grupo de edad (meses)",
        y = "Porcentaje de pacientes") +
   theme_minimal() +
@@ -137,7 +137,7 @@ vacunacion_6_23_meses <- vacunacion %>%
                     name = "Vacunacion antigripal") +
   scale_y_continuous(labels = function(x) paste0(x, "%"),
                      limits = c (0, 101), expand =  c(0 , 0)) +
-  labs(title = "Porcentaje de cobertura de vacunación  antigripal en niños de 6 a 23 meses",
+  labs(title = "Porcentaje de vacunación  antigripal en niños de 6 a 23 meses",
        x = "Grupo de edad (meses)",
        y = "Porcentaje de pacientes") +
   theme_minimal() +
@@ -171,7 +171,7 @@ vacunacion_mayores_65 <- vacunacion %>%
                     name = "Vacunacion antigripal") +
   scale_y_continuous(labels = function(x) paste0(x, "%"),
                      limits = c (0, 101), expand =  c(0 , 0)) +
-  labs(title = "Porcentaje de cobertura de vacunación  antigripal en adultos mayores de 65 años",
+  labs(title = "Porcentaje de vacunación  antigripal en adultos mayores de 65 años",
        x = "Grupo de edad (años)",
        y = "Porcentaje de pacientes") +
   theme_minimal() +
