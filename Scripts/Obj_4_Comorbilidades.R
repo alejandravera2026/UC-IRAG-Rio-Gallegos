@@ -4,12 +4,13 @@
 
 # Se crea una columna  de comorbilidad
 
-unique(data$COMORBILIDAD)
+unique (data$PRESENCIA_COMORBILIDADES)
 
 tabla_comorbilidad_grupo <- data %>%
   mutate(COMORBILIDAD = case_when(
     PRESENCIA_COMORBILIDADES == 1  ~ "SI", 
     PRESENCIA_COMORBILIDADES == 2  ~ "NO",
+    PRESENCIA_COMORBILIDADES == 9  ~ "SIN DATOS",
     TRUE ~ "SIN DATO"
   ))
 
@@ -28,7 +29,7 @@ tabla_comorbilidad_grupo <- tabla_comorbilidad_grupo %>%
 # Se crea tabla de comorbilidad por grupo de edad establecidos
            
 tabla_comorbilidad_grupo_edad <- tabla_comorbilidad_grupo %>%
-  filter(COMORBILIDAD %in% c("SI", "NO"))%>%
+  filter(COMORBILIDAD %in% c("SI", "NO", "SIN DATOS"))%>%
   mutate(grupo_etario_resumen = case_when(
     EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO < 2 ~ "Menor de 2 años",
     EDAD_DIAGNOSTICO >= 2 & EDAD_DIAGNOSTICO < 15 ~ "2 a 14 años",
@@ -61,7 +62,7 @@ ggplot(aes(x = grupo_etario_resumen, y = Porcentaje, fill = COMORBILIDAD)) +
   geom_text(aes(label = label),
             position = position_stack(vjust = 0.5),
             color = "white", size = 4.5 , fontface = "bold") +
-  scale_fill_manual(values = c("NO" = "#BCBEC0","SI" = "#FDB913"),
+  scale_fill_manual(values = c("NO" = "#BCBEC0","SI" = "#FDB913", "SIN DATOS"= "#8B5A2B"),
                     name = "Comorbilidad") +
   scale_y_continuous(labels = function(x) paste0(x, "%"),
                      limits = c (0, 101), expand =  c(0 , 0)) +
