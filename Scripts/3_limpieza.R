@@ -34,8 +34,6 @@ data <- data %>%
          (ANIO_MIN_INTERNACION == ANIO_MAXIMO & 
             SEPI_MIN_INTERNACION <= SEMANA_MAXIMA)))
     
-str(data)
-
 # 4- CREO BASE LIMPIA -----------------------------------------------------
 
 data <- data
@@ -50,7 +48,7 @@ table(data$CLASIFICACION_MANUAL)
 
 table(data$ANIO_MIN_INTERNACION)
 
-str(data)
+
 
 
 

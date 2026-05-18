@@ -1,0 +1,34 @@
+---
+title: ""
+format: html
+toc: true
+toc-title: "Índice"
+toc-depth: 3
+toc-location: left
+execute:
+  echo: false
+  warning: false
+  message: false
+smooth-scroll: true
+embed-resources: true
+css: "Plantillas e imagenes/estilo.css"
+---
+
+
+![](Plantillas e imagenes/hospital.png){width=20%}
+
+
+```{r}
+source("Scripts/1_library.R")
+source("Scripts/2_importacion.R")
+source("Scripts/3_limpieza.R")
+source("Scripts/4_recodificacion.R")
+source("Scripts/5_Procesamiento_base_datos_agrupada.R")
+
+```
+
+# Boletín Epidemiológico
+# Unidad Centinela de IRAG
+# Hospital Regional de Río Gallegos
+
+## **1.Introducción**
