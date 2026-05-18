@@ -36,9 +36,7 @@ data <- data %>%
     
 str(data)
 
-
 # 4- CREO BASE LIMPIA -----------------------------------------------------
-  # data = base original limpia
 
 data <- data
 
