@@ -34,7 +34,7 @@ unique(data$grupo_etario)
 
   # Analizamos dimensiones de la base analítica
 
-dim(data)
+
 
   # Verificamos datos faltantes por variable
 
