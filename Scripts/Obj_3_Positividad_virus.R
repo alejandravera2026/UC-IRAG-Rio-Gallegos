@@ -92,6 +92,28 @@ positivos_influenza <- positividad_virus %>%
 
 positivos_influenza
 
-pct_influenza <- positividad_virus %>%
-  filter(Agente == "Influenza") %>%
-  summarise()
+pct_influenza = (positivos_influenza/total_positivos)*100.1
+
+pct_influenza
+
+positivos_sars_cov <- positividad_virus %>%
+  filter(Agente == "SARS-CoV-2") %>%
+  summarise (n = sum(POSITIVOS, na.rm = TRUE)) %>%
+  pull (n)
+
+positivos_sars_cov
+
+pct_sars_cov = (positivos_sars_cov/total_positivos)*100.1
+
+pct_sars_cov
+
+positivos_vsr <- positividad_virus %>%
+  filter(Agente == "VSR") %>%
+  summarise(n = sum(POSITIVOS, na.rm = TRUE)) %>%
+  pull(n)
+
+positivos_vsr
+
+pct_vsr = (positivos_vsr/total_positivos)*100.1
+
+pct_vsr
