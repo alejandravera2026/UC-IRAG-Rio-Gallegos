@@ -83,7 +83,7 @@ datos_fallecidos <- agente_etiologico_FALLECIDOS %>%
 #Grafico 
 #=======================================================================================
 
-highchart() %>%
+virus_terapia_fallecidos <- highchart() %>%
   hc_chart(type = "bar", inverted = TRUE) %>%
   hc_title (text = "Positividad por agente etiológico  y grupo de edad en fallecidos") %>%
   hc_xAxis(
@@ -121,7 +121,7 @@ highchart() %>%
   hc_tooltip(shared = TRUE, valueSuffix = "%")
 
 
-
+virus_terapia_fallecidos
 
 
 
