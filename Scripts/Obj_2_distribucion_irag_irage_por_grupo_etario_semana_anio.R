@@ -65,7 +65,7 @@ curva_interactiva_menores_dos
 dos_a_14_años <- distribucion_grupo_etario %>%
   filter(grupo_etario %in% "2-14 años")
 
-dos_a_14_años <- dos_a_14_años %>% 
+casos_dos_a_14_años <- dos_a_14_años %>% 
   group_by(SEPI,CLASIFICACION_MANUAL) %>%
   summarise(CASOS = n()) %>%
   ungroup() %>%
@@ -73,7 +73,7 @@ dos_a_14_años <- dos_a_14_años %>%
 
 # Paso datos a formato ancho (wider) para hacer curva interactiva
 
-dos_a_14_años <- dos_a_14_años %>% 
+casos_dos_a_14_años <- casos_dos_a_14_años %>% 
   pivot_wider(names_from = CLASIFICACION_MANUAL,
               values_from = CASOS,
               values_fill = 0) 
@@ -94,11 +94,11 @@ curva_interactiva_dos_a_14_años <-highchart() %>%
     title = list(text = "Semana epidemiológica")) %>%  #título del eje X) 
   hc_yAxis(title= list(text="Casos notificados")) %>%
   hc_add_series(
-    data = dos_a_14_años$`Infección respiratoria aguda grave (IRAG)`,
+    data = casos_dos_a_14_años$`Infección respiratoria aguda grave (IRAG)`,
     name = "IRAG",
     color = "#252C61") %>%
   hc_add_series(
-    data = dos_a_14_años$`IRAG extendida`,
+    data = casos_dos_a_14_años$`IRAG extendida`,
     name = "IRAG extendida",
     color = "#7EC8E6")
 
@@ -111,7 +111,7 @@ curva_interactiva_dos_a_14_años
 de_15_a_59_años <- distribucion_grupo_etario %>%
   filter(grupo_etario %in% "15-59 años")
 
-de_15_a_59_años <- de_15_a_59_años %>% 
+casos_de_15_a_59_años <- de_15_a_59_años %>% 
   group_by(SEPI,CLASIFICACION_MANUAL) %>%
   summarise(CASOS = n()) %>%
   ungroup() %>%
@@ -119,7 +119,7 @@ de_15_a_59_años <- de_15_a_59_años %>%
 
 # Paso datos a formato ancho (wider) para hacer curva interactiva
 
-de_15_a_59_años <- de_15_a_59_años %>% 
+casos_de_15_a_59_años <- casos_de_15_a_59_años %>% 
   pivot_wider(names_from = CLASIFICACION_MANUAL,
               values_from = CASOS,
               values_fill = 0) 
@@ -140,11 +140,11 @@ curva_interactiva_de_15_a_59 <-highchart() %>%
     title = list(text = "Semana epidemiológica")) %>%  #título del eje X) 
   hc_yAxis(title= list(text="Casos notificados")) %>%
   hc_add_series(
-    data = de_15_a_59_años$`Infección respiratoria aguda grave (IRAG)`,
+    data = casos_de_15_a_59_años$`Infección respiratoria aguda grave (IRAG)`,
     name = "IRAG",
     color = "#252C61") %>%
   hc_add_series(
-    data = de_15_a_59_años$`IRAG extendida`,
+    data = casos_de_15_a_59_años$`IRAG extendida`,
     name = "IRAG extendida",
     color = "#7EC8E6")
 
@@ -157,7 +157,7 @@ curva_interactiva_de_15_a_59
 mayores_60_años <- distribucion_grupo_etario %>%
   filter(grupo_etario %in% "60 años y más")
 
-mayores_60_años <- mayores_60_años %>% 
+casos_mayores_60_años <- mayores_60_años %>% 
   group_by(SEPI,CLASIFICACION_MANUAL) %>%
   summarise(CASOS = n()) %>%
   ungroup() %>%
@@ -165,7 +165,7 @@ mayores_60_años <- mayores_60_años %>%
 
 # Paso datos a formato ancho (wider) para hacer curva interactiva
 
-mayores_60_años <- mayores_60_años %>% 
+casos_mayores_60_años <- casos_mayores_60_años %>% 
   pivot_wider(names_from = CLASIFICACION_MANUAL,
               values_from = CASOS,
               values_fill = 0) 
@@ -186,14 +186,104 @@ curva_interactiva_mayores_60 <-highchart() %>%
     title = list(text = "Semana epidemiológica")) %>%  #título del eje X) 
   hc_yAxis(title= list(text="Casos notificados")) %>%
   hc_add_series(
-    data = mayores_60_años$`Infección respiratoria aguda grave (IRAG)`,
+    data = casos_mayores_60_años$`Infección respiratoria aguda grave (IRAG)`,
     name = "IRAG",
     color = "#252C61") %>%
   hc_add_series(
-    data = mayores_60_años$`IRAG extendida`,
+    data = casos_mayores_60_años$`IRAG extendida`,
     name = "IRAG extendida",
     color = "#7EC8E6")
 
 curva_interactiva_mayores_60
 
-#
+#=============================================================================
+# Se determina los números de casos de IRAG e IRAG extendida en menores de dos
+#años y mayores de 60. Además, se realizan los cálculos en porcentaje
+#=============================================================================
+
+###Menores de dos años
+
+notificaciones_totales1 <- menor_dos_años%>%
+  filter(CLASIFICACION_MANUAL %in%c("Infección respiratoria aguda grave (IRAG)",
+                                    "IRAG extendida"))%>%
+  summarise(Total = n())
+
+notificaciones_totales1
+
+notificaciones_irag1 <- menor_dos_años %>%
+  filter(CLASIFICACION_MANUAL %in% "Infección respiratoria aguda grave (IRAG)") %>%
+  summarise(IRAG = n())
+
+notificaciones_irag1
+
+notificaciones_irage1 <- menor_dos_años %>%
+  filter(CLASIFICACION_MANUAL %in% "IRAG extendida") %>%
+  summarise(IRAGE = n())
+
+notificaciones_irage1
+
+pct_IRAG1 <- menor_dos_años %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)", 
+                                     "IRAG extendida")) %>%
+  summarise(
+    n_IRAG = sum(CLASIFICACION_MANUAL == "Infección respiratoria aguda grave (IRAG)"),
+    n_Total = n())%>%
+  mutate(pct = round(n_IRAG/n_Total *100.1))%>%
+  pull(pct)
+
+pct_IRAG1
+
+pct_IRAGE1 <- menor_dos_años %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)",
+                                     "IRAG extendida")) %>%
+  summarise(
+    n_IRAGE = sum (CLASIFICACION_MANUAL == "IRAG extendida"),
+    n_Total = n()) %>%
+  mutate(pct = round(n_IRAGE/n_Total *100.1)) %>%
+  pull (pct)
+
+pct_IRAGE1
+
+####Mayores de 60 años
+
+notificaciones_totales2 <- mayores_60_años %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)",
+                                    "IRAG extendida"))%>%
+  summarise(Total = n())
+
+notificaciones_totales2
+
+notificaciones_irag2 <- mayores_60_años %>%
+  filter(CLASIFICACION_MANUAL %in% "Infección respiratoria aguda grave (IRAG)") %>%
+  summarise(IRAG = n())
+
+notificaciones_irag2
+
+notificaciones_irage2 <- mayores_60_años %>%
+  filter(CLASIFICACION_MANUAL %in% "IRAG extendida") %>%
+  summarise(IRAGE = n())
+
+notificaciones_irage2
+
+pct_IRAG2 <- mayores_60_años %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)", 
+                                     "IRAG extendida")) %>%
+  summarise(
+    n_IRAG = sum(CLASIFICACION_MANUAL == "Infección respiratoria aguda grave (IRAG)"),
+    n_Total = n())%>%
+  mutate(pct = round(n_IRAG/n_Total *100.1))%>%
+  pull(pct)
+
+pct_IRAG2
+
+pct_IRAGE2 <- mayores_60_años %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)",
+                                     "IRAG extendida")) %>%
+  summarise(
+    n_IRAGE = sum (CLASIFICACION_MANUAL == "IRAG extendida"),
+    n_Total = n()) %>%
+  mutate(pct = round(n_IRAGE/n_Total *100.1)) %>%
+  pull (pct)
+
+pct_IRAGE2
+
