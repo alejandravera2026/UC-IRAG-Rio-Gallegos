@@ -73,3 +73,16 @@ positividad_lineas <- highchart() %>%
 
 
 positividad_lineas
+
+
+#========================================================================
+# Se determina el total de virus positivos
+#=========================================================================
+
+total_positivos <- positividad_virus %>%
+  summarise(POSITIVOS = n())
+
+total_positivos
+
+
+  
