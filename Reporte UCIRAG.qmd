@@ -111,6 +111,7 @@ En el *GRÁFICO N° 4*, muestra la distribución de los virus estudiados por sem
 Durante el año 2025, hubo mayor circulación del virus Influenza con respecto al año 2024,  con un adelanto a partir de la semana 12 con picos constantes hasta la semana 25.
 Para el virus SARS-CoV-2, muestra mayor circulación en el año 2025 con respecto al año 2024 pero es menor con respecto a los otros virus Influenza y VSR.
 
+
 *GRÁFICO N°4*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz. N = `r total_positivos`
 
 ```{r} 
