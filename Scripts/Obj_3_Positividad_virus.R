@@ -76,13 +76,22 @@ positividad_lineas
 
 
 #========================================================================
-# Se determina el total de virus positivos
+# Se determina el total de virus positivos y por cada virus
 #=========================================================================
 
 total_positivos <- positividad_virus %>%
-  summarise(POSITIVOS = n())
+  summarise(total = sum(POSITIVOS, na.rm = TRUE)) %>%
+  pull(total)
+total_positivos  
 
-total_positivos
 
+positivos_influenza <- positividad_virus %>%
+  filter(Agente == "Influenza") %>%
+  summarise(n= sum(POSITIVOS, na.rm = TRUE)) %>%
+  pull (n)
 
-  
+positivos_influenza
+
+pct_influenza <- positividad_virus %>%
+  filter(Agente == "Influenza") %>%
+  summarise()
