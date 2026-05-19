@@ -37,8 +37,8 @@ data <- data %>%
 
 # Verificación inicial de estructura
 
-str(data$ANIO_MIN_INTERNACION)
-str(data$SEPI_MIN_INTERNACION)
+
+
 
 
 # 4- PARÁMETROS TEMPORALES PARA EL ANÁLISIS -------------------------------
@@ -52,5 +52,5 @@ SEMANA_MAXIMA <- 8
 
 # 5- VERIFICACIÓN DE ARCHIVOS CARGADOS ------------------------------------
 
-ls()
+
 
