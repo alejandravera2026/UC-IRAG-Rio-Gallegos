@@ -24,6 +24,16 @@ source("Scripts/2_importacion.R")
 source("Scripts/3_limpieza.R")
 source("Scripts/4_recodificacion.R")
 source("Scripts/5_Procesamiento_base_datos_agrupada.R")
+source("Scripts/Obj_1_Distribución_temporal.R")
+source("Scripts/Obj_2_distribucion_irag_irage_por_grupo_etario_semana_anio.R")
+source("Scripts/Obj_3_Positividad_virus.R")
+source("Scripts/Obj_4_Comorbilidades.R")
+source("Scripts/Obj_5_Vacunacion.R")
+source("Scripts/Obj_6_total_internados_total_irag_irage.R")
+source("Scripts/Obj_6_total_internados_total_irag_irage.R")
+source("Scripts/Obj_7_total_uci_total_uci_irag_irage.R")
+source("Scripts/Obj_8_total_fallecidos_y_total_irag_irage.R")
+source("Scripts/Obj_10_virus_terapia_fallecidos.R")
 
 ```
 
@@ -32,3 +42,31 @@ source("Scripts/5_Procesamiento_base_datos_agrupada.R")
 # Hospital Regional de Río Gallegos
 
 ## **1.Introducción**
+
+```{r}
+curva_interactiva
+```
+
+
+
+```{r}
+curva_interactiva_menores_dos
+```
+
+```{r}
+curva_interactiva_dos_a_14_años
+```
+```{r}
+curva_interactiva_de_15_a_59
+```
+```{r}
+curva_interactiva_mayores_60
+```
+
+```{r}
+positividad_lineas
+
+```
+```{r}
+tabla_comorbilidad_grupo_edad
+```
