@@ -76,4 +76,35 @@ ggplot(aes(x = grupo_etario_resumen, y = Porcentaje, fill = COMORBILIDAD)) +
 
 tabla_comorbilidad_grupo_edad
 
+###################################
+##################################
 
+tabla_comorbilidad_gt <- data %>%
+  group_by(CLASIFICACION_MANUAL, PRESENCIA_COMORBILIDADES) %>%
+  summarise(casos = n(), .groups = "drop") %>%
+  pivot_wider(
+    names_from = PRESENCIA_COMORBILIDADES,
+    values_from = casos,
+    values_fill = 0
+  ) %>%
+  mutate(
+    total = `1` + `2` + `9`,
+    `1` = round(`1` / total * 100, 1),
+    `2` = round(`2` / total * 100, 1),
+    `9` = round(`9` / total * 100, 1)
+  ) %>%
+  select(-total) %>%
+  gt() %>%
+  cols_label(
+    CLASIFICACION_MANUAL = "Clasificación",
+    `1` = "Con comorbilidades (%)",
+    `2` = "Sin comorbilidades (%)",
+    `9` = "Sin datos (%)"
+  ) %>%
+  cols_align(align = "center") %>%
+  tab_header(
+    title = "Presencia de comorbilidades",
+    subtitle = "Período SE 8 de 2024 a SE 2025"
+  )
+
+tabla_comorbilidad_gt
