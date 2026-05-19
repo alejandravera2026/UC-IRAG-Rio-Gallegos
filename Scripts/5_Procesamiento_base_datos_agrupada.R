@@ -4,7 +4,6 @@
 
 agrupada <-agrupada [-1,]
 
-str(agrupada)
 
 # Selecciono columnas a converir a numeric
 
