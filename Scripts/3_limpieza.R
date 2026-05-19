@@ -40,7 +40,7 @@ data <- data
 
 # 5- CONTROL FINAL DE BASE ANALÍTICA --------------------------------------
 
-glimpse(data)
+
 
 dim(data)
 
