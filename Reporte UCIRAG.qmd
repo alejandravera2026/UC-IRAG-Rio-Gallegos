@@ -14,9 +14,7 @@ embed-resources: true
 css: "Plantillas e imagenes/estilo.css"
 ---
 
-
-![](Plantillas e imagenes/hospital.png){width=20%}
-
+![](Plantillas%20e%20imagenes/hospital.png){width="20%"}
 
 ```{r}
 source("Scripts/1_library.R")
@@ -38,16 +36,18 @@ source("Scripts/Obj_10_virus_terapia_fallecidos.R")
 ```
 
 # Boletín Epidemiológico
+
 # Unidad Centinela de IRAG
+
 # Hospital Regional de Río Gallegos
 
 ## **1.Introducción**
 
+Las infecciones respiratorias agudas (IRAs) son patologías originadas por diferentes agentes etiológicos que provocan cuadros clínicos como la enfermedad tipo influenza (ETI), bronquiolitis y neumonía, hasta cuadros de mayor gravedad manifestados como infecciones respiratorias agudas graves (IRAG). Las IRAs constituyen una importante causa de morbimortalidad afectando fundamentalmente a niñas/os menores de dos años, personas mayores de 60 años y personas susceptibles con patologías de base. En Argentina, la vigilancia epidemiológica de las IRAs se realiza a través del Sistema Nacional de Vigilancia de la Salud el cual involucra la participación de diferentes niveles de atención (local, provincial y nacional), laboratorios y áreas de epidemiología. En este sentido, se destaca una vigilancia de infecciones respiratorias agudas colaborativa y con componentes diferentes que sean complementarios y adecuados para responder a propósitos definidos. La Unidad Centinela de IRAG (UCIRAG) aporta información de calidad permitiendo monitorear las tendencias en la incidencia identificando periodos epidémicos en diferentes unidades territoriales; caracterizar el comportamiento de la enfermedad (grupos poblacionales afectados y factores de riesgo, magnitud, severidad, mortalidad). En la provincia de Santa Cruz, la UCIRAG se implementa en la semana 18 del año 2024, asignando al Hospital Regional Río Gallegos, establecimiento de mayor densidad poblacional con internación adulta y pediátrica.
+
 ```{r}
 curva_interactiva
 ```
-
-
 
 ```{r}
 curva_interactiva_menores_dos
@@ -56,9 +56,11 @@ curva_interactiva_menores_dos
 ```{r}
 curva_interactiva_dos_a_14_años
 ```
+
 ```{r}
 curva_interactiva_de_15_a_59
 ```
+
 ```{r}
 curva_interactiva_mayores_60
 ```
@@ -67,6 +69,7 @@ curva_interactiva_mayores_60
 positividad_lineas
 
 ```
+
 ```{r}
 tabla_comorbilidad_grupo_edad
 ```
