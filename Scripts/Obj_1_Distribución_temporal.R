@@ -53,3 +53,51 @@ curva_interactiva <-highchart() %>%
     color = "#7EC8E6")
 
 curva_interactiva
+#==============================================================================
+# total de irag + irag extendida. Total por cada clasificación.
+#Porcentaje de IRAG e IRAGe
+#==============================================================================
+
+data %>%
+  count(CLASIFICACION_MANUAL)
+
+notificaciones_totales <- data %>%
+  filter(CLASIFICACION_MANUAL %in%c("Infección respiratoria aguda grave (IRAG)",
+         "IRAG extendida"))%>%
+  summarise(Total = n())
+
+notificaciones_totales
+
+notificaciones_irag <- data %>%
+  filter(CLASIFICACION_MANUAL %in% "Infección respiratoria aguda grave (IRAG)") %>%
+  summarise(IRAG = n())
+
+notificaciones_irag
+
+notificaciones_irage <- data %>%
+  filter(CLASIFICACION_MANUAL %in% "IRAG extendida") %>%
+  summarise(IRAGE = n())
+
+notificaciones_irage
+
+pct_IRAG <- data %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)", 
+                                     "IRAG extendida")) %>%
+  summarise(
+    n_IRAG = sum(CLASIFICACION_MANUAL == "Infección respiratoria aguda grave (IRAG)"),
+    n_Total = n())%>%
+  mutate(pct = round(n_IRAG/n_Total *100.1))%>%
+pull(pct)
+
+pct_IRAG
+
+pct_IRAGE <- data %>%
+  filter(CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)",
+                                     "IRAG extendida")) %>%
+  summarise(
+    n_IRAGE = sum (CLASIFICACION_MANUAL == "IRAG extendida"),
+    n_Total = n()) %>%
+  mutate(pct = round(n_IRAGE/n_Total *100.1)) %>%
+  pull (pct)
+
+pct_IRAGE
