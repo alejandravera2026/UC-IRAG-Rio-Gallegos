@@ -51,16 +51,26 @@ Caracterizar el perfil clínico, epidemiológico y etiológico de las infeccione
 
 *Objetivos específicos*
 
-1-Describir la distribución temporal de los casos de IRAG e IRAGE por semana epidemiológica y por año, identificando patrones de tendencia y comportamiento estacional. 2-Describir la distribución de casos de IRAG e IRAGE por grupo etario, por semana epidemiológica y por año, identificando grupos poblaciones de mayor riesgo. 3-Estimar el porcentaje de positividad para SARS-CoV-2, Influenza y VSR por semana epidemiológica y por año, a fin de caracterizar etiológicamente la circulación de virus respiratorios.\
-4-Caracterizar la frecuencia de comorbilidades registradas en los casos de IRAG e IRAGE por grupo etario, identificando factores asociados a mayor riesgo de gravedad. 5-Determinar la proporción de pacientes vacunados en los grupos de riesgo (6 a 23 meses y mayores de 65 años) y en gestantes vacunadas durante el embarazo (menores de 6 meses) 6-Estimar la proporción de casos de IRAG e IRAGE en relación con el total de pacientes internados por todas las causas por semana epidemiológica y por año con el fin de estimar la carga de enfermedad respiratoria en el hospital. 7-Estimar la proporción de casos que requieren ingreso a unidades de cuidados intensivos, en relación con el total de pacientes que ingresaron a UTI, por semana epidemiológica y grupo etario, como indicador de severidad. 8-Estimar la proporción de casos fallecidos en relación con el total de pacientes fallecidos, por semana epidemiológica y por año, con el fin de evaluar el impacto en la mortalidad hospitalaria. 9-Calcular la tasa de letalidad de los casos de IRAG e IRAGE, por grupo etario, como medida de gravedad clínica.
+1-Describir la distribución temporal de los casos de IRAG e IRAGE por semana epidemiológica y por año, identificando patrones de tendencia y comportamiento estacional. 2-Describir la distribución de casos de IRAG e IRAGE por grupo etario, por semana epidemiológica y por año, identificando grupos poblaciones de mayor riesgo. 3-Estimar el porcentaje de positividad para SARS-CoV-2, Influenza y VSR por semana epidemiológica y por año, a fin de caracterizar etiológicamente la circulación de virus respiratorios.
+4-Caracterizar la frecuencia de comorbilidades registradas en los casos de IRAG e IRAGE por grupo etario, identificando factores asociados a mayor riesgo de gravedad. 
+5-Determinar la proporción de pacientes vacunados en los grupos de riesgo (6 a 23 meses y mayores de 65 años) y en gestantes vacunadas durante el embarazo (menores de 6 meses) 
+6-Estimar la proporción de casos de IRAG e IRAGE en relación con el total de pacientes internados por todas las causas por semana epidemiológica y por año con el fin de estimar la carga de enfermedad respiratoria en el hospital.
+7-Estimar la proporción de casos que requieren ingreso a unidades de cuidados intensivos, en relación con el total de pacientes que ingresaron a UTI, por semana epidemiológica y grupo etario, como indicador de severidad.
+8-Estimar la proporción de casos fallecidos en relación con el total de pacientes fallecidos, por semana epidemiológica y por año, con el fin de evaluar el impacto en la mortalidad hospitalaria.
+9-Calcular la tasa de letalidad de los casos de IRAG e IRAGE, por grupo etario, como medida de gravedad clínica.
 
 *Definiciones de los casos de IRAG e IRAG extendida*
 
-*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con: Fiebre referida o constatada \>= 38°C y Tos; y Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación por criterio clínico. *IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años Infección respiratoria: definida por tos o dificultad respiratoria; e Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación por criterio clínico. En lactantes menores de 6 meses también considerar: Apnea (cese temporal de la respiración por cualquier causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
+*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con: Fiebre referida o constatada >= 38°C y Tos; e
+Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación por criterio clínico. 
+*IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años Infección respiratoria: definida por tos o dificultad respiratoria; e Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación por criterio clínico. 
+En lactantes menores de 6 meses también considerar: Apnea (cese temporal de la respiración por cualquier causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
 
 Para mayor información de la estrategia de vigilancia centinela de IRAG consultar en: https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
 
-**NOTA METODOLÓGICA** En el presente informe integra el análisis de la información proveniente de dos fuentes nominal y agrupada a través del Sistema Información Sanitaria Argentina (SNVS2.0). El procesamiento y análisis de los datos se efectuó con el software R, versión..., empleando los procedimientos reproducibles. El período evaluado abarca desde la semana 18 del año 2024 hasta la semana 8 del 2026. Se implementaron los criterios de inclusión y exclusión para garantizar la validez de las estimaciones.
+**NOTA METODOLÓGICA**
+En el presente informe integra el análisis de la información proveniente de dos fuentes nominal y agrupada a través del Sistema Información Sanitaria Argentina (SNVS2.0). El procesamiento y análisis de los datos se efectuó con el software R, versión..., empleando los procedimientos reproducibles. 
+El período evaluado abarca desde la semana 18 del año 2024 hasta la semana 8 del 2026. Se implementaron los criterios de inclusión y exclusión para garantizar la validez de las estimaciones.
 
 **SITUACIÓN EPIDEMIOLÓGICA** 
 Entre la semana 18 del año 2024 y la semana 8 del año 2026, se registraron un total de `r notificaciones_totales`de internaciones con diagnóstico de infección respiratoria aguda grave (IRAG e IRAG extendida). Del total, el `r pct_IRAG` % (n = `r notificaciones_irag`) corresponde a IRAG y el `r pct_IRAGE` % (n = `r notificaciones_irage`) corresponde a IRAG extendida.
@@ -73,10 +83,10 @@ En el *GRÁFICO N° 1* se observa la distribución temporal desde la semana 18 d
 curva_interactiva
 ```
 
-Fuente: SNVS 2.0
+Fuente:Elaboración propia en base a datos del  SNVS 2.0
 
 En los *GRÁFICO N° 2 y 3* se describen la distribución de IRAG e IRAG extendida en los dos grupos etarios de mayor riesgo, menores de dos años y mayores de 60 años.
-En el caso de los menores de dos años, el  total de  `r notificaciones_totales1` casos de internaciones por IRAG e IRAG extendida. De las cuales, un   `r pct_IRAG1` % (n =  `r notificaciones_irag1`) corresponden a IRAG y un  `r pct_IRAGE1` % (n =  `r notificaciones_irage1`) corresponden a IRAG extendida. 
+En el grupo de menores de dos años, el  total de  `r notificaciones_totales1` casos de internaciones por IRAG e IRAG extendida. De las cuales, un   `r pct_IRAG1` % (n =  `r notificaciones_irag1`) corresponden a IRAG y un  `r pct_IRAGE1` % (n =  `r notificaciones_irage1`) corresponden a IRAG extendida. 
 En el grupo de mayores de 60 años, un total de  `r notificaciones_totales2`. De las cuales, un  `r pct_IRAG2` % (n=  `r notificaciones_irag2`) corresponden IRAG y un  `r pct_IRAGE2` % (n=  `r notificaciones_irage2`) corresponden a IRAG extendida. 
 
 *GRÁFICO N° 2*: Distribución temporal de IRAG e IRAG extendida por semana y año en menores de 2 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz. N =  `r notificaciones_totales1`
@@ -84,7 +94,7 @@ En el grupo de mayores de 60 años, un total de  `r notificaciones_totales2`. De
 ```{r}
 curva_interactiva_menores_dos
 ```
-Fuente: SNVS 2.0
+Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 *GRÁFICO N° 3*: Distribución temporal de IRAG e IRAG extendida por semana y año en mayores de 60 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz. N =  `r notificaciones_totales2`
 
@@ -92,20 +102,22 @@ Fuente: SNVS 2.0
 ```{r}
 curva_interactiva_mayores_60
 ```
-Fuente: SNVS 2.0
+Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 **VIGILANCIA POR LABORATORIO**
 
-De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR). Del total de `r notificaciones_totales`, se obtuvieron .... positivos para virus estudiados.
-En el *GRÁFICO N° 4*, demuestra la distribución de los virus estudiados por semana y por año. 
+De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. Del total de `r notificaciones_totales`, se obtuvieron `r total_positivos` positivos para virus estudiados. De los cuales, un `r pct_influenza` % (n = `r positivos_influenza`) para virus Influenza, un `r pct_sars_cov` % (n = `r positivos_sars_cov`) para el virus SARS-CoV-2 y un `r pct_vsr` % (n = `r positivos_vsr`) para el virus VSR (Virus Sincicial Respiratorio). 
+En el *GRÁFICO N° 4*, muestra la distribución de los virus estudiados por semana y por año, que se observa una mayor circulación para el virus VSR, con picos máximos en las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025. 
+Durante el año 2025, hubo mayor circulación del virus Influenza con respecto al año 2024,  con un adelanto a partir de la semana 12 con picos constantes hasta la semana 25.
+Para el virus SARS-CoV-2, muestra mayor circulación en el año 2025 con respecto al año 2024 pero es menor con respecto a los otros virus Influenza y VSR.
 
-*GRÁFICO N°4*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz. N = ...
+*GRÁFICO N°4*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz. N = `r total_positivos`
 
 ```{r} 
 positividad_lineas
 
 ```
-Fuente: SNVS 2.0
+Fuente: Elaboración propia en base a datos del  SNVS 2.0
 
 ```{r}
 tabla_comorbilidad_grupo_edad
