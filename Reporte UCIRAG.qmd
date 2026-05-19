@@ -108,7 +108,37 @@ positividad_lineas
 Fuente: SNVS 2.0
 
 ```{r}
-tabla_comorbilidad_grupo
+tabla_comorbilidad_grupo_edad
+```
+
+
+```{r}
+tabla_comorbilidad_gt
+```
+
+
+```{r}
+vacunacion_materna
+
 ```
 
 ```{r}
+vacunacion_antigripal 
+
+```
+
+```{r}
+curva_internaciones_irag
+```
+```{r}
+curva_uci_irag_irage
+```
+
+```{r}
+curva_fallecidos_irag
+```
+
+```{r}
+virus_terapia_fallecidos
+```
+
