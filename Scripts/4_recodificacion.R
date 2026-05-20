@@ -1,19 +1,10 @@
 # ===========================================================================
-# SCRIPTS 4 - RECODIFICACIÓN Y VARIABLES ANALÍTICAS 
+# SCRIPTS 4 - RECODIFICACIÓN - GRUPOS ETARIOS Y NUEVAS CATEGORÍAS 
 # UNIDAD CENTINELA DE INFECCIONES RESPIRATORIAS AGUDAS 
 # ===========================================================================
-#
 
-# 1- COPIO BASE ANALÍTICA -------------------------------------------------
-# Luego de copiar, no modificamos la base analítica principal
-
-
-# 2- CREACIÓN DE GRUPOS ETARIOS SEGÚN VIGILANCIA UCIRAG -------------------
-
-# CREAR GRUPOS ETARIOS A PARTIR DE LA VARIABLE EDAD_UCIRAG 
-
-#Grupos: menor de 6 meses, 6 a 23 meses, 2 a 14, 15-64 y 65 años y más
-
+# 1- CREACIÓN DE GRUPOS ETARIOS SEGÚN LA VARIABLE EDAD_UCIRAG  ------------
+     # Grupos: < 6 meses; 6 a 23 meses; 2 a 14; 15-64 y 65 años y más.
 
 data <- data %>%
   mutate(
@@ -30,49 +21,52 @@ data <- data %>%
 
 unique(data$grupo_etario)
 
-# 3- CONTROLES BÁSICOS DE BASE ANALÍTICA ----------------------------------
 
-  # Analizamos dimensiones de la base analítica
-
-
-
-  # Verificamos datos faltantes por variable
+# 2- VERIFICAMOS DATOS FALTANTES POR VARIABLES ----------------------------
 
 colSums(is.na(data))
 
-  # Observamos la distribución de grupos etarios
-
-table(data$grupo_etario, useNA = "ifany")
-
-  # Calculamos porcentajes por grupo etario
+  # Observamos la distribución de grupos etarios y sus porcentajes
 
 prop.table(table(data$grupo_etario))*100
 
 
-# 4- CREACIÓN DE CATEGORÍAS PARA VACUNACIÓN -------------------
+# 3- CREACIÓN DE CATEGORÍAS PARA VACUNACIÓN  ------------------------------
 
-aplicacion_vsr <- c("SE 32", "SE 33", "SE 34", "SE 35","SE 36", "SE DESCONOCIDA")
+aplicacion_vsr <- c("SE 32", "SE 33", "SE 34", "SE 35","SE 36", 
+                    "SE DESCONOCIDA")
 
-# Categorías de vacunacion
+
+# 4- CATEGORÍAS DE VACUNACIÓN ---------------------------------------------
 
 vacunado <- c("CONSTATADA", "REFERIDA")
 
 no_vacunado <- c("MADRE NO VACUNADA","NO VACUNADO")
 
-# APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL MATERNA Y VSR 
+
+# 5- APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL MATERNA ------------
 
 data <- data %>%
+  
   mutate (VAC_MATERNA_VSR = case_when
           (VAC_VSR %in% aplicacion_vsr ~ "VACUNADA",
-                                     VAC_VSR %in% no_vacunado ~ "NO VACUNADA",
-                                      TRUE ~ "SIN DATO"))%>%
-  mutate (VAC_ANTIGRIPAL_MATERNA = case_when(VAC_ANTIGRIPAL_MATERNA == "MADRE NO VACUNADA" ~ "NO VACUNADA",
-                                             VAC_ANTIGRIPAL_MATERNA %in% vacunado ~ "VACUNADA",
-                                             TRUE ~ "SIN DATO"))
+            VAC_VSR %in% no_vacunado ~ "NO VACUNADA",
+            TRUE ~ "SIN DATO")
+          )%>%
+  
+  mutate (VAC_ANTIGRIPAL_MATERNA = case_when
+          (VAC_ANTIGRIPAL_MATERNA == "MADRE NO VACUNADA" ~ "NO VACUNADA",
+            VAC_ANTIGRIPAL_MATERNA %in% vacunado ~ "VACUNADA",
+            TRUE ~ "SIN DATO")
+          )
 
-# APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL  
 
-data <- data %>% mutate (VAC_ANTIGRIPAL = 
-                           case_when(VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO",
-                                     VAC_ANTIGRIPAL %in% vacunado ~ "VACUNADO",
-                                      TRUE ~ "SIN DATO"))
+# 6- APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL  -------------------
+
+data <- data %>% 
+  
+  mutate (VAC_ANTIGRIPAL = case_when
+          (VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO",
+            VAC_ANTIGRIPAL %in% vacunado ~ "VACUNADO",
+            TRUE ~ "SIN DATO")
+          )
