@@ -2,6 +2,8 @@
 # 📊 Grafico interactivo proporcion de ingresos a UCI por IRAG e IRAGe    
 #=========================================================================
 
+
+
 # Total de ingresados a UCI por todas las causas y total de irag e irag e
 
 curva_uci_irag_irage <-highchart() %>%
