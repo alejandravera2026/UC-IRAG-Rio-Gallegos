@@ -26,9 +26,14 @@ curva_fallecidos_irag <-highchart() %>%
     name = "Otras causas",
     color = "lightgrey") %>%
   hc_add_series(
-    data = tabla_resumen$PROPORCION_FALLECIDOS,
-    name = "Fallecidos por IRAG e IRAGe",
+    data = tabla_resumen$PROPORCION_FALLECIDOS_IRAG,
+    name = "Fallecidos por IRAG",
     color = "#252C61") %>%
+  hc_add_series(
+    data = tabla_resumen$PROPORCION_FALLECIDOS_IRAGE,
+    name = "Fallecidos por IRAG extendida",
+    color = 
+  )
   hc_tooltip(
     shared = TRUE,
     pointFormat = "<span style='color:{point.color}'>●</span> {series.name}: <b>{point.percentage:.1f}%</b><br/>"
