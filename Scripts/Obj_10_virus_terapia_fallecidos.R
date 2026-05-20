@@ -1,140 +1,118 @@
-#=============================================================================
-# Objetivo 10: se define el agente etiológico en cuidados intensivos y en fallecidos
+#============================================================================
+# OBJETIVO 10
+# AGENTES ETIOLÓGICOS POSITIVOS EN CASOS FALLECIDOS
 #============================================================================
 
-#Se crea una base para el análisis
+#============================================================================
+# 1. Selección de variables
+#============================================================================
 
 agente_etiologico_causa <- data %>%
-  select(SEPI,EDAD_DIAGNOSTICO, INFLUENZA_FINAL, VSR_FINAL, COVID_19_FINAL,
-         CUIDADO_INTENSIVO, FALLECIDO)
+  select(
+    grupo_etario,
+    INFLUENZA_FINAL,
+    VSR_FINAL,
+    COVID_19_FINAL,
+    FALLECIDO
+  )
 
-# Se crea los grupos de edad para el análisis
 
-agente_etiologico_causa <- agente_etiologico_causa %>%
-  mutate(grupo_etario_resumen = case_when(
-    EDAD_DIAGNOSTICO >= 0 & EDAD_DIAGNOSTICO < 2 ~ "Menor de 2 años",
-    EDAD_DIAGNOSTICO >= 2 & EDAD_DIAGNOSTICO < 15 ~ "2 a 14 años",
-    EDAD_DIAGNOSTICO >= 15 & EDAD_DIAGNOSTICO < 65 ~ "15 a 64 años",
-    EDAD_DIAGNOSTICO >= 65 ~ "Mayor de 65 años",
-    TRUE ~ NA_character_))%>%
-  mutate(grupo_etario_resumen = factor(grupo_etario_resumen, levels = c(
-    "Menor de 2 años", "2 a 14 años", "15 a 64 años", "Mayor de 65 años")))
-
-# Se pasa a formato pivot longer
-
+#============================================================================
+# 2. Paso a formato largo
+#============================================================================
 
 agente_etiologico_causa <- agente_etiologico_causa %>%
-  pivot_longer(cols = c(INFLUENZA_FINAL, COVID_19_FINAL, VSR_FINAL),
-               names_to = "Agente", values_to = "resultado") %>%
-  filter(resultado != "Sin resultado") %>%
-  mutate(Agente = case_when(
-    Agente == "INFLUENZA_FINAL" ~ "Influenza",
-    Agente == "COVID_19_FINAL"  ~ "SARS-CoV-2",
-    Agente == "VSR_FINAL"       ~ "VSR"
-  ))
-
-
-# Se hace el análisis de agente etiologico a cuidados intensivos
-
-agente_etiologico_cuidados <- agente_etiologico_causa %>%
-  group_by(grupo_etario_resumen, Agente) %>%
-  filter(CUIDADO_INTENSIVO =="SI")%>%
-  summarise(
-    ESTUDIADOS = n(),
-    POSITIVOS = sum(resultado != "Negativo"),
-    .groups = "drop"
+  pivot_longer(
+    cols = c(INFLUENZA_FINAL, COVID_19_FINAL, VSR_FINAL),
+    names_to = "Agente",
+    values_to = "resultado"
   ) %>%
-  mutate(POSITIVIDAD = round(POSITIVOS/ESTUDIADOS *100,1))
+  filter(
+    !is.na(resultado),
+    resultado != "Sin resultado"
+  ) %>%
+  mutate(
+    Agente = case_when(
+      Agente == "INFLUENZA_FINAL" ~ "Influenza",
+      Agente == "COVID_19_FINAL" ~ "SARS-CoV-2",
+      Agente == "VSR_FINAL" ~ "VSR"
+    )
+  )
 
 
+#============================================================================
+# 3. Tabla de positividad en fallecidos
+#============================================================================
 
-#=======================================================================================
-#Grafico 
-#=======================================================================================
-
-
-
-
-#===========================================================================
-# se hace la misma gráfica para fallecidos
-#===========================================================================
-agente_etiologico_FALLECIDOS <- agente_etiologico_causa %>%
-  group_by(grupo_etario_resumen, Agente) %>%
+tabla_fallecidos_agente <- agente_etiologico_causa %>%
   filter(FALLECIDO == "SI") %>%
-summarise(
-    ESTUDIADOS = n(),
-    POSITIVOS = sum(resultado != "Negativo"),
+  filter(!is.na(grupo_etario)) %>%
+  mutate(
+    grupo_etario = case_when(
+      grupo_etario == "15-59 años" ~ "15 a 59 años",
+      grupo_etario == "60 años y más" ~ "60 años y más",
+      TRUE ~ grupo_etario
+    ),
+    grupo_etario = factor(
+      grupo_etario,
+      levels = c(
+        "< 2 años",
+        "2-14 años",
+        "15 a 59 años",
+        "60 años y más"
+      )
+    )
+  ) %>%
+  group_by(grupo_etario, Agente) %>%
+  summarise(
+    estudiados = n(),
+    positivos = sum(resultado != "Negativo"),
+    positividad = round(positivos / estudiados * 100, 1),
     .groups = "drop"
   ) %>%
-  mutate(POSITIVIDAD = round(POSITIVOS/ESTUDIADOS *100,1))
-
-orden_grupos <- c("Menor de 2 años", "2 a 14 años", "15 a 64 años", "Mayor de 65 años")
-
-datos_fallecidos <- agente_etiologico_FALLECIDOS %>%
-  complete(grupo_etario_resumen = orden_grupos, Agente, fill = list (POSITIVIDAD = 0)) %>%
-  mutate(grupo_etario_resumen = factor(grupo_etario_resumen, levels = orden_grupos, 
-                                       ordered = TRUE)) %>%
-  arrange(grupo_etario_resumen)
-   
-
-
-
-#=======================================================================================
-#Grafico 
-#=======================================================================================
-
-virus_terapia_fallecidos <- highchart() %>%
-  hc_chart(type = "bar", inverted = TRUE) %>%
-  hc_title (text = "Positividad por agente etiológico  y grupo de edad en fallecidos") %>%
-  hc_xAxis(
-    categories = levels(datos_fallecidos$grupo_etario_resumen),
-    title = list(text = " Grupo etario")) %>%
-  hc_yAxis(
-    title = list(text = "Positividad"),
-    max = 50,
-    labels = list(format= "{value}%")) %>%
-  hc_add_series(
-    name = "Influenza",
-    data = datos_fallecidos%>%
-      filter(Agente == "Influenza") %>% pull (POSITIVIDAD),
-    color = "#f7941e") %>%
-  hc_add_series(
-    name = "SARS-CoV-2",
-    data = datos_fallecidos %>%
-      filter(Agente == "SARS-CoV-2") %>% pull (POSITIVIDAD),
-    color = "#C62828") %>%
-  hc_add_series(
-    name = "VSR",
-    data = datos_fallecidos %>%
-      filter(Agente == "VSR") %>% pull (POSITIVIDAD),
-    color = "#00a651") %>%
-  hc_plotOptions(
-    bar = list(
-      dataLabels = list(enabled = TRUE, format = "{y}%"),
-      groupPadding = 0.1,
-      pointPadding = 0.05)) %>%
-  hc_legend(
-    title = list(text = "Agente etiológico"),
-    align = "center",
-    verticalAlign = "bottom"
+  filter(positivos > 0) %>%
+  mutate(
+    resultado = paste0(
+      positivos, "/", estudiados, " (", positividad, "%)"
+    )
   ) %>%
-  hc_tooltip(shared = TRUE, valueSuffix = "%")
+  arrange(grupo_etario, Agente)
 
 
-virus_terapia_fallecidos
+#============================================================================
+# 4. Tabla final GT
+#============================================================================
 
+tabla_fallecidos_agente_gt <- tabla_fallecidos_agente %>%
+  select(
+    grupo_etario,
+    Agente,
+    resultado
+  ) %>%
+  pivot_wider(
+    names_from = Agente,
+    values_from = resultado,
+    values_fill = "-"
+  ) %>%
+  select(
+    grupo_etario,
+    Influenza,
+    `SARS-CoV-2`,
+    VSR
+  ) %>%
+  gt() %>%
+  cols_label(
+    grupo_etario = "Grupo etario",
+    Influenza = "Influenza",
+    `SARS-CoV-2` = "SARS-CoV-2",
+    VSR = "VSR"
+  ) %>%
+  cols_align(
+    align = "center"
+  ) %>%
+  tab_header(
+    title = "Agentes etiológicos positivos en casos fallecidos",
+    subtitle = "Frecuencia de detección y positividad por agente respiratorio. Unidad Centinela HRRG, 2024–2026"
+  )
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
+tabla_fallecidos_agente_gt
