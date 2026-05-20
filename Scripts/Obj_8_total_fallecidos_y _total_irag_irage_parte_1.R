@@ -61,4 +61,5 @@ curva_fallecidos_irag <- highchart() %>%
     verticalAlign = "bottom"
   )
 
+
 curva_fallecidos_irag
