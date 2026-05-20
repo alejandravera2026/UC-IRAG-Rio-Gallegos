@@ -118,3 +118,86 @@ tabla_vsr_materna <- vacunacion_materna_larga %>%
   )
 
 tabla_vsr_materna
+
+
+#===============================================================================
+# 3. PARTE 2 - VACUNACIÓN ANTIGRIPAL EN GRUPOS DE RIESGO
+#===============================================================================
+
+vacunacion_antigripal_larga <- vacunacion_base %>%
+  filter(grupo_riesgo_vacunacion %in% c("6 a 23 meses", "65 años y más")) %>%
+  select(
+    grupo_riesgo_vacunacion,
+    VAC_ANTIGRIPAL
+  ) %>%
+  mutate(
+    Estado = case_when(
+      VAC_ANTIGRIPAL %in% c("VACUNADA", "VACUNADO") ~ "Vacunado",
+      VAC_ANTIGRIPAL %in% c("NO VACUNADA", "NO VACUNADO") ~ "No vacunado",
+      TRUE ~ "Sin dato"
+    ),
+    Estado = factor(
+      Estado,
+      levels = c("No vacunado", "Sin dato")
+    )
+  )
+
+
+tabla_antigripal_riesgo <- vacunacion_antigripal_larga %>%
+  count(grupo_riesgo_vacunacion, Estado, name = "casos") %>%
+  group_by(grupo_riesgo_vacunacion) %>%
+  mutate(
+    porcentaje = round(casos / sum(casos) * 100, 1),
+    etiqueta = paste0(round(porcentaje, 1), "%")
+  ) %>%
+  ungroup()
+
+
+#===============================================================================
+# Gráfico - vacunación antigripal en grupos de riesgo
+#===============================================================================
+
+grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
+  ggplot(
+    aes(
+      x = grupo_riesgo_vacunacion,
+      y = porcentaje,
+      fill = Estado
+    )
+  ) +
+  geom_col(
+    position = position_fill(reverse = TRUE),
+    width = 0.6
+  ) +
+  geom_text(
+    aes(label = etiqueta),
+    position = position_fill(vjust = 0.5, reverse = TRUE),
+    color = "white",
+    fontface = "bold",
+    size = 4
+  ) +
+  coord_flip() +
+  scale_fill_manual(
+    values = c(
+      "No vacunado" = "#4E79A7",
+      "Sin dato" = "#D4A373"
+    ),
+    breaks = c("No vacunado", "Sin dato")
+  ) +
+  scale_y_continuous(
+    labels = scales::percent_format(scale = 1)
+  ) +
+  labs(
+    title = "Vacunación antigripal en grupos de riesgo",
+    subtitle = "Distribución porcentual según estado de vacunación. Unidad Centinela HRRG, 2024–2026",
+    x = NULL,
+    y = "Porcentaje (%)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "none",
+    panel.grid.major.y = element_blank()
+  )
+
+grafico_antigripal_riesgo
