@@ -35,11 +35,6 @@ data <- data %>%
       as.numeric(SEPI_MIN_INTERNACION)
   )
 
-# Verificación inicial de estructura
-
-
-
-
 
 # 4- PARÁMETROS TEMPORALES PARA EL ANÁLISIS -------------------------------
 
@@ -48,9 +43,6 @@ SEMANA_MINIMA <- 18
 
 ANIO_MAXIMO <- 2026
 SEMANA_MAXIMA <- 8
-
-
-# 5- VERIFICACIÓN DE ARCHIVOS CARGADOS ------------------------------------
 
 
 
