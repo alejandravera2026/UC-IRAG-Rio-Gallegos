@@ -29,10 +29,10 @@ source("Scripts/Obj_3_Positividad_virus.R")
 source("Scripts/Obj_4_Comorbilidades.R")
 source("Scripts/Obj_5_Vacunacion.R")
 source("Scripts/Obj_6_total_internados_total_irag_irage.R")
-source("Scripts/Obj_7_total_uci_total_uci_irag_irage.R")
-source("Scripts/Obj_8_total_fallecidos_y_total_irag_irage.R")
+source("Scripts/Obj_7_total_uci_irag_irage.R")
+source("Scripts/Obj_8_total_fallecidos_y _total_irag_irage.R")
 source("Scripts/Obj_10_virus_terapia_fallecidos.R")
-source("Scripts/Obj_5_parte_1_Vacunacion.R")
+source("Scripts/Obj_9_Letalidad.R")
 
 ```
 
@@ -211,7 +211,18 @@ Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
 curva_fallecidos_irag
 ```
 
+
+
 ```{r}
-virus_terapia_fallecidos
+curva_uci_irag
+```
+
+
+```{r}
+tabla_letalidad_gt
+```
+
+```{r}
+tabla_fallecidos_agente_gt
 ```
 
