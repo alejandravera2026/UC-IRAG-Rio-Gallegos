@@ -30,41 +30,42 @@ casos_menores_dos_anios <- menor_dos_anios %>%
   
 # 3- CURVA INTERACTIVA  ---------------------------------------------------
 
-curva_interactiva_menores_dos <-highchart() %>%
-  hc_chart(type= "column") %>%
+curva_interactiva_menores_dos <- highchart() %>%
+  hc_chart(type = "column") %>%
   
   hc_title(
-    text = "Distribución semanal de casos de IRAG extendida en menores 
-    de 2 años.") %>%
+    text = "Distribución semanal de casos de IRAG extendida en menores de 2 años"
+  ) %>%
   
   hc_subtitle(
-  text = ("Casos notificados según semana epidemiológica. 
-    Unidad Centinela HRRG, 2024 - 2025."
-  )) %>%
+    text = "Casos notificados según semana epidemiológica. Unidad Centinela HRRG, 2024–2026"
+  ) %>%
   
-  hc_plotOptions(column = list(stacking = "normal",
-                               pointPadding = 0.1,   
-                               groupPadding = 0.05,  
-                               borderWidth = 0)) %>%
-  hc_xAxis(
-    categories = casos_menores_dos_años$SEPI, 
-    title = list(text = NULL),
-    labels = list(
-      rotation = -45,
-      step = 2
+  hc_plotOptions(
+    column = list(
+      pointPadding = 0.1,
+      groupPadding = 0.05,
+      borderWidth = 0
     )
-    )%>%  
+  ) %>%
   
-  hc_yAxis(title= list(text="Número de casos")
-           ) %>%
+  hc_xAxis(
+    categories = casos_menores_dos_anios$SEPI,
+    title = list(text = NULL),
+    labels = list(rotation = -45, step = 2)
+  ) %>%
+  
+  hc_yAxis(
+    title = list(text = "Número de casos")
+  ) %>%
   
   hc_add_series(
-    data = casos_menores_dos_años$`IRAG extendida`,
+    data = casos_menores_dos_anios$CASOS,
     name = "IRAG extendida",
-    color = "#7EC8E6") %>%
+    color = "#7EC8E6"
+  ) %>%
   
   hc_legend(enabled = FALSE)
-
 
 curva_interactiva_menores_dos
 
@@ -124,9 +125,9 @@ curva_interactiva_2_14 <- highchart() %>%
     data = casos_2_14$CASOS,
     name = "IRAG",
     color = "#252C61"
-  ) %>%
+  ) 
   
-  hc_legend(enabled = FALSE)
+  # hc_legend(enabled = FALSE)
 
 curva_interactiva_2_14
 
@@ -187,9 +188,9 @@ curva_interactiva_15_59 <- highchart() %>%
     data = casos_15_59$CASOS,
     name = "IRAG",
     color = "#252C61"
-  ) %>%
+  ) 
   
-  hc_legend(enabled = FALSE)
+  # hc_legend(enabled = FALSE)
 
 curva_interactiva_15_59
 
@@ -251,9 +252,9 @@ curva_interactiva_60_mas <- highchart() %>%
     data = casos_60_mas$CASOS,
     name = "IRAG extendida",
     color = "#7EC8E6"
-  ) %>%
+  ) 
   
-  hc_legend(enabled = FALSE)
+  # hc_legend(enabled = FALSE)
 
 curva_interactiva_60_mas
 

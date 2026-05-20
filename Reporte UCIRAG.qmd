@@ -1,5 +1,6 @@
 ---
-title: ""
+title: "Boletín Epidemiológico"
+subtitle: "Unidad Centinela de Infecciones Respiratorias Agudas Graves"
 format: html
 toc: true
 toc-title: "Índice"
@@ -28,7 +29,6 @@ source("Scripts/Obj_3_Positividad_virus.R")
 source("Scripts/Obj_4_Comorbilidades.R")
 source("Scripts/Obj_5_Vacunacion.R")
 source("Scripts/Obj_6_total_internados_total_irag_irage.R")
-source("Scripts/Obj_6_total_internados_total_irag_irage.R")
 source("Scripts/Obj_7_total_uci_total_uci_irag_irage.R")
 source("Scripts/Obj_8_total_fallecidos_y_total_irag_irage.R")
 source("Scripts/Obj_10_virus_terapia_fallecidos.R")
@@ -37,34 +37,58 @@ source("Scripts/Obj_10_virus_terapia_fallecidos.R")
 
 # Boletín Epidemiológico
 
-# Unidad Centinela de IRAG
+# Unidad Centinela de Infecciones Respiratorias Agudas Graves 
 
 # Hospital Regional de Río Gallegos
 
 ## **1.Introducción**
 
-Las infecciones respiratorias agudas (IRAs) son patologías originadas por diferentes agentes etiológicos que provocan cuadros clínicos como la enfermedad tipo influenza (ETI), bronquiolitis y neumonía, hasta cuadros de mayor gravedad manifestados como infecciones respiratorias agudas graves (IRAG). Las IRAs constituyen una importante causa de morbimortalidad afectando fundamentalmente a niñas/os menores de dos años, personas mayores de 60 años y personas susceptibles con patologías de base. En Argentina, la vigilancia epidemiológica de las IRAs se realiza a través del Sistema Nacional de Vigilancia de la Salud el cual involucra la participación de diferentes niveles de atención (local, provincial y nacional), laboratorios y áreas de epidemiología. En este sentido, se destaca una vigilancia de infecciones respiratorias agudas colaborativa y con componentes diferentes que sean complementarios y adecuados para responder a propósitos definidos. La Unidad Centinela de IRAG (UCIRAG) aporta información de calidad permitiendo monitorear las tendencias en la incidencia identificando periodos epidémicos en diferentes unidades territoriales; caracterizar el comportamiento de la enfermedad (grupos poblacionales afectados y factores de riesgo, magnitud, severidad, mortalidad). En la provincia de Santa Cruz, la UCIRAG se implementa en la semana 18 del año 2024, asignando al Hospital Regional Río Gallegos, establecimiento de mayor densidad poblacional con internación adulta y pediátrica.
+Las infecciones respiratorias agudas (IRAs) representan una importante causa de 
+morbimortalidad, afectando principalmente a menores de dos años, personas 
+mayores de 60 años y pacientes con factores de riesgo. 
+En Argentina, su vigilancia epidemiológica se realiza a través del 
+Sistema Nacional de Vigilancia de la Salud (SNVS), mediante estrategias 
+complementarias entre los distintos niveles sanitarios. 
+La Unidad Centinela de IRAG (UCIRAG) permite monitorear tendencias 
+epidemiológicas, identificar periodos epidémicos y caracterizar la magnitud y
+severidad de la enfermedad. 
+En la provincia de Santa Cruz, la UCIRAG comenzó a implementarse en la semana 
+epidemiológica 18 del año 2024 en el Hospital Regional Río Gallegos, 
+establecimiento de referencia provincial con internación adulta y pediátrica.
 
 **Objetivo general**
 
-Caracterizar el perfil clínico, epidemiológico y etiológico de las infecciones respiratorias agudas graves (IRAG) e infecciones respiratorias agudas graves extendidas (IRAGE) notificadas en el Hospital Regional de Río Gallegos, en el marco de la estrategia de vigilancia Unidad Centinela de IRAG, durante el período comprendido entre la semana epidemiológica 18 del año 2024 y la semana epidemiológica 8 del año 2026, con el fin de describir su comportamiento temporal, identificar grupos de riesgo y aportar información para la vigilancia y el análisis de su impacto en el sistema de salud.
+## Objetivo general
 
-*Objetivos específicos*
+## Objetivo general
 
-1-Describir la distribución temporal de los casos de IRAG e IRAGE por semana epidemiológica y por año, identificando patrones de tendencia y comportamiento estacional. 2-Describir la distribución de casos de IRAG e IRAGE por grupo etario, por semana epidemiológica y por año, identificando grupos poblaciones de mayor riesgo. 3-Estimar el porcentaje de positividad para SARS-CoV-2, Influenza y VSR por semana epidemiológica y por año, a fin de caracterizar etiológicamente la circulación de virus respiratorios.
-4-Caracterizar la frecuencia de comorbilidades registradas en los casos de IRAG e IRAGE por grupo etario, identificando factores asociados a mayor riesgo de gravedad. 
-5-Determinar la proporción de pacientes vacunados en los grupos de riesgo (6 a 23 meses y mayores de 65 años) y en gestantes vacunadas durante el embarazo (menores de 6 meses) 
-6-Estimar la proporción de casos de IRAG e IRAGE en relación con el total de pacientes internados por todas las causas por semana epidemiológica y por año con el fin de estimar la carga de enfermedad respiratoria en el hospital.
-7-Estimar la proporción de casos que requieren ingreso a unidades de cuidados intensivos, en relación con el total de pacientes que ingresaron a UTI, por semana epidemiológica y grupo etario, como indicador de severidad.
-8-Estimar la proporción de casos fallecidos en relación con el total de pacientes fallecidos, por semana epidemiológica y por año, con el fin de evaluar el impacto en la mortalidad hospitalaria.
-9-Calcular la tasa de letalidad de los casos de IRAG e IRAGE, por grupo etario, como medida de gravedad clínica.
+Describir el comportamiento epidemiológico, clínico y etiológico de los casos 
+de infecciones respiratorias agudas graves (IRAG) e IRAG extendidas (IRAGE) 
+notificados en la Unidad Centinela del Hospital Regional Río Gallegos entre 
+la semana epidemiológica 18 de 2024 y la semana epidemiológica 8 de 2026, 
+con el fin de aportar información para la vigilancia epidemiológica y el 
+análisis de su impacto en el sistema de salud.
+
+
+## Ejes de análisis
+
+El presente boletín describe el comportamiento temporal de los casos de IRAG e 
+IRAG extendida, la circulación de virus respiratorios, los grupos poblacionales
+afectados, la presencia de comorbilidades y vacunación, así como indicadores 
+de severidad, internación y mortalidad hospitalaria.
 
 *Definiciones de los casos de IRAG e IRAG extendida*
 
-*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con: Fiebre referida o constatada >= 38°C y Tos; e
-Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación por criterio clínico. 
-*IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años Infección respiratoria: definida por tos o dificultad respiratoria; e Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación por criterio clínico. 
-En lactantes menores de 6 meses también considerar: Apnea (cese temporal de la respiración por cualquier causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
+*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con: 
+Fiebre referida o constatada >= 38°C y Tos; e
+Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación 
+por criterio clínico. 
+*IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años Infección 
+respiratoria: definida por tos o dificultad respiratoria; e Inicio del cuadro 
+en los 10 días precedentes; y Requerimiento de internación por criterio clínico. 
+En lactantes menores de 6 meses también considerar: Apnea (cese temporal de la 
+respiración por cualquier causa), o Sepsis (fiebre/hipotermia y shock y 
+gravemente enfermo sin causa aparente)
 
 Para mayor información de la estrategia de vigilancia centinela de IRAG consultar en: https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
 
@@ -85,28 +109,27 @@ curva_interactiva
 
 Fuente:Elaboración propia en base a datos del  SNVS 2.0
 
-En los *GRÁFICO N° 2 y 3* se describen la distribución de IRAG e IRAG extendida en los dos grupos etarios de mayor riesgo, menores de dos años y mayores de 60 años.
-En el grupo de menores de dos años, el  total de  `r notificaciones_totales1` casos de internaciones por IRAG e IRAG extendida. De las cuales, un   `r pct_IRAG1` % (n =  `r notificaciones_irag1`) corresponden a IRAG y un  `r pct_IRAGE1` % (n =  `r notificaciones_irage1`) corresponden a IRAG extendida. 
-En el grupo de mayores de 60 años, un total de  `r notificaciones_totales2`. De las cuales, un  `r pct_IRAG2` % (n=  `r notificaciones_irag2`) corresponden IRAG y un  `r pct_IRAGE2` % (n=  `r notificaciones_irage2`) corresponden a IRAG extendida. 
+En los gráficos siguientes se describe la distribución temporal de los casos notificados de IRAG e IRAG extendida según grupo etario, semana epidemiológica y año. Para mantener coherencia con los criterios de vigilancia, se presentan por separado los grupos poblacionales definidos para el análisis: menores de 2 años, población de 2 a 14 años, población de 15 a 59 años y personas de 60 años y más.
 
-*GRÁFICO N° 2*: Distribución temporal de IRAG e IRAG extendida por semana y año en menores de 2 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz. N =  `r notificaciones_totales1`
+**Gráfico N.° 2:** Distribución semanal de casos de IRAG extendida en menores de 2 años. Unidad Centinela HRRG, 2024–2026.
+
 
 ```{r}
 curva_interactiva_menores_dos
 ```
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 3*: Distribución temporal de IRAG e IRAG extendida por semana y año en mayores de 60 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz. N =  `r notificaciones_totales2`
+*GRÁFICO N° 3*: Distribución temporal de IRAG e IRAG extendida por semana y año en mayores de 60 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
 
 
 ```{r}
-curva_interactiva_mayores_60
+
 ```
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 **VIGILANCIA POR LABORATORIO**
 
-De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. Del total de `r notificaciones_totales`, se obtuvieron `r total_positivos` positivos para virus estudiados. De los cuales, un `r pct_influenza` % (n = `r positivos_influenza`) para virus Influenza, un `r pct_sars_cov` % (n = `r positivos_sars_cov`) para el virus SARS-CoV-2 y un `r pct_vsr` % (n = `r positivos_vsr`) para el virus VSR (Virus Sincicial Respiratorio). 
+De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. Del total de, se obtuvieron  positivos para virus estudiados. De los cuales, un % para virus Influenza, un `r pct_sars_cov` % (n = `r positivos_sars_cov`) para el virus SARS-CoV-2 y un `r pct_vsr` % (n = `r positivos_vsr`) para el virus VSR (Virus Sincicial Respiratorio). 
 En el *GRÁFICO N° 4*, muestra la distribución de los virus estudiados por semana y por año, que se observa una mayor circulación para el virus VSR, con picos máximos en las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025. 
 Durante el año 2025, hubo mayor circulación del virus Influenza con respecto al año 2024,  con un adelanto a partir de la semana 12 con picos constantes hasta la semana 25.
 Para el virus SARS-CoV-2, muestra mayor circulación en el año 2025 con respecto al año 2024 pero es menor con respecto a los otros virus Influenza y VSR.
