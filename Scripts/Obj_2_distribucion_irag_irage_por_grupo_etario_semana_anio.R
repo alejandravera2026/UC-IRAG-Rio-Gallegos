@@ -16,25 +16,31 @@ distribucion_grupo_etario <- data %>%
 menor_dos_anios <- distribucion_grupo_etario %>%
   filter(
     grupo_etario == "< 2 años",
-    CLASIFICACION_MANUAL == "IRAG extendida"
-  )
+    CLASIFICACION_MANUAL %in% c("IRAG extendida", "Infección respiratoria aguda grave (IRAG)"))
+  
 
 casos_menores_dos_anios <- menor_dos_anios %>%
-  group_by(SEPI) %>%
+  group_by(SEPI,CLASIFICACION_MANUAL) %>%
   summarise(
     CASOS = n(),
     .groups = "drop"
   ) %>%
   arrange(SEPI) 
 
+#3' Paso datos a formato ancho (wider) para hacer curva interactiva
+
+casos_menores_dos_anios <- casos_menores_dos_anios %>% 
+  pivot_wider(names_from = CLASIFICACION_MANUAL,
+              values_from = CASOS,
+              values_fill = 0) 
   
-# 3- CURVA INTERACTIVA  ---------------------------------------------------
+# 4- CURVA INTERACTIVA  ---------------------------------------------------
 
 curva_interactiva_menores_dos <- highchart() %>%
   hc_chart(type = "column") %>%
   
   hc_title(
-    text = "Distribución semanal de casos de IRAG extendida en menores de 2 años"
+    text = "Distribución semanal de casos de IRAG e IRAG extendida en menores de 2 años"
   ) %>%
   
   hc_subtitle(
@@ -60,10 +66,15 @@ curva_interactiva_menores_dos <- highchart() %>%
   ) %>%
   
   hc_add_series(
-    data = casos_menores_dos_anios$CASOS,
+    data = casos_menores_dos_anios$`IRAG extendida`,
     name = "IRAG extendida",
     color = "#7EC8E6"
   ) %>%
+  hc_add_series(
+    data = casos_menores_dos_anios$`Infección respiratoria aguda grave (IRAG)`,
+    name = "IRAG",
+    color = "#252C61"
+  )%>%
   
   hc_legend(enabled = FALSE)
 
@@ -125,9 +136,9 @@ curva_interactiva_2_14 <- highchart() %>%
     data = casos_2_14$CASOS,
     name = "IRAG",
     color = "#252C61"
-  ) 
+  )%>% 
   
-  # hc_legend(enabled = FALSE)
+   hc_legend(enabled = FALSE)
 
 curva_interactiva_2_14
 
@@ -188,9 +199,10 @@ curva_interactiva_15_59 <- highchart() %>%
     data = casos_15_59$CASOS,
     name = "IRAG",
     color = "#252C61"
-  ) 
+  )%>% 
   
-  # hc_legend(enabled = FALSE)
+  hc_legend(enabled = FALSE)
+
 
 curva_interactiva_15_59
 
@@ -200,16 +212,23 @@ curva_interactiva_15_59
 grupo_60_mas <- distribucion_grupo_etario %>%
   filter(
     grupo_etario == "60 años y más",
-    CLASIFICACION_MANUAL == "IRAG extendida"
-  )
+    CLASIFICACION_MANUAL %in% c("Infección respiratoria aguda grave (IRAG)", "IRAG extendida"
+  ))
 
 casos_60_mas <- grupo_60_mas %>%
-  group_by(SEPI) %>%
+  group_by(SEPI,CLASIFICACION_MANUAL) %>%
   summarise(
     CASOS = n(),
     .groups = "drop"
   ) %>%
   arrange(SEPI)
+
+#9 Paso datos a formato ancho (wider) para hacer curva interactiva
+
+casos_60_mas <- casos_60_mas %>% 
+  pivot_wider(names_from = CLASIFICACION_MANUAL,
+              values_from = CASOS,
+              values_fill = 0) 
 
 
 # 9- CURVA INTERACTIVA - IRAG EXTENDIDA EN PERSONAS DE 60 AÑOS Y MÁS ---------
@@ -218,7 +237,7 @@ curva_interactiva_60_mas <- highchart() %>%
   hc_chart(type = "column") %>%
   
   hc_title(
-    text = "Distribución semanal de casos de IRAG extendida en personas de 
+    text = "Distribución semanal de casos de IRAG e IRAG extendida en personas de 
     60 años y más."
   ) %>%
   
@@ -249,12 +268,16 @@ curva_interactiva_60_mas <- highchart() %>%
   ) %>%
   
   hc_add_series(
-    data = casos_60_mas$CASOS,
+    data = casos_60_mas$`IRAG extendida`,
     name = "IRAG extendida",
     color = "#7EC8E6"
-  ) 
-  
-  # hc_legend(enabled = FALSE)
+  ) %>%
+  hc_add_series(
+    data = casos_60_mas$`Infección respiratoria aguda grave (IRAG)`,
+    name = "IRAG",
+    color = "#252C61"
+  ) %>%
+   hc_legend(enabled = FALSE)
 
 curva_interactiva_60_mas
 
