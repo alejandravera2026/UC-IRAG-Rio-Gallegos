@@ -148,7 +148,7 @@ casos_15_59 <- grupo_15_59 %>%
   arrange(SEPI)
 
 
-# CURVA INTERACTIVA - IRAG EN POBLACIÓN DE 15 A 59 AÑOS ---------------------
+# 7- CURVA INTERACTIVA - IRAG EN POBLACIÓN DE 15 A 59 AÑOS -------------------
 
 curva_interactiva_15_59 <- highchart() %>%
   hc_chart(type = "column") %>%
@@ -193,9 +193,8 @@ curva_interactiva_15_59 <- highchart() %>%
 
 curva_interactiva_15_59
 
-# ===========================================================================
-# GRUPO ETARIO 60 AÑOS Y MÁS - IRAG EXTENDIDA
-# ===========================================================================
+
+# 8- GRUPO ETARIO 60 AÑOS Y MAS - IRAG extendida --------------------------
 
 grupo_60_mas <- distribucion_grupo_etario %>%
   filter(
@@ -212,7 +211,7 @@ casos_60_mas <- grupo_60_mas %>%
   arrange(SEPI)
 
 
-# CURVA INTERACTIVA - IRAG EXTENDIDA EN PERSONAS DE 60 AÑOS Y MÁS -----------
+# 9- CURVA INTERACTIVA - IRAG EXTENDIDA EN PERSONAS DE 60 AÑOS Y MÁS ---------
 
 curva_interactiva_60_mas <- highchart() %>%
   hc_chart(type = "column") %>%
