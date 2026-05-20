@@ -259,7 +259,7 @@ curva_interactiva_60_mas <- highchart() %>%
     title = list(text = NULL),
     labels = list(
       rotation = -45,
-      step = 2
+      step = 4
     )
   ) %>%
   
