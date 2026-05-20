@@ -37,3 +37,5 @@ curva_uci_irag_irage <-highchart() %>%
   ) 
 
 curva_uci_irag_irage
+
+
