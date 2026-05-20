@@ -1,21 +1,36 @@
 ---
 title: "Boletín Epidemiológico"
 subtitle: "Unidad Centinela de Infecciones Respiratorias Agudas Graves"
-format: html
-toc: true
-toc-title: "Índice"
-toc-depth: 3
-toc-location: left
+format:
+  html:
+    toc: true
+    toc-title: "Índice"
+    toc-depth: 3
+    toc-location: left
+    smooth-scroll: true
+    embed-resources: true
+    css: "Plantillas e imagenes/estilo.css"
+
 execute:
   echo: false
   warning: false
   message: false
-smooth-scroll: true
-embed-resources: true
-css: "Plantillas e imagenes/estilo.css"
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-![](Plantillas%20e%20imagenes/hospital.png){width="20%"}
+::: portada
+![](%22Plantillas%20e%20imagenes/hospital.png%22){width="18%"}
+
+# Hospital Regional Río Gallegos
+
+## Unidad Centinela de Infecciones Respiratorias Agudas Graves
+
+### Boletín Epidemiológico UCIRAG
+
+#### SE 18/2024 – SE 08/2026
+:::
 
 ```{r}
 source("Scripts/1_library.R")
@@ -38,94 +53,119 @@ source("Scripts/Obj_9_Letalidad.R")
 
 # Boletín Epidemiológico
 
-# Unidad Centinela de Infecciones Respiratorias Agudas Graves 
+# Unidad Centinela de Infecciones Respiratorias Agudas Graves
 
 # Hospital Regional de Río Gallegos
 
 ## **1.Introducción**
 
-Las infecciones respiratorias agudas (IRAs) representan una importante causa de 
-morbimortalidad, afectando principalmente a menores de dos años, personas 
-mayores de 60 años y pacientes con factores de riesgo. 
-En Argentina, su vigilancia epidemiológica se realiza a través del 
-Sistema Nacional de Vigilancia de la Salud (SNVS), mediante estrategias 
-complementarias entre los distintos niveles sanitarios. 
-La Unidad Centinela de IRAG (UCIRAG) permite monitorear tendencias 
-epidemiológicas, identificar periodos epidémicos y caracterizar la magnitud y
-severidad de la enfermedad. 
-En la provincia de Santa Cruz, la UCIRAG comenzó a implementarse en la semana 
-epidemiológica 18 del año 2024 en el Hospital Regional Río Gallegos, 
-establecimiento de referencia provincial con internación adulta y pediátrica.
+Las infecciones respiratorias agudas (IRAs) representan una importante
+causa de morbimortalidad, afectando principalmente a menores de dos
+años, personas mayores de 60 años y pacientes con factores de riesgo. En
+Argentina, su vigilancia epidemiológica se realiza a través del Sistema
+Nacional de Vigilancia de la Salud (SNVS), mediante estrategias
+complementarias entre los distintos niveles sanitarios. La Unidad
+Centinela de IRAG (UCIRAG) permite monitorear tendencias
+epidemiológicas, identificar periodos epidémicos y caracterizar la
+magnitud y severidad de la enfermedad. En la provincia de Santa Cruz, la
+UCIRAG comenzó a implementarse en la semana epidemiológica 18 del año
+2024 en el Hospital Regional Río Gallegos, establecimiento de referencia
+provincial con internación adulta y pediátrica.
 
 ## **Objetivo general**
 
-Describir el comportamiento epidemiológico, clínico y etiológico de los casos 
-de infecciones respiratorias agudas graves (IRAG) e IRAG extendidas (IRAGE) 
-notificados en la Unidad Centinela del Hospital Regional Río Gallegos entre 
-la semana epidemiológica 18 de 2024 y la semana epidemiológica 8 de 2026, 
-con el fin de aportar información para la vigilancia epidemiológica y el 
-análisis de su impacto en el sistema de salud.
-
+Describir el comportamiento epidemiológico, clínico y etiológico de los
+casos de infecciones respiratorias agudas graves (IRAG) e IRAG
+extendidas (IRAGE) notificados en la Unidad Centinela del Hospital
+Regional Río Gallegos entre la semana epidemiológica 18 de 2024 y la
+semana epidemiológica 8 de 2026, con el fin de aportar información para
+la vigilancia epidemiológica y el análisis de su impacto en el sistema
+de salud.
 
 ## Ejes de análisis
 
-El presente boletín describe el comportamiento temporal de los casos de IRAG e 
-IRAG extendida, la circulación de virus respiratorios, los grupos poblacionales
-afectados, la presencia de comorbilidades y vacunación, así como indicadores 
-de severidad, internación y mortalidad hospitalaria.
+El presente boletín describe el comportamiento temporal de los casos de
+IRAG e IRAG extendida, la circulación de virus respiratorios, los grupos
+poblacionales afectados, la presencia de comorbilidades y vacunación,
+así como indicadores de severidad, internación y mortalidad
+hospitalaria.
 
 *Definiciones de los casos de IRAG e IRAG extendida*
 
-*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con: 
-Fiebre referida o constatada >= 38°C y Tos; e
-Inicio del cuadro en los 10 días precedentes; y Requerimiento de internación 
-por criterio clínico. 
-*IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años Infección 
-respiratoria: definida por tos o dificultad respiratoria; e Inicio del cuadro 
-en los 10 días precedentes; y Requerimiento de internación por criterio clínico. 
-En lactantes menores de 6 meses también considerar: Apnea (cese temporal de la 
-respiración por cualquier causa), o Sepsis (fiebre/hipotermia y shock y 
-gravemente enfermo sin causa aparente)
+*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con:
+Fiebre referida o constatada \>= 38°C y Tos; e Inicio del cuadro en los
+10 días precedentes; y Requerimiento de internación por criterio
+clínico. *IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años
+Infección respiratoria: definida por tos o dificultad respiratoria; e
+Inicio del cuadro en los 10 días precedentes; y Requerimiento de
+internación por criterio clínico. En lactantes menores de 6 meses
+también considerar: Apnea (cese temporal de la respiración por cualquier
+causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin
+causa aparente)
 
-Para mayor información de la estrategia de vigilancia centinela de IRAG consultar en: https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
+Para mayor información de la estrategia de vigilancia centinela de IRAG
+consultar en:
+https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
 
-**NOTA METODOLÓGICA**
-En el presente informe integra el análisis de la información proveniente de dos fuentes nominal y agrupada a través del Sistema Información Sanitaria Argentina (SNVS2.0). El procesamiento y análisis de los datos se efectuó con el software R, versión..., empleando los procedimientos reproducibles. 
-El período evaluado abarca desde la semana 18 del año 2024 hasta la semana 8 del 2026. Se implementaron los criterios de inclusión y exclusión para garantizar la validez de las estimaciones.
+**NOTA METODOLÓGICA** En el presente informe integra el análisis de la
+información proveniente de dos fuentes nominal y agrupada a través del
+Sistema Información Sanitaria Argentina (SNVS2.0). El procesamiento y
+análisis de los datos se efectuó con el software R, versión...,
+empleando los procedimientos reproducibles. El período evaluado abarca
+desde la semana 18 del año 2024 hasta la semana 8 del 2026. Se
+implementaron los criterios de inclusión y exclusión para garantizar la
+validez de las estimaciones.
 
-**SITUACIÓN EPIDEMIOLÓGICA** 
-Entre la semana 18 del año 2024 y la semana 8 del año 2026, se registraron un total de `r notificaciones_totales`de internaciones con diagnóstico de infección respiratoria aguda grave (IRAG e IRAG extendida). Del total, el `r pct_IRAG` % (n = `r notificaciones_irag`) corresponde a IRAG y el `r pct_IRAGE` % (n = `r notificaciones_irage`) corresponde a IRAG extendida.
+**SITUACIÓN EPIDEMIOLÓGICA** Entre la semana 18 del año 2024 y la semana
+8 del año 2026, se registraron un total de `r notificaciones_totales`de
+internaciones con diagnóstico de infección respiratoria aguda grave
+(IRAG e IRAG extendida). Del total, el `r pct_IRAG` % (n =
+`r notificaciones_irag`) corresponde a IRAG y el `r pct_IRAGE` % (n =
+`r notificaciones_irage`) corresponde a IRAG extendida.
 
-En el *GRÁFICO N° 1* se observa la distribución temporal desde la semana 18 del año 2024 hasta la semana 8 del año 2026.
+En el *GRÁFICO N° 1* se observa la distribución temporal desde la semana
+18 del año 2024 hasta la semana 8 del año 2026.
 
-*GRÁFICO N°1*: Casos de IRAG e IRAG extendida por SE y año. Desde semana 1 año 2024 hasta semana 8 del 2026. UC IRAG Hospital Regional Río Gallegos- Provincia de Santa Cruz. N= `r notificaciones_totales`
+*GRÁFICO N°1*: Casos de IRAG e IRAG extendida por SE y año. Desde semana
+1 año 2024 hasta semana 8 del 2026. UC IRAG Hospital Regional Río
+Gallegos- Provincia de Santa Cruz. N= `r notificaciones_totales`
 
 ```{r}
 curva_interactiva
 ```
 
-Fuente:Elaboración propia en base a datos del  SNVS 2.0
+Fuente:Elaboración propia en base a datos del SNVS 2.0
 
-En los gráficos siguientes se describe la distribución temporal de los casos notificados de IRAG e IRAG extendida según grupo etario, semana epidemiológica y año. Para mantener coherencia con los criterios de vigilancia, se presentan por separado los grupos poblacionales definidos para el análisis: menores de 2 años, población de 2 a 14 años, población de 15 a 59 años y personas de 60 años y más.
+En los gráficos siguientes se describe la distribución temporal de los
+casos notificados de IRAG e IRAG extendida según grupo etario, semana
+epidemiológica y año. Para mantener coherencia con los criterios de
+vigilancia, se presentan por separado los grupos poblacionales definidos
+para el análisis: menores de 2 años, población de 2 a 14 años, población
+de 15 a 59 años y personas de 60 años y más.
 
-**Gráfico N.° 2:** Distribución semanal de casos de IRAG e IRAG extendida en menores de 2 años. Unidad Centinela HRRG, 2024–2026.
-
+**Gráfico N.° 2:** Distribución semanal de casos de IRAG e IRAG
+extendida en menores de 2 años. Unidad Centinela HRRG, 2024–2026.
 
 ```{r}
 curva_interactiva_menores_dos
 ```
+
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 3*: Distribución temporal de IRAG por semana y año en población de 2 a 14 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
-
+*GRÁFICO N° 3*: Distribución temporal de IRAG por semana y año en
+población de 2 a 14 años. Desde la semana 1 año 2024 hasta la semana 8
+año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
 
 ```{r}
 curva_interactiva_2_14
 
 ```
+
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 4*:  Distribución temporal de IRAG por semana y año en población de 15 a 59 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+*GRÁFICO N° 4*: Distribución temporal de IRAG por semana y año en
+población de 15 a 59 años. Desde la semana 1 año 2024 hasta la semana 8
+año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
 
 ```{r}
 curva_interactiva_15_59
@@ -133,90 +173,130 @@ curva_interactiva_15_59
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 5*: Distribución temporal de IRAG por semana y año en mayores de 60 años y más. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+*GRÁFICO N° 5*: Distribución temporal de IRAG por semana y año en
+mayores de 60 años y más. Desde la semana 1 año 2024 hasta la semana 8
+año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
 
 ```{r}
 curva_interactiva_60_mas
 ```
+
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 **VIGILANCIA POR LABORATORIO**
 
-De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. 
-En el *GRÁFICO N° 6*, muestra la distribución de los virus estudiados por semana y por año, que se observa una mayor circulación para el virus VSR, con picos máximos en las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025. 
-Durante el año 2025, hubo mayor circulación del virus Influenza con respecto al año 2024,  con un adelanto a partir de la semana 12 con picos constantes hasta la semana 25.
-Para el virus SARS-CoV-2, muestra mayor circulación en el año 2025 con respecto al año 2024 pero es menor con respecto a los otros virus Influenza y VSR.
+De los casos internados por IRAG e IRAG extendida, se realizaron las
+determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR)
+mediante técnicas de biología molecular. En el *GRÁFICO N° 6*, muestra
+la distribución de los virus estudiados por semana y por año, que se
+observa una mayor circulación para el virus VSR, con picos máximos en
+las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025.
+Durante el año 2025, hubo mayor circulación del virus Influenza con
+respecto al año 2024, con un adelanto a partir de la semana 12 con picos
+constantes hasta la semana 25. Para el virus SARS-CoV-2, muestra mayor
+circulación en el año 2025 con respecto al año 2024 pero es menor con
+respecto a los otros virus Influenza y VSR.
 
+*GRÁFICO N°6*: Distribución de los agentes etiológicos estudiados por
+semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del
+año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
 
-*GRÁFICO N°6*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
-
-```{r} 
+```{r}
 positividad_scatter
 
 ```
-Fuente: Elaboración propia en base a datos del  SNVS 2.0
 
+Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 *COMORBILIDADES*
 
-La distribución de frecuencia y porcentaje de comorbilidades por grupo etario durante el período de estudio, muestra  un mayor porcentaje de comorbilidades en el grupo de adultos mayores de 60 años y más de los casos internados por IRAG e IRAG extendida en el Hospital Regional Río Gallegos. (TABLA N° 1)
+La distribución de frecuencia y porcentaje de comorbilidades por grupo
+etario durante el período de estudio, muestra un mayor porcentaje de
+comorbilidades en el grupo de adultos mayores de 60 años y más de los
+casos internados por IRAG e IRAG extendida en el Hospital Regional Río
+Gallegos. (TABLA N° 1)
 
-*TABLA N° 1*: Frecuencia y procentaje de comorbilidades por grupo etario. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
+*TABLA N° 1*: Frecuencia y procentaje de comorbilidades por grupo
+etario. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026.
+Hospital Regional Río Gallegos. Provincia de Santa Cruz.
+
 ```{r}
 tabla_comorbilidad_grupo_gt
 ```
-Fuente: Elaboración propia en base a datos del  SNVS 2.0
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 *COBERTURA DE VACUNACION MATERNA EN MENORES DE 6 MESES*
 
-Durante el período de estudio, se evaluaron en los menores de 6 meses si presentaban antecedentes de vacunación materna contra el Virus Sincicial Respiratorio e Influenza, observándose diferencias porcentuales entre las vacunaciones maternas antigripal y contra el Virus Sincicial Respiratorio. (TABLA N° 2 Y 3)
+Durante el período de estudio, se evaluaron en los menores de 6 meses si
+presentaban antecedentes de vacunación materna contra el Virus Sincicial
+Respiratorio e Influenza, observándose diferencias porcentuales entre
+las vacunaciones maternas antigripal y contra el Virus Sincicial
+Respiratorio. (TABLA N° 2 Y 3)
 
-*TABLA N° 2*: Vacunación materna contra VSR. Período semana 18 año 2024 al semana 8 año 2026. Hospital Regional Río Gallegos.
+*TABLA N° 2*: Vacunación materna contra VSR. Período semana 18 año 2024
+al semana 8 año 2026. Hospital Regional Río Gallegos.
 
 ```{r}
 tabla_vsr_materna
 
 ```
+
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*TABLA N°3*: Vacunación materna contra Influenza. Período semana 18 año 2024 hasta semana 8 año 2026. Hospital Regional Río Gallegos.
+*TABLA N°3*: Vacunación materna contra Influenza. Período semana 18 año
+2024 hasta semana 8 año 2026. Hospital Regional Río Gallegos.
 
 ```{r}
 tabla_antigripal_materna
 
 ```
+
 Fuente: Elaboración propia en base a los datos del SNVS 2.0
 
-Además, se evaluaron los antecedentes de vacunación antigripal en los grupos poblacionales, considerados como grupos de riesgo, que son incluídos al Calendario Nacional de Vacunación. Se observaron que en el grupo de 6 a 23 meses presenta mayor porcentaje de vacunación, en comparación al grupo de 65 años y más. (TABLA N° 4)
+Además, se evaluaron los antecedentes de vacunación antigripal en los
+grupos poblacionales, considerados como grupos de riesgo, que son
+incluídos al Calendario Nacional de Vacunación. Se observaron que en el
+grupo de 6 a 23 meses presenta mayor porcentaje de vacunación, en
+comparación al grupo de 65 años y más. (TABLA N° 4)
 
+*TABLAN° 4*: Vacunación antigripal en grupo de riesgo. Desde semana 18
+año 2024 al semana 8 año 2026. Hospital Regional Río Gallegos.
 
-*TABLAN° 4*: Vacunación antigripal en grupo de riesgo. Desde semana 18 año 2024 al semana 8 año 2026. Hospital Regional Río Gallegos.
 ```{r}
 grafico_antigripal_riesgo
 ```
+
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*IMPACTO DE LAS OCUPACIONES DE CAMAS EN INTERNACION HOSPITALARIA ADULTOS Y PEDIÁTRICOS*
+*IMPACTO DE LAS OCUPACIONES DE CAMAS EN INTERNACION HOSPITALARIA ADULTOS
+Y PEDIÁTRICOS*
 
-Del análisis de la notificación agrupada durante el período de estudio establecido, muestra una proporción aproximada de  ocupación de camas en internaciones por causa respiratoria con respecto al total de internaciones, ya que no todas las infecciones respiratorias agudas (IRA) con requerimiento de internación se notifican en esta vigilancia de centinela respiratoria, acorde con las definiciones vigentes. (GRÁFICO N° 7)
+Del análisis de la notificación agrupada durante el período de estudio
+establecido, muestra una proporción aproximada de ocupación de camas en
+internaciones por causa respiratoria con respecto al total de
+internaciones, ya que no todas las infecciones respiratorias agudas
+(IRA) con requerimiento de internación se notifican en esta vigilancia
+de centinela respiratoria, acorde con las definiciones vigentes.
+(GRÁFICO N° 7)
 
+*GRÁFICA N°7*: Proporción semanal de internaciones por IRAG e IRAG
+extendida sobre el total de internaciones. Hospital Regional Río
+Gallegos.
 
-*GRÁFICA N°7*: Proporción semanal de internaciones por IRAG e IRAG extendida sobre el total de internaciones. Hospital Regional Río Gallegos.
 ```{r}
 curva_internaciones_irag
 ```
-Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive 
+
+Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
 
 ```{r}
 curva_fallecidos_irag
 ```
 
-
-
 ```{r}
 curva_uci_irag
 ```
-
 
 ```{r}
 tabla_letalidad_gt
@@ -225,4 +305,3 @@ tabla_letalidad_gt
 ```{r}
 tabla_fallecidos_agente_gt
 ```
-
