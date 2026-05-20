@@ -32,6 +32,7 @@ source("Scripts/Obj_6_total_internados_total_irag_irage.R")
 source("Scripts/Obj_7_total_uci_total_uci_irag_irage.R")
 source("Scripts/Obj_8_total_fallecidos_y_total_irag_irage.R")
 source("Scripts/Obj_10_virus_terapia_fallecidos.R")
+source("Scripts/Obj_5_parte_1_Vacunacion.R")
 
 ```
 
@@ -142,12 +143,12 @@ Fuente: Elaboración propia en base a datos del SNVS 2.0
 **VIGILANCIA POR LABORATORIO**
 
 De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. 
-En el *GRÁFICO N° 4*, muestra la distribución de los virus estudiados por semana y por año, que se observa una mayor circulación para el virus VSR, con picos máximos en las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025. 
+En el *GRÁFICO N° 6*, muestra la distribución de los virus estudiados por semana y por año, que se observa una mayor circulación para el virus VSR, con picos máximos en las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025. 
 Durante el año 2025, hubo mayor circulación del virus Influenza con respecto al año 2024,  con un adelanto a partir de la semana 12 con picos constantes hasta la semana 25.
 Para el virus SARS-CoV-2, muestra mayor circulación en el año 2025 con respecto al año 2024 pero es menor con respecto a los otros virus Influenza y VSR.
 
 
-*GRÁFICO N°4*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
+*GRÁFICO N°6*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
 
 ```{r} 
 positividad_scatter
@@ -158,7 +159,7 @@ Fuente: Elaboración propia en base a datos del  SNVS 2.0
 
 *COMORBILIDADES*
 
-La distribución de frecuencia y porcentaje de comorbilidades por grupo etario muestra que el mayor porcentaje de comorbilidades se presentó en el grupo de adultos mayores de 60 años y más, con un 94 % (n = 152) de los casos internados por IRAG e IRAG extendida en el Hospital Regional Río Gallegos. (TABLA N° 1)
+La distribución de frecuencia y porcentaje de comorbilidades por grupo etario durante el período de estudio, muestra  un mayor porcentaje de comorbilidades en el grupo de adultos mayores de 60 años y más de los casos internados por IRAG e IRAG extendida en el Hospital Regional Río Gallegos. (TABLA N° 1)
 
 *TABLA N° 1*: Frecuencia y procentaje de comorbilidades por grupo etario. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
 ```{r}
@@ -166,25 +167,45 @@ tabla_comorbilidad_grupo_gt
 ```
 Fuente: Elaboración propia en base a datos del  SNVS 2.0
 
+*COBERTURA DE VACUNACION MATERNA EN MENORES DE 6 MESES*
 
+Durante el período de estudio, se evaluaron en los menores de 6 meses si presentaban antecedentes de vacunación materna contra el Virus Sincicial Respiratorio e Influenza, observándose diferencias porcentuales entre las vacunaciones maternas antigripal y contra el Virus Sincicial Respiratorio. (TABLA N° 2 Y 3)
 
-
-```{r}
-vacunacion_materna
-
-```
+*TABLA N° 2*: Vacunación materna contra VSR. Período semana 18 año 2024 al semana 8 año 2026. Hospital Regional Río Gallegos.
 
 ```{r}
-vacunacion_antigripal 
+tabla_vsr_materna
 
 ```
+Fuente: Elaboración propia en base a datos del SNVS 2.0
 
+*TABLA N°3*: Vacunación materna contra Influenza. Período semana 18 año 2024 hasta semana 8 año 2026. Hospital Regional Río Gallegos.
+
+```{r}
+tabla_antigripal_materna
+
+```
+Fuente: Elaboración propia en base a los datos del SNVS 2.0
+
+Además, se evaluaron los antecedentes de vacunación antigripal en los grupos poblacionales, considerados como grupos de riesgo, que son incluídos al Calendario Nacional de Vacunación. Se observaron que en el grupo de 6 a 23 meses presenta mayor porcentaje de vacunación, en comparación al grupo de 65 años y más. (TABLA N° 4)
+
+
+*TABLAN° 4*: Vacunación antigripal en grupo de riesgo. Desde semana 18 año 2024 al semana 8 año 2026. Hospital Regional Río Gallegos.
+```{r}
+grafico_antigripal_riesgo
+```
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+*IMPACTO DE LAS OCUPACIONES DE CAMAS EN INTERNACION HOSPITALARIA ADULTOS Y PEDIÁTRICOS*
+
+Del análisis de la notificación agrupada durante el período de estudio establecido, muestra una proporción aproximada de  ocupación de camas en internaciones por causa respiratoria con respecto al total de internaciones, ya que no todas las infecciones respiratorias agudas (IRA) con requerimiento de internación se notifican en esta vigilancia de centinela respiratoria, acorde con las definiciones vigentes. (GRÁFICO N° 7)
+
+
+*GRÁFICA N°7*: Proporción semanal de internaciones por IRAG e IRAG extendida sobre el total de internaciones. Hospital Regional Río Gallegos.
 ```{r}
 curva_internaciones_irag
 ```
-```{r}
-curva_uci_irag_irage
-```
+Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive 
 
 ```{r}
 curva_fallecidos_irag
