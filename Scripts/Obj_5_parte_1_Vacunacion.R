@@ -20,7 +20,8 @@ vacunacion_base <- data %>%
     grupo_riesgo_vacunacion = case_when(
       EDAD_UC_IRAG %in% c("0 a 2 Meses", "3 a 5 Meses") ~ "Menores de 6 meses",
       EDAD_UC_IRAG %in% c("6 a 11 Meses", "12 a 23 Meses") ~ "6 a 23 meses",
-      EDAD_UC_IRAG %in% c("65 a 69 Años", "70 a 74 Años", "75 y más Años") ~ "65 años y más",
+      EDAD_UC_IRAG %in% c("65 a 69 Años", "70 a 74 Años", "75 y más Años") ~ 
+        "65 años y más",
       TRUE ~ NA_character_
     ),
     grupo_riesgo_vacunacion = factor(
@@ -84,8 +85,8 @@ tabla_antigripal_materna <- vacunacion_materna_larga %>%
     align = "center"
   ) %>%
   tab_header(
-    title = "Vacunación antigripal materna",
-    subtitle = "Pacientes menores de 6 meses. Unidad Centinela HRRG, 2024–2026"
+    title = "Vacunación antigripal materna.",
+    subtitle = "Pacientes menores de 6 meses. Unidad Centinela HRRG, 2024–2026."
   )
 
 tabla_antigripal_materna
@@ -112,8 +113,8 @@ tabla_vsr_materna <- vacunacion_materna_larga %>%
     align = "center"
   ) %>%
   tab_header(
-    title = "Vacunación materna contra VSR",
-    subtitle = "Pacientes menores de 6 meses. Unidad Centinela HRRG, 2024–2026"
+    title = "Vacunación materna contra VSR.",
+    subtitle = "Pacientes menores de 6 meses. Unidad Centinela HRRG, 2024–2026."
   )
 
 tabla_vsr_materna
