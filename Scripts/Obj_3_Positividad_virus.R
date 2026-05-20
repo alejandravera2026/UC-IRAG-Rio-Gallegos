@@ -1,119 +1,125 @@
-# ============================================
-# Objetivo 3 - Porcentaje de positividad
-# SARS - Cov2, Influenza y VSR
-#=============================================
-
-unique(data$INFLUENZA_FINAL)
+#============================================================================
+# SCRIPT 6 - OBJETIVO 3 - PORCENTAJE DE POSITIVIDAD
+# UNIDAD CENTINELA DE INFECCIONES RESPIRATORIAS AGUDAS
+#============================================================================
 
 
-#===========================================================================
-# Se arma  gráfico de positividad por SE y tipo de virus
-#===========================================================================
+# 1- SELECCIÓN DE VARIABLES -----------------------------------------------
 
-#Se arma otra base y se selecciona las  variables a estudiar
-
-positividad_virus <- data %>% 
-  select(SEPI,VSR_FINAL,INFLUENZA_FINAL,COVID_19_FINAL)
+positividad_base <- data %>% 
+  select(SEPI, VSR_FINAL, INFLUENZA_FINAL, COVID_19_FINAL)
 
 
-# Pasamos a formato largo (pivot longer)
+# 2- CONVERSIÓN A FORMATO LARGO -------------------------------------------
 
-positividad_virus <- positividad_virus %>%
-  pivot_longer(cols = c(INFLUENZA_FINAL, COVID_19_FINAL, VSR_FINAL),
-               names_to = "Agente", values_to = "resultado") %>%
-  filter(resultado != "Sin resultado") %>%
-  mutate(Agente = case_when(
-    Agente == "INFLUENZA_FINAL" ~ "Influenza",
-    Agente == "COVID_19_FINAL"  ~ "SARS-CoV-2",
-    Agente == "VSR_FINAL"       ~ "VSR"
-  ))
+positividad_larga <- positividad_base %>%
+  
+  pivot_longer(
+    cols = c(INFLUENZA_FINAL, COVID_19_FINAL, VSR_FINAL),
+    names_to = "Agente",
+    values_to = "resultado"
+  ) %>%
+  
+  filter(
+    !is.na(resultado),
+    resultado != "Sin resultado"
+  ) %>%
+  
+  mutate(
+    Agente = case_when(
+      Agente == "INFLUENZA_FINAL" ~ "Influenza",
+      Agente == "COVID_19_FINAL" ~ "SARS-CoV-2",
+      Agente == "VSR_FINAL" ~ "VSR"
+    )
+  )
 
 
-# Calculamos positividad por virus y semana
+# 3- CÁLCULO DE POSITIVIDAD SEMANAL ---------------------------------------
 
-positividad_virus <- positividad_virus %>%
+positividad_semanal <- positividad_larga %>%
+  
   group_by(SEPI, Agente) %>%
+  
   summarise(
     ESTUDIADOS = n(),
     POSITIVOS = sum(resultado != "Negativo"),
+    POSITIVIDAD = round(POSITIVOS / ESTUDIADOS * 100, 1),
     .groups = "drop"
   ) %>%
-  mutate(POSITIVIDAD = round(POSITIVOS/ESTUDIADOS *100,1))
+  
+  filter(ESTUDIADOS >= 5)
 
 
-#Se pasa a formato ancho (pivot wider) para gráfico interactivo
+# 4- CONVERSIÓN A FORMATO ANCHO PARA GRÁFICO ------------------------------
 
-positividad_virus <- positividad_virus %>% pivot_wider(names_from = Agente,
-                                                 values_from = POSITIVIDAD,
-                                                 values_fill = 0)
+positividad_grafico <- positividad_semanal %>%
+  
+  select(SEPI, Agente, POSITIVIDAD) %>%
+  
+  pivot_wider(
+    names_from = Agente,
+    values_from = POSITIVIDAD,
+    values_fill = 0
+  )
 
 
-#Grafico de líneas interactivo
+# 5- GRÁFICO INTERACTIVO TIPO SCATTER -------------------------------------
 
-positividad_lineas <- highchart() %>%
-  hc_chart(type= "line") %>%
-  hc_xAxis(title = list(text = "SE - Año"),
-           categories = positividad_virus$SEPI) %>%
+positividad_scatter <- highchart() %>%
+  
+  hc_chart(type = "scatter") %>%
+  
+  hc_title(
+    text = "Positividad semanal por virus respiratorio"
+  ) %>%
+  
+  hc_subtitle(
+    text = "Unidad Centinela HRRG, 2024–2026"
+  ) %>%
+  
+  hc_xAxis(
+    categories = positividad_grafico$SEPI,
+    title = list(text = NULL),
+    
+    labels = list(
+      rotation = -45,
+      step = 4
+    )
+  ) %>%
+  
   hc_yAxis(
-    title = list(text = "Porcentaje de positividad"),
+    title = list(text = "Poisitividad %"),
     min = 0,
     max = 100,
-    tickInterval = 10,
-    labels = list(format = "{value}%")
-  )  %>%
-  hc_add_series(name = "Influenza", 
-                data = positividad_virus$Influenza,
-                color = "#f7941e") %>%
-  hc_add_series(name = "VSR", 
-                data = positividad_virus$VSR,
-                color = "#00a651" ) %>%
-  hc_add_series(name = "SARS-CoV-2",
-                data = positividad_virus$`SARS-CoV-2`,
-                color = "#C62828" )
+    tickInterval = 10
+  ) %>%
+  
+  hc_plotOptions(
+    scatter = list(
+      lineWidth = 2,
+      marker = list(
+        radius = 4,
+        symbol = "circle"
+      )
+    )
+  ) %>%
+  
+  hc_add_series(
+    name = "Influenza",
+    data = positividad_grafico$Influenza,
+    color = "#E69F00"
+  ) %>%
+  
+  hc_add_series(
+    name = "VSR",
+    data = positividad_grafico$VSR,
+    color = "#009E73"
+  ) %>%
+  
+  hc_add_series(
+    name = "SARS-CoV-2",
+    data = positividad_grafico$`SARS-CoV-2`,
+    color = "#A61C3C"
+  )
 
-
-positividad_lineas
-
-
-#========================================================================
-# Se determina el total de virus positivos y por cada virus
-#=========================================================================
-
-total_positivos <- positividad_virus %>%
-  summarise(total = sum(POSITIVOS, na.rm = TRUE)) %>%
-  pull(total)
-total_positivos  
-
-
-positivos_influenza <- positividad_virus %>%
-  filter(Agente == "Influenza") %>%
-  summarise(n= sum(POSITIVOS, na.rm = TRUE)) %>%
-  pull (n)
-
-positivos_influenza
-
-pct_influenza = (positivos_influenza/total_positivos)*100.1
-
-pct_influenza
-
-positivos_sars_cov <- positividad_virus %>%
-  filter(Agente == "SARS-CoV-2") %>%
-  summarise (n = sum(POSITIVOS, na.rm = TRUE)) %>%
-  pull (n)
-
-positivos_sars_cov
-
-pct_sars_cov = (positivos_sars_cov/total_positivos)*100.1
-
-pct_sars_cov
-
-positivos_vsr <- positividad_virus %>%
-  filter(Agente == "VSR") %>%
-  summarise(n = sum(POSITIVOS, na.rm = TRUE)) %>%
-  pull(n)
-
-positivos_vsr
-
-pct_vsr = (positivos_vsr/total_positivos)*100.1
-
-pct_vsr
+positividad_scatter
