@@ -195,5 +195,4 @@ grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
     plot.title = element_text(hjust = 0.5, face = "bold"),
     legend.position = "bottom")
 
-
 grafico_antigripal_riesgo
