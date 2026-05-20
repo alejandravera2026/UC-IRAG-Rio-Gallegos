@@ -132,16 +132,11 @@ vacunacion_antigripal_larga <- vacunacion_base %>%
   ) %>%
   mutate(
     Estado = case_when(
-      VAC_ANTIGRIPAL %in% c("VACUNADA", "VACUNADO") ~ "Vacunado",
+      VAC_ANTIGRIPAL =="VACUNADO" ~ "Vacunado",
       VAC_ANTIGRIPAL %in% c("NO VACUNADA", "NO VACUNADO") ~ "No vacunado",
       TRUE ~ "Sin dato"
-    ),
-    Estado = factor(
-      Estado,
-      levels = c("No vacunado", "Sin dato")
-    )
-  )
-
+    ))
+    
 
 tabla_antigripal_riesgo <- vacunacion_antigripal_larga %>%
   count(grupo_riesgo_vacunacion, Estado, name = "casos") %>%
@@ -180,9 +175,10 @@ grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
   scale_fill_manual(
     values = c(
       "No vacunado" = "#4E79A7",
-      "Sin dato" = "#D4A373"
+      "Sin dato" = "#D4A373",
+      "Vacunado" = "#f28e2b"
     ),
-    breaks = c("No vacunado", "Sin dato")
+    breaks = c("Vacunado", "No vacunado", "Sin dato")
   ) +
   scale_y_continuous(
     labels = scales::percent_format(scale = 1)
@@ -191,13 +187,13 @@ grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
     title = "Vacunación antigripal en grupos de riesgo",
     subtitle = "Distribución porcentual según estado de vacunación. Unidad Centinela HRRG, 2024–2026",
     x = NULL,
-    y = "Porcentaje (%)"
+    y = "Porcentaje (%)",
+    fill = "Estado"
   ) +
   theme_minimal(base_size = 13) +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold"),
-    legend.position = "none",
-    panel.grid.major.y = element_blank()
-  )
+    legend.position = "bottom")
+
 
 grafico_antigripal_riesgo
