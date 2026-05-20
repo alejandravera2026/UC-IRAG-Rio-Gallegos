@@ -56,11 +56,7 @@ En la provincia de Santa Cruz, la UCIRAG comenzó a implementarse en la semana
 epidemiológica 18 del año 2024 en el Hospital Regional Río Gallegos, 
 establecimiento de referencia provincial con internación adulta y pediátrica.
 
-**Objetivo general**
-
-## Objetivo general
-
-## Objetivo general
+## **Objetivo general**
 
 Describir el comportamiento epidemiológico, clínico y etiológico de los casos 
 de infecciones respiratorias agudas graves (IRAG) e IRAG extendidas (IRAGE) 
@@ -111,7 +107,7 @@ Fuente:Elaboración propia en base a datos del  SNVS 2.0
 
 En los gráficos siguientes se describe la distribución temporal de los casos notificados de IRAG e IRAG extendida según grupo etario, semana epidemiológica y año. Para mantener coherencia con los criterios de vigilancia, se presentan por separado los grupos poblacionales definidos para el análisis: menores de 2 años, población de 2 a 14 años, población de 15 a 59 años y personas de 60 años y más.
 
-**Gráfico N.° 2:** Distribución semanal de casos de IRAG extendida en menores de 2 años. Unidad Centinela HRRG, 2024–2026.
+**Gráfico N.° 2:** Distribución semanal de casos de IRAG e IRAG extendida en menores de 2 años. Unidad Centinela HRRG, 2024–2026.
 
 
 ```{r}
@@ -119,38 +115,58 @@ curva_interactiva_menores_dos
 ```
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 3*: Distribución temporal de IRAG e IRAG extendida por semana y año en mayores de 60 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+*GRÁFICO N° 3*: Distribución temporal de IRAG por semana y año en población de 2 a 14 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
 
 
 ```{r}
+curva_interactiva_2_14
 
+```
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+*GRÁFICO N° 4*:  Distribución temporal de IRAG por semana y año en población de 15 a 59 años. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+
+```{r}
+curva_interactiva_15_59
+```
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+*GRÁFICO N° 5*: Distribución temporal de IRAG por semana y año en mayores de 60 años y más. Desde la semana 1  año 2024 hasta la semana 8 año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+
+```{r}
+curva_interactiva_60_mas
 ```
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 **VIGILANCIA POR LABORATORIO**
 
-De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. Del total de, se obtuvieron  positivos para virus estudiados. De los cuales, un % para virus Influenza, un `r pct_sars_cov` % (n = `r positivos_sars_cov`) para el virus SARS-CoV-2 y un `r pct_vsr` % (n = `r positivos_vsr`) para el virus VSR (Virus Sincicial Respiratorio). 
+De los casos internados por IRAG e IRAG extendida, se realizaron las determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR) mediante técnicas de biología molecular. 
 En el *GRÁFICO N° 4*, muestra la distribución de los virus estudiados por semana y por año, que se observa una mayor circulación para el virus VSR, con picos máximos en las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025. 
 Durante el año 2025, hubo mayor circulación del virus Influenza con respecto al año 2024,  con un adelanto a partir de la semana 12 con picos constantes hasta la semana 25.
 Para el virus SARS-CoV-2, muestra mayor circulación en el año 2025 con respecto al año 2024 pero es menor con respecto a los otros virus Influenza y VSR.
 
 
-*GRÁFICO N°4*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz. N = `r total_positivos`
+*GRÁFICO N°4*: Distribución de los agentes etiológicos estudiados por semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
 
 ```{r} 
-positividad_lineas
+positividad_scatter
 
 ```
 Fuente: Elaboración propia en base a datos del  SNVS 2.0
 
+
+*COMORBILIDADES*
+
+La distribución de frecuencia y porcentaje de comorbilidades por grupo etario muestra que el mayor porcentaje de comorbilidades se presentó en el grupo de adultos mayores de 60 años y más, con un 94 % (n = 152) de los casos internados por IRAG e IRAG extendida en el Hospital Regional Río Gallegos. (TABLA N° 1)
+
+*TABLA N° 1*: Frecuencia y procentaje de comorbilidades por grupo etario. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
 ```{r}
-tabla_comorbilidad_grupo_edad
+tabla_comorbilidad_grupo_gt
 ```
+Fuente: Elaboración propia en base a datos del  SNVS 2.0
 
 
-```{r}
-tabla_comorbilidad_gt
-```
 
 
 ```{r}
