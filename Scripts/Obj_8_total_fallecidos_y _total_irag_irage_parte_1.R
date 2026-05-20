@@ -24,13 +24,13 @@ curva_fallecidos_irag <- highchart() %>%
     title = list(text = "% de fallecidos"),
     labels = list(format = "{value}%"),
     min = 0,
-    max = 50,
+    max = 40,
     tickInterval = 2
   ) %>%
   
   hc_add_series(
-    name = "Fallecidos",
-    data = tabla_resumen$PROPORCION_FALLECIDOS,
+    name = "Fallecidos por IRAG",
+    data = tabla_resumen$PROPORCION_FALLECIDOS_IRAG,
     color = "#252C61",
     lineWidth = 2.5,
     marker = list(
@@ -38,8 +38,17 @@ curva_fallecidos_irag <- highchart() %>%
       radius = 3
     )
   ) %>%
-  
-  hc_tooltip(
+  hc_add_series(
+    name = "Fallecidos por IRAG extendida",
+    data = tabla_resumen$PROPORCION_FALLECIDOS_IRAGE,
+    color = "#4DB6E2",
+    lineWidth = 2.5,
+    marker = list(
+      enabled = TRUE,
+      radius = 3
+      
+  )) %>%
+    hc_tooltip(
     shared = TRUE,
     pointFormat = paste0(
       "<span style='color:{point.color}'>●</span> ",
