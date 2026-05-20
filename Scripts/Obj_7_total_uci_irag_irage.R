@@ -40,7 +40,7 @@ curva_uci_irag <- highchart() %>%
   ) %>%
   
   hc_add_series(
-    name = "Fallecidos por IRAG",
+    name = "Terapia intensiva por IRAG",
     data = tabla_resumen$IRAG_UCI,
     color = "#252C61",
     lineWidth = 2.5,
@@ -50,7 +50,7 @@ curva_uci_irag <- highchart() %>%
     )
   ) %>%
   hc_add_series(
-    name = "Fallecidos por IRAG extendida",
+    name = "Terapia intensiva por IRAG extendida",
     data = tabla_resumen$IRAGE_UCI,
     color = "#4DB6E2",
     lineWidth = 2.5,
