@@ -208,6 +208,7 @@ tabla_resumen <- tabla_resumen %>%
     )
   )
 
+
 # 13- PARA ELIMINAR DE LOS GRÁFICOS LAS SE CON ERRORES DE CARGA  ----------
 
 tabla_resumen <- tabla_resumen %>% 
