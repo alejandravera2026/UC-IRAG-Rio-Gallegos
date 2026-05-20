@@ -178,6 +178,7 @@ tabla_resumen <- tabla_resumen %>%
 
 colnames(tabla_resumen)
 
+
 tabla_resumen <- tabla_resumen %>% 
   mutate(PROPORCION_IRAG = round(
     (`Casos de IRAG entre los internados`/
