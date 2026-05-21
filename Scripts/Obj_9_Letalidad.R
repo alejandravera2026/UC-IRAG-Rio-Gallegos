@@ -108,7 +108,6 @@ tabla_letalidad_gt <- tabla_letalidad %>%
     title = "Tasa de letalidad por grupo etario",
     
     subtitle = paste(
-      "Fallecidos/casos y porcentaje de letalidad.",
       "Unidad Centinela HRRG, 2024–2026"
     )
   )
