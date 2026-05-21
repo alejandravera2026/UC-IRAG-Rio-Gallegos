@@ -38,13 +38,13 @@ source("Scripts/2_importacion.R")
 source("Scripts/3_limpieza.R")
 source("Scripts/4_recodificacion.R")
 source("Scripts/5_Procesamiento_base_datos_agrupada.R")
-source("Scripts/Obj_1_Distribución_temporal.R")
+source("Scripts/Obj_1_Distribución_semanal.R")
 source("Scripts/Obj_2_distribucion_irag_irage_por_grupo_etario_semana_anio.R")
 source("Scripts/Obj_3_Positividad_virus.R")
 source("Scripts/Obj_4_Comorbilidades.R")
 source("Scripts/Obj_5_Vacunacion.R")
 source("Scripts/Obj_6_total_internados_total_irag_irage.R")
-source("Scripts/Obj_7_total_uci_irag_irage.R")
+source("Scripts/Obj_7_total_uci_Irage.R")
 source("Scripts/Obj_8_total_fallecidos_y _total_irag_irage.R")
 source("Scripts/Obj_10_virus_terapia_fallecidos.R")
 source("Scripts/Obj_9_Letalidad.R")
@@ -66,7 +66,7 @@ Argentina, su vigilancia epidemiológica se realiza a través del Sistema
 Nacional de Vigilancia de la Salud (SNVS), mediante estrategias
 complementarias entre los distintos niveles sanitarios. La Unidad
 Centinela de IRAG (UCIRAG) permite monitorear tendencias
-epidemiológicas, identificar periodos epidémicos y caracterizar la
+epidemiológicas, identificar períodos epidémicos y caracterizar la
 magnitud y severidad de la enfermedad. En la provincia de Santa Cruz, la
 UCIRAG comenzó a implementarse en la semana epidemiológica 18 del año
 2024 en el Hospital Regional Río Gallegos, establecimiento de referencia
@@ -93,7 +93,7 @@ hospitalaria.
 *Definiciones de los casos de IRAG e IRAG extendida*
 
 *IRAG:* Paciente de cualquier edad con infección respiratoria aguda con:
-Fiebre referida o constatada \>= 38°C y Tos; e Inicio del cuadro en los
+Fiebre referida o constatada >= 38°C y Tos; e Inicio del cuadro en los
 10 días precedentes; y Requerimiento de internación por criterio
 clínico. *IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años
 Infección respiratoria: definida por tos o dificultad respiratoria; e
@@ -103,16 +103,14 @@ también considerar: Apnea (cese temporal de la respiración por cualquier
 causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin
 causa aparente)
 
-Para mayor información de la estrategia de vigilancia centinela de IRAG
-consultar en:
-https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
+Para mayor información de la estrategia de vigilancia centinela de IRAG consultar en:
+
 
 **NOTA METODOLÓGICA** En el presente informe integra el análisis de la
-información proveniente de dos fuentes nominal y agrupada a través del
-Sistema Información Sanitaria Argentina (SNVS2.0). El procesamiento y
+información proveniente de dos fuentes nominal y agrupada a través de la Unidad Centinela Río Gallegos a través del Sisteman Nacional de la Vigilancia de la Salud (SNVS2.0). El procesamiento y
 análisis de los datos se efectuó con el software R, versión...,
 empleando los procedimientos reproducibles. El período evaluado abarca
-desde la semana 18 del año 2024 hasta la semana 8 del 2026. Se
+desde la semana epidemiológica 18 del año 2024 hasta la semana epidemiológica 8 del año 2026. Se
 implementaron los criterios de inclusión y exclusión para garantizar la
 validez de las estimaciones.
 
@@ -127,7 +125,7 @@ En el *GRÁFICO N° 1* se observa la distribución temporal desde la semana
 18 del año 2024 hasta la semana 8 del año 2026.
 
 *GRÁFICO N°1*: Casos de IRAG e IRAG extendida por SE y año. Desde semana
-1 año 2024 hasta semana 8 del 2026. UC IRAG Hospital Regional Río
+18 año 2024 hasta semana 8 del 2026. UC IRAG Hospital Regional Río
 Gallegos- Provincia de Santa Cruz. N= `r notificaciones_totales`
 
 ```{r}
@@ -289,6 +287,8 @@ curva_internaciones_irag
 ```
 
 Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
+
+*Fallecidos*
 
 ```{r}
 curva_fallecidos_irag
