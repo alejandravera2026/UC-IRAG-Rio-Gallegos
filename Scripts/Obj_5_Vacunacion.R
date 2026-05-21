@@ -183,7 +183,8 @@ grafico_antigripal_riesgo <- highchart() %>%
     min = 0,
     max = 100,
     tickInterval = 20,
-    gridLineColor = "#E6E6E6"
+    gridLineColor = "#E6E6E6",
+    reversedStacks = FALSE
   ) %>%
   
   hc_plotOptions(
@@ -209,7 +210,7 @@ grafico_antigripal_riesgo <- highchart() %>%
       filter(Estado == "Vacunado") %>%
       pull(porcentaje),
     
-    color = "#F28ce2"
+    color = "#2e7d32"
   ) %>%
 
   hc_add_series(
@@ -219,20 +220,10 @@ grafico_antigripal_riesgo <- highchart() %>%
       filter(Estado == "No vacunado") %>%
       pull(porcentaje),
     
-    color = "#4E79A7"
+    color = "#e67d32"
   ) %>%
   
-  hc_add_series(
-    name = "Sin dato",
-    
-    data = tabla_antigripal_high %>%
-      filter(Estado == "Sin dato") %>%
-      pull(porcentaje),
-    
-    color = "#D4A373"
-  ) %>%
-  
-  hc_tooltip(
+    hc_tooltip(
     shared = TRUE,
     
     pointFormat = paste0(
