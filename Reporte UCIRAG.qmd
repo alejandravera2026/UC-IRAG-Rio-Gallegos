@@ -59,7 +59,7 @@ source("Scripts/Obj_9_Letalidad.R")
 
 ## **1.Introducción**
 
-<<<<<<< HEAD
+
 Las infecciones respiratorias agudas (IRAs) representan una importante
 causa de morbimortalidad, afectando principalmente a menores de dos
 años, personas mayores de 60 años y pacientes con factores de riesgo. En
