@@ -59,7 +59,7 @@ curva_uci_irag <- highchart() %>%
             reversed = FALSE
                   )%>%
   hc_credits(enabled = FALSE)
-  )
+  
                 
               
 curva_uci_irag
