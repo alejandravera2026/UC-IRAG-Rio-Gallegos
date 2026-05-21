@@ -50,8 +50,7 @@ curva_interactiva_menores_dos <- highchart() %>%
   
   hc_plotOptions(
     column = list(
-      pointPadding = 0.08,
-      groupPadding = 0.05,
+      stacking = "normal",
       borderWidth = 0
     )
   ) %>%
@@ -287,8 +286,7 @@ curva_interactiva_60_mas <- highchart() %>%
   
   hc_plotOptions(
     column = list(
-      pointPadding = 0.08,
-      groupPadding = 0.05,
+      stacking = "normal",
       borderWidth = 0
     )
   ) %>%

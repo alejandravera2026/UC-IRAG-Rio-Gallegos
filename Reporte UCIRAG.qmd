@@ -38,13 +38,13 @@ source("Scripts/2_importacion.R")
 source("Scripts/3_limpieza.R")
 source("Scripts/4_recodificacion.R")
 source("Scripts/5_Procesamiento_base_datos_agrupada.R")
-source("Scripts/Obj_1_Distribución_temporal.R")
+source("Scripts/Obj_1_Distribución_semanal.R")
 source("Scripts/Obj_2_distribucion_irag_irage_por_grupo_etario_semana_anio.R")
 source("Scripts/Obj_3_Positividad_virus.R")
 source("Scripts/Obj_4_Comorbilidades.R")
 source("Scripts/Obj_5_Vacunacion.R")
 source("Scripts/Obj_6_total_internados_total_irag_irage.R")
-source("Scripts/Obj_7_total_uci_irag_irage.R")
+source("Scripts/Obj_7_total_uci_Irage.R")
 source("Scripts/Obj_8_total_fallecidos_y _total_irag_irage.R")
 source("Scripts/Obj_10_virus_terapia_fallecidos.R")
 source("Scripts/Obj_9_Letalidad.R")
@@ -59,12 +59,27 @@ source("Scripts/Obj_9_Letalidad.R")
 
 ## **1.Introducción**
 
+
+Las infecciones respiratorias agudas (IRAs) representan una importante
+causa de morbimortalidad, afectando principalmente a menores de dos
+años, personas mayores de 60 años y pacientes con factores de riesgo. En
+Argentina, su vigilancia epidemiológica se realiza a través del Sistema
+Nacional de Vigilancia de la Salud (SNVS), mediante estrategias
+complementarias entre los distintos niveles sanitarios. La Unidad
+Centinela de IRAG (UCIRAG) permite monitorear tendencias
+epidemiológicas, identificar períodos epidémicos y caracterizar la
+magnitud y severidad de la enfermedad. En la provincia de Santa Cruz, la
+UCIRAG comenzó a implementarse en la semana epidemiológica 18 del año
+2024 en el Hospital Regional Río Gallegos, establecimiento de referencia
+provincial con internación adulta y pediátrica.
+=======
 Las infecciones respiratorias agudas (IRAs) representan una causa
 relevante de morbimortalidad y presión asistencial, especialmente en
 menores de dos años, personas mayores de 60 años y pacientes con
 factores de riesgo. La circulación de influenza, SARS-CoV-2, virus
 sincicial respiratorio (VSR) y otros virus respiratorios requiere una
 vigilancia epidemiológica integrada, oportuna y sostenida.
+>>>>>>> dd8cb52d07422645dcec96662491152c211ba2d5
 
 La estrategia de Unidad Centinela de Infección Respiratoria Aguda Grave
 (UC-IRAG) permite caracterizar los casos hospitalizados, monitorear
@@ -102,6 +117,29 @@ hospitalaria.
 
 ## **4. Definiciones operativas y criterios de inclusión**
 
+<<<<<<< HEAD
+*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con:
+Fiebre referida o constatada >= 38°C y Tos; e Inicio del cuadro en los
+10 días precedentes; y Requerimiento de internación por criterio
+clínico. *IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años
+Infección respiratoria: definida por tos o dificultad respiratoria; e
+Inicio del cuadro en los 10 días precedentes; y Requerimiento de
+internación por criterio clínico. En lactantes menores de 6 meses
+también considerar: Apnea (cese temporal de la respiración por cualquier
+causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin
+causa aparente)
+
+Para mayor información de la estrategia de vigilancia centinela de IRAG consultar en:
+
+
+**NOTA METODOLÓGICA** En el presente informe integra el análisis de la
+información proveniente de dos fuentes nominal y agrupada a través de la Unidad Centinela Río Gallegos a través del Sisteman Nacional de la Vigilancia de la Salud (SNVS2.0). El procesamiento y
+análisis de los datos se efectuó con el software R, versión...,
+empleando los procedimientos reproducibles. El período evaluado abarca
+desde la semana epidemiológica 18 del año 2024 hasta la semana epidemiológica 8 del año 2026. Se
+implementaron los criterios de inclusión y exclusión para garantizar la
+validez de las estimaciones.
+=======
 La clasificación de los casos se realizó de acuerdo con las definiciones
 establecidas para la estrategia de vigilancia centinela de Infección
 Respiratoria Aguda Grave (IRAG).
@@ -110,6 +148,7 @@ Respiratoria Aguda Grave (IRAG).
 
 Se considera caso de IRAG a todo paciente, de cualquier edad, con
 infección respiratoria aguda que presenta:
+>>>>>>> dd8cb52d07422645dcec96662491152c211ba2d5
 
 - fiebre referida o constatada mayor o igual a 38 °C;
 - tos;
@@ -118,6 +157,11 @@ infección respiratoria aguda que presenta:
 
 ### **IRAG extendida**
 
+<<<<<<< HEAD
+*GRÁFICO N°1*: Casos de IRAG e IRAG extendida por SE y año. Desde semana
+18 año 2024 hasta semana 8 del 2026. UC IRAG Hospital Regional Río
+Gallegos- Provincia de Santa Cruz. N= `r notificaciones_totales`
+=======
 Se considera caso de IRAG extendida a pacientes menores de 2 años o
 personas de 60 años o más que presentan:
 
@@ -200,6 +244,7 @@ severidad, ingreso a cuidados intensivos y mortalidad.
 epidemiológica y año. Unidad Centinela de IRAG, Hospital Regional Río
 Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a
 semana epidemiológica 8 de 2026. N = `r notificaciones_totales`.
+>>>>>>> dd8cb52d07422645dcec96662491152c211ba2d5
 
 ```{r}
 curva_interactiva
@@ -465,6 +510,8 @@ curva_internaciones_irag
 ```
 
 Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
+
+*Fallecidos*
 
 ```{r}
 curva_fallecidos_irag
