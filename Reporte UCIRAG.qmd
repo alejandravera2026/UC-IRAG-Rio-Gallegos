@@ -59,113 +59,230 @@ source("Scripts/Obj_9_Letalidad.R")
 
 ## **1.Introducción**
 
-Las infecciones respiratorias agudas (IRAs) representan una importante
-causa de morbimortalidad, afectando principalmente a menores de dos
-años, personas mayores de 60 años y pacientes con factores de riesgo. En
-Argentina, su vigilancia epidemiológica se realiza a través del Sistema
-Nacional de Vigilancia de la Salud (SNVS), mediante estrategias
-complementarias entre los distintos niveles sanitarios. La Unidad
-Centinela de IRAG (UCIRAG) permite monitorear tendencias
-epidemiológicas, identificar periodos epidémicos y caracterizar la
-magnitud y severidad de la enfermedad. En la provincia de Santa Cruz, la
-UCIRAG comenzó a implementarse en la semana epidemiológica 18 del año
-2024 en el Hospital Regional Río Gallegos, establecimiento de referencia
-provincial con internación adulta y pediátrica.
+Las infecciones respiratorias agudas (IRAs) representan una causa
+relevante de morbimortalidad y presión asistencial, especialmente en
+menores de dos años, personas mayores de 60 años y pacientes con
+factores de riesgo. La circulación de influenza, SARS-CoV-2, virus
+sincicial respiratorio (VSR) y otros virus respiratorios requiere una
+vigilancia epidemiológica integrada, oportuna y sostenida.
 
-## **Objetivo general**
+La estrategia de Unidad Centinela de Infección Respiratoria Aguda Grave
+(UC-IRAG) permite caracterizar los casos hospitalizados, monitorear
+tendencias, evaluar severidad clínica e identificar grupos de mayor
+riesgo. Esta información resulta clave para orientar decisiones
+sanitarias, fortalecer la respuesta hospitalaria y anticipar necesidades
+vinculadas a internación, cuidados críticos, laboratorio y prevención.
+
+En la provincia de Santa Cruz, la UC-IRAG comenzó a implementarse en la
+semana epidemiológica 18 del año 2024 en el Hospital Regional Río
+Gallegos, hospital de referencia provincial con internación adulta y
+pediátrica. Este boletín presenta el análisis de los casos de IRAG e
+IRAG extendida registrados por la Unidad Centinela, considerando su
+evolución temporal, clasificación epidemiológica, severidad, ingreso a
+cuidados intensivos, mortalidad y circulación viral.
+
+## **2. Objetivo general**
 
 Describir el comportamiento epidemiológico, clínico y etiológico de los
 casos de infecciones respiratorias agudas graves (IRAG) e IRAG
-extendidas (IRAGE) notificados en la Unidad Centinela del Hospital
+extendidas (IRAGE) notificados por la Unidad Centinela del Hospital
 Regional Río Gallegos entre la semana epidemiológica 18 de 2024 y la
-semana epidemiológica 8 de 2026, con el fin de aportar información para
-la vigilancia epidemiológica y el análisis de su impacto en el sistema
-de salud.
+semana epidemiológica 8 de 2026, con el prpósito de aportar información
+oportuna para la vigilancia epidemiológica, la evaluación de severidad y
+el análisis del impacto sobre el sistema de salud.
 
-## Ejes de análisis
+## **3. Ejes de análisis**
 
-El presente boletín describe el comportamiento temporal de los casos de
-IRAG e IRAG extendida, la circulación de virus respiratorios, los grupos
-poblacionales afectados, la presencia de comorbilidades y vacunación,
-así como indicadores de severidad, internación y mortalidad
+El presente boletín analiza el comportamiento temporal de los casos de
+IRAG e IRAG extendida, la circulación de virus respiratorios bajo
+vigilancia, la distribución según grupos etarios, la presencia de
+comorbilidades y antecedentes de vacunación, así como indicadores de
+severidad clínica, ingreso a cuidados intensivos y mortalidad
 hospitalaria.
 
-*Definiciones de los casos de IRAG e IRAG extendida*
+## **4. Definiciones operativas y criterios de inclusión**
 
-*IRAG:* Paciente de cualquier edad con infección respiratoria aguda con:
-Fiebre referida o constatada \>= 38°C y Tos; e Inicio del cuadro en los
-10 días precedentes; y Requerimiento de internación por criterio
-clínico. *IRAGE:* Pacientes menores de 2 años y mayor o igual a 60 años
-Infección respiratoria: definida por tos o dificultad respiratoria; e
-Inicio del cuadro en los 10 días precedentes; y Requerimiento de
-internación por criterio clínico. En lactantes menores de 6 meses
-también considerar: Apnea (cese temporal de la respiración por cualquier
-causa), o Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin
-causa aparente)
+La clasificación de los casos se realizó de acuerdo con las definiciones
+establecidas para la estrategia de vigilancia centinela de Infección
+Respiratoria Aguda Grave (IRAG).
 
-Para mayor información de la estrategia de vigilancia centinela de IRAG
-consultar en:
-https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
+### **IRAG**
 
-**NOTA METODOLÓGICA** En el presente informe integra el análisis de la
-información proveniente de dos fuentes nominal y agrupada a través del
-Sistema Información Sanitaria Argentina (SNVS2.0). El procesamiento y
-análisis de los datos se efectuó con el software R, versión...,
-empleando los procedimientos reproducibles. El período evaluado abarca
-desde la semana 18 del año 2024 hasta la semana 8 del 2026. Se
-implementaron los criterios de inclusión y exclusión para garantizar la
-validez de las estimaciones.
+Se considera caso de IRAG a todo paciente, de cualquier edad, con
+infección respiratoria aguda que presenta:
 
-**SITUACIÓN EPIDEMIOLÓGICA** Entre la semana 18 del año 2024 y la semana
-8 del año 2026, se registraron un total de `r notificaciones_totales`de
-internaciones con diagnóstico de infección respiratoria aguda grave
-(IRAG e IRAG extendida). Del total, el `r pct_IRAG` % (n =
-`r notificaciones_irag`) corresponde a IRAG y el `r pct_IRAGE` % (n =
-`r notificaciones_irage`) corresponde a IRAG extendida.
+- fiebre referida o constatada mayor o igual a 38 °C;
+- tos;
+- inicio del cuadro en los 10 días previos;
+- requerimiento de internación por criterio clínico.
 
-En el *GRÁFICO N° 1* se observa la distribución temporal desde la semana
-18 del año 2024 hasta la semana 8 del año 2026.
+### **IRAG extendida**
 
-*GRÁFICO N°1*: Casos de IRAG e IRAG extendida por SE y año. Desde semana
-1 año 2024 hasta semana 8 del 2026. UC IRAG Hospital Regional Río
-Gallegos- Provincia de Santa Cruz. N= `r notificaciones_totales`
+Se considera caso de IRAG extendida a pacientes menores de 2 años o
+personas de 60 años o más que presentan:
+
+- infección respiratoria definida por tos o dificultad respiratoria;
+- inicio del cuadro en los 10 días previos;
+- requerimiento de internación por criterio clínico.
+
+En lactantes menores de 6 meses, también se consideran criterios
+clínicos relevantes la presencia de apnea o sepsis, entendida como
+fiebre o hipotermia, shock y cuadro grave sin causa aparente.
+
+Estas definiciones permiten diferenciar los casos captados por la
+definición clásica de IRAG de aquellos incorporados mediante la
+estrategia ampliada de IRAG extendida, lo cual resulta fundamental para
+interpretar adecuadamente la magnitud, severidad e impacto de los
+eventos analizados.
+
+Para mayor detalle sobre las definiciones operativas, criterios de
+inclusión, circuito de notificación e indicadores de la estrategia
+UC-IRAG, consultar la guía operativa nacional vigente:
+
+[Guía Operativa UC-IRAG – Ministerio de Salud de la
+Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
+
+## **5. Nota metodológica**
+
+El presente informe integra información proveniente de la notificación
+nominal de casos y de la notificación agrupada semanal de la estrategia
+UC-IRAG, registradas en el Sistema Nacional de Vigilancia de la Salud
+—SNVS 2.0—.
+
+El período evaluado comprende desde la semana epidemiológica 18 de 2024
+hasta la semana epidemiológica 8 de 2026. El procesamiento de los datos
+se realizó mediante el software R, incluyendo procedimientos de
+limpieza, depuración, clasificación y análisis descriptivo, con el
+propósito de garantizar trazabilidad, consistencia y reproducibilidad en
+la construcción de los indicadores.
+
+Para la construcción de los indicadores se aplicaron los criterios de
+inclusión y exclusión establecidos por la estrategia nacional de
+vigilancia centinela de IRAG. Los resultados deben interpretarse como
+información de vigilancia centinela hospitalaria, útil para monitorear
+tendencias, severidad e impacto, pero no como tasas poblacionales
+provinciales.
+
+## **6. Situación epidemiológica**
+
+Entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 8
+de 2026, se registraron un total de `r notificaciones_totales`
+internaciones notificadas en el marco de la estrategia UC-IRAG,
+correspondientes a casos clasificados como IRAG e IRAG extendida.
+
+Del total de casos notificados, el `r pct_IRAG` % (n =
+`r notificaciones_irag`) correspondió a IRAG, mientras que el
+`r pct_IRAGE` % (n = `r notificaciones_irage`) correspondió a IRAG
+extendida.
+
+Esta distribución permite dimensionar la magnitud de los eventos
+captados por la Unidad Centinela y diferenciar los casos incluidos por
+la definición clásica de IRAG de aquellos incorporados mediante la
+estrategia ampliada de IRAG extendida.
+
+### **6.1 Distribución temporal de casos de IRAG e IRAG extendida**
+
+Entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 8
+de 2026, se registraron `r notificaciones_totales` casos notificados en
+el marco de la estrategia UC-IRAG del Hospital Regional Río Gallegos.
+Del total, `r notificaciones_irag` casos (`r pct_IRAG` %)
+correspondieron a IRAG y `r notificaciones_irage` casos (`r pct_IRAGE`
+%) a IRAG extendida.
+
+La distribución temporal evidencia variaciones semanales en la
+notificación de casos, con mayor concentración durante semanas
+compatibles con la temporada respiratoria. Esta lectura permite
+dimensionar la magnitud de la demanda hospitalaria captada por la
+vigilancia centinela y contextualizar los indicadores posteriores de
+severidad, ingreso a cuidados intensivos y mortalidad.
+
+**Gráfico 1.** Casos de IRAG e IRAG extendida según semana
+epidemiológica y año. Unidad Centinela de IRAG, Hospital Regional Río
+Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a
+semana epidemiológica 8 de 2026. N = `r notificaciones_totales`.
 
 ```{r}
 curva_interactiva
 ```
 
-Fuente:Elaboración propia en base a datos del SNVS 2.0
+Fuente: Elaboración propia con base en datos del SNVS 2.0
 
-En los gráficos siguientes se describe la distribución temporal de los
-casos notificados de IRAG e IRAG extendida según grupo etario, semana
-epidemiológica y año. Para mantener coherencia con los criterios de
-vigilancia, se presentan por separado los grupos poblacionales definidos
-para el análisis: menores de 2 años, población de 2 a 14 años, población
-de 15 a 59 años y personas de 60 años y más.
+### **6.2 Distribución temporal según grupo etario**
 
-**Gráfico N.° 2:** Distribución semanal de casos de IRAG e IRAG
-extendida en menores de 2 años. Unidad Centinela HRRG, 2024–2026.
+A continuación, se presenta la distribución temporal de los casos
+notificados de IRAG e IRAG extendida según grupo etario, semana
+epidemiológica y año. Para mantener coherencia con los criterios
+operativos de la vigilancia centinela y facilitar la interpretación
+epidemiológica, el análisis se organiza en cuatro grupos poblacionales:
+menores de 2 años, población de 2 a 14 años, población de 15 a 59 años y
+personas de 60 años y más.
+
+Esta desagregación permite identificar diferencias en la magnitud y
+comportamiento temporal de los casos según etapa de la vida. Esta
+desagregación permite identificar diferencias en la magnitud y el
+comportamiento temporal de los casos según etapa de la vida. Asimismo,
+resulta relevante considerar que los menores de 2 años y las personas de
+60 años y más constituyen grupos incluidos en la definición de IRAG
+extendida, por tratarse de poblaciones con mayor vulnerabilidad frente a
+las infecciones respiratorias agudas graves.
+
+#### **6.2.1 Menores de 2 años**
+
+**Gráfico 2.** Distribución semanal de casos de IRAG e IRAG extendida en
+menores de 2 años. Unidad Centinela de IRAG, Hospital Regional Río
+Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a
+semana epidemiológica 8 de 2026.
 
 ```{r}
 curva_interactiva_menores_dos
 ```
 
-Fuente: Elaboración propia en base a datos del SNVS 2.0
+Fuente: Elaboración propia con base en datos del SNVS 2.0
 
-*GRÁFICO N° 3*: Distribución temporal de IRAG por semana y año en
-población de 2 a 14 años. Desde la semana 1 año 2024 hasta la semana 8
-año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+#### **6.2.2 Población de 2 a 14 años**
+
+En la población de 2 a 14 años, el análisis permite observar la
+evolución semanal de los casos de IRAG notificados en una etapa de la
+vida que no integra los grupos específicos definidos para IRAG
+extendida, salvo situaciones particulares que deban ser evaluadas según
+los criterios operativos de inclusión.
+
+La lectura de este grupo resulta útil para caracterizar la afectación en
+población pediátrica fuera del grupo de mayor vulnerabilidad definido
+por la estrategia ampliada, y para identificar eventuales incrementos
+semanales que puedan orientar acciones de seguimiento clínico,
+vigilancia epidemiológica y organización de la respuesta hospitalaria.
+
+**Gráfico 3.** Distribución semanal de casos de IRAG e IRAG extendida en
+población de 2 a 14 años. Unidad Centinela de IRAG, Hospital Regional
+Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024
+a semana epidemiológica 8 de 2026.
 
 ```{r}
 curva_interactiva_2_14
-
 ```
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 4*: Distribución temporal de IRAG por semana y año en
-población de 15 a 59 años. Desde la semana 1 año 2024 hasta la semana 8
-año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+#### **6.2.3 Población de 15 a 59 años**
+
+En la población de 15 a 59 años, el análisis permite describir la
+evolución semanal de los casos de IRAG en población adolescente, joven y
+adulta. Este grupo no forma parte de los grupos etarios definidos para
+la captación mediante IRAG extendida, por lo que su comportamiento debe
+interpretarse principalmente en relación con la definición clásica de
+IRAG.
+
+La vigilancia en este grupo permite identificar variaciones temporales
+en la demanda de internación por infecciones respiratorias agudas
+graves, así como aportar información para el análisis posterior de
+comorbilidades, antecedentes de vacunación, ingreso a cuidados
+intensivos y evolución clínica.
+
+**Gráfico 4.** Distribución semanal de casos de IRAG e IRAG extendida en
+población de 15 a 59 años. Unidad Centinela de IRAG, Hospital Regional
+Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024
+a semana epidemiológica 8 de 2026.
 
 ```{r}
 curva_interactiva_15_59
@@ -173,15 +290,53 @@ curva_interactiva_15_59
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-*GRÁFICO N° 5*: Distribución temporal de IRAG por semana y año en
-mayores de 60 años y más. Desde la semana 1 año 2024 hasta la semana 8
-año 2026. Hospital Regional Río Gallegos.Provincia de Santa Cruz.
+#### **6.2.4 Personas de 60 años y más**
+
+En las personas de 60 años y más, el análisis permite observar la
+evolución semanal de los casos de IRAG e IRAG extendida en una población
+priorizada por la estrategia de vigilancia centinela debido a su mayor
+vulnerabilidad clínica y riesgo de complicaciones.
+
+La lectura de este grupo resulta especialmente relevante para valorar la
+carga de enfermedad grave en personas mayores, identificar períodos de
+mayor concentración de casos y orientar la interpretación posterior de
+los indicadores de severidad, ingreso a cuidados intensivos,
+comorbilidades, vacunación y mortalidad hospitalaria.
+
+**Gráfico 5.** Distribución semanal de casos de IRAG e IRAG extendida en
+personas de 60 años y más. Unidad Centinela de IRAG, Hospital Regional
+Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024
+a semana epidemiológica 8 de 2026.
 
 ```{r}
 curva_interactiva_60_mas
 ```
 
-Fuente: Elaboración propia en base a datos del SNVS 2.0
+Fuente: Elaboración propia con base en datos del SNVS 2.0
+
+### **6.3 Determinaciones para virus respiratorios**
+
+En esta sección se presenta la distribución temporal de las determinaciones realizadas para virus respiratorios en vigilancia, así como las determinaciones con resultado negativo.
+
+El análisis etiológico permite caracterizar la circulación viral asociada a los casos hospitalizados de IRAG e IRAG extendida, identificar períodos de mayor detección de agentes respiratorios específicos y complementar la interpretación de los indicadores de magnitud, severidad, ingreso a cuidados intensivos y mortalidad.
+
+**Gráfico 6.** Determinaciones para virus respiratorios según semana epidemiológica y año. Resultados positivos para influenza, VSR y SARS-CoV-2, y determinaciones negativas. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
+
+### **6.4 Comorbilidades según grupo etario**
+
+La presencia de comorbilidades constituye un componente relevante para interpretar el riesgo clínico y la posible evolución desfavorable de los casos de IRAG e IRAG extendida. En esta sección se describe la distribución de los casos según presencia o ausencia de comorbilidades, estratificada por grupo etario.
+
+**Tabla 1.** Comorbilidades según grupo etario en casos notificados de IRAG e IRAG extendida. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
+
+```{r}
+tabla_comorbilidad_grupo_gt
+```
+
+Fuente: Elaboración propia con base en a datos del SNVS 2.0
+
+La distribución evidencia una mayor proporción de comorbilidades en los grupos de mayor edad, aspecto relevante para la interpretación de los indicadores de severidad, ingreso a cuidados intensivos y mortalidad hospitalaria. Desde el punto de vista sanitario, estos resultados refuerzan la necesidad de sostener estrategias de prevención, vacunación, identificación temprana de riesgo y seguimiento diferenciado en personas mayores y pacientes con condiciones preexistentes.
+
+
 
 **VIGILANCIA POR LABORATORIO**
 
@@ -204,24 +359,6 @@ año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
 ```{r}
 positividad_scatter
 
-```
-
-Fuente: Elaboración propia en base a datos del SNVS 2.0
-
-*COMORBILIDADES*
-
-La distribución de frecuencia y porcentaje de comorbilidades por grupo
-etario durante el período de estudio, muestra un mayor porcentaje de
-comorbilidades en el grupo de adultos mayores de 60 años y más de los
-casos internados por IRAG e IRAG extendida en el Hospital Regional Río
-Gallegos. (TABLA N° 1)
-
-*TABLA N° 1*: Frecuencia y procentaje de comorbilidades por grupo
-etario. Desde la semana 18 del año 2024 hasta la semana 8 del año 2026.
-Hospital Regional Río Gallegos. Provincia de Santa Cruz.
-
-```{r}
-tabla_comorbilidad_grupo_gt
 ```
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
