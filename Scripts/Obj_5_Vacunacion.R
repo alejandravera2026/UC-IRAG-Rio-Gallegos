@@ -161,12 +161,12 @@ grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
     )
   ) +
   geom_col(
-    position = position_fill(reverse = TRUE),
+    position = position_fill(reverse = FALSE),
     width = 0.6
   ) +
   geom_text(
     aes(label = etiqueta),
-    position = position_fill(vjust = 0.5, reverse = TRUE),
+    position = position_fill(vjust = 0.5, reverse = FALSE),
     color = "white",
     fontface = "bold",
     size = 4
@@ -174,9 +174,9 @@ grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
   coord_flip() +
   scale_fill_manual(
     values = c(
-      "No vacunado" = "#4E79A7",
-      "Sin dato" = "#D4A373",
-      "Vacunado" = "#f28e2b"
+      "Vacunado" =  "#f28ce2",
+      "Sin dato" = "#d4a373",
+      "No vacunado" = "#4e79a7"
     ),
     breaks = c("Vacunado", "No vacunado", "Sin dato")
   ) +
