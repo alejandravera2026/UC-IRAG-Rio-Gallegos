@@ -42,14 +42,15 @@ curva_uci_irag <- highchart() %>%
   hc_yAxis(
     title = list(text = "N° de ingresos a UCI"), allowDecimals = FALSE) %>%
   hc_plotOptions(column = list(stacking = "normal", borderWidht = 0)) %>%
-  hc_colors(c ("#4f4f4f","#4db6e2", "#252c61")) %>%
+  hc_colors(c ("#EADBC8","#4db6e2", "#252c61")) %>%
   hc_add_series(name = "Total Ingresos a UCI", data =
                   tabla_resumen$`Pacientes ingresados a UCI`) %>%
   hc_add_series(name = "Casos de IRAG a UCI", data =
                   tabla_resumen$`Casos de IRAG entre los ingresados a UCI`) %>%
   hc_add_series(name = "Casos de IRAG extendida a UCI", data = 
                   tabla_resumen$`Casos de IRAG extendida entre los ingresados a UCI`)%>%
-  hc_tooltip(
+  
+   hc_tooltip(
     shared = TRUE,
     pointFormat = "<span style='color:{point.color}'>●</span> 
     {series.name}: <b>{point.y}</b> casos<br>")%>%
