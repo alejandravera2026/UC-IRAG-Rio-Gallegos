@@ -28,13 +28,16 @@ casos_semana_anio <- casos_semana_anio %>%
 
 curva_interactiva <-highchart() %>%
   
-  hc_chart(type= "column") %>%
+  hc_chart(
+    type = "column",
+    spacingTop = 20
+  ) %>%
   
   hc_title(
-    text = "Distribución semanal de IRAG e IRAG extendida")%>%
+    text = "Casos de IRAG e IRAG extendida")%>%
+  
   hc_subtitle(
-    text = "Casos notificados según semana epidemiológica. 
-    Unidad centinela HRRG, 2024 - 2026."
+    text = "Unidad Centinela HRRG, 2024 - 2026."
   )%>%
   
   hc_plotOptions(column = list(stacking = "normal",
@@ -46,10 +49,11 @@ curva_interactiva <-highchart() %>%
     title = list(text = NULL),
     labels = list(
       rotation = -45,
-      step = 4
+      step = 6
     )) %>%
   
-  hc_yAxis(title= list(text="Números de casos")
+  hc_yAxis(title= list(text="Número de casos"),
+           gridLineColor = "#E6E6E6"
            ) %>%
   
   hc_add_series(
@@ -60,10 +64,27 @@ curva_interactiva <-highchart() %>%
   hc_add_series(
     data = casos_semana_anio$`IRAG extendida`,
     name = "IRAG extendida",
-    color = "#7EC8E6")
-
+    color = "#7EC8E6") %>%
+  
+  hc_tooltip(
+    shared = TRUE,
+    pointFormat = paste0(
+      "<span style='color:{point.color}'>●</span> ",
+      "{series.name}: <b>{point.y}</b><br/>"
+    )
+  ) %>%
+  
+  hc_legend(
+    align = "center",
+    verticalAlign = "bottom",
+    
+    itemStyle = list(
+      fontWeight = "normal",
+      fontSize = "11px"
+    )
+  )
+  
 curva_interactiva
-
 
 
 # 3- TOTALES Y PORCENTAJES ------------------------------------------------
