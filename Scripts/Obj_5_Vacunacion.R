@@ -120,6 +120,7 @@ tabla_vsr_materna <- vacunacion_materna_larga %>%
 tabla_vsr_materna
 
 
+
 #===============================================================================
 # 3. PARTE 2 - VACUNACIÓN ANTIGRIPAL EN GRUPOS DE RIESGO
 #===============================================================================
