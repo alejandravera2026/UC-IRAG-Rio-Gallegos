@@ -23,14 +23,6 @@ editor:
 ::: portada
 ![](%22Plantillas%20e%20imagenes/hospital.png%22){width="18%"}
 
-# Hospital Regional Río Gallegos
-
-## Unidad Centinela de Infecciones Respiratorias Agudas Graves
-
-### Boletín Epidemiológico UCIRAG
-
-#### SE 18/2024 – SE 08/2026
-:::
 
 ```{r}
 source("Scripts/1_library.R")
@@ -95,19 +87,19 @@ Respiratoria Aguda Grave (IRAG).
 Se considera caso de IRAG a todo paciente, de cualquier edad, con
 infección respiratoria aguda que presenta:
 
-- fiebre referida o constatada mayor o igual a 38 °C;
-- tos;
-- inicio del cuadro en los 10 días previos;
-- requerimiento de internación por criterio clínico.
+-   fiebre referida o constatada mayor o igual a 38 °C;
+-   tos;
+-   inicio del cuadro en los 10 días previos;
+-   requerimiento de internación por criterio clínico.
 
 ### **IRAG extendida**
 
 Se considera caso de IRAG extendida a pacientes menores de 2 años o
 personas de 60 años o más que presentan:
 
-- infección respiratoria definida por tos o dificultad respiratoria;
-- inicio del cuadro en los 10 días previos;
-- requerimiento de internación por criterio clínico.
+-   infección respiratoria definida por tos o dificultad respiratoria;
+-   inicio del cuadro en los 10 días previos;
+-   requerimiento de internación por criterio clínico.
 
 En lactantes menores de 6 meses, también se consideran criterios
 clínicos relevantes la presencia de apnea o sepsis, entendida como
@@ -123,7 +115,7 @@ Para mayor detalle sobre las definiciones operativas, criterios de
 inclusión, circuito de notificación e indicadores de la estrategia
 UC-IRAG, consultar la guía operativa nacional vigente:
 
-[Guía Operativa UC-IRAG – Ministerio de Salud de la
+[Guía Operativa UC-IRAG -- Ministerio de Salud de la
 Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
 
 ## **5. Nota metodológica**
@@ -131,7 +123,7 @@ Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
 El presente informe integra información proveniente de la notificación
 nominal de casos y de la notificación agrupada semanal de la estrategia
 UC-IRAG, registradas en el Sistema Nacional de Vigilancia de la Salud
-—SNVS 2.0—.
+---SNVS 2.0---.
 
 El período evaluado comprende desde la semana epidemiológica 18 de 2024
 hasta la semana epidemiológica 8 de 2026. El procesamiento de los datos,
@@ -350,7 +342,7 @@ A continuación, se presentan en forma comparativa los antecedentes
 registrados de vacunación antigripal materna y vacunación materna contra
 VSR en los casos notificados por la Unidad Centinela.
 
-::::: columns
+::: columns
 ::: {.column width="50%"}
 **Tabla 2.** Vacunación antigripal materna en pacientes menores de 6
 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos,
@@ -446,4 +438,4 @@ tabla_letalidad_gt
 tabla_fallecidos_agente_gt
 ```
 :::
-:::::
+:::
