@@ -40,30 +40,39 @@ table(comorbilidad_base$COMORBILIDAD, useNA = "always")
 # 3- TABLA DE RESUMEN -----------------------------------------------------
 
 tabla_comorbilidad_grupo <- comorbilidad_base %>%
+  
   filter(
     !is.na(grupo_etario),
     COMORBILIDAD %in% c("Sí", "No", "Sin datos")
   ) %>%
+  
   count(grupo_etario, COMORBILIDAD, name = "casos") %>%
+  
   group_by(grupo_etario) %>%
+  
   mutate(
     porcentaje = round(casos / sum(casos) * 100, 1),
-    resultado = paste0(casos, " (", porcentaje, "%)")
+    
+    resultado = paste0(
+      casos,
+      " (",
+      sprintf("%.1f", porcentaje),
+      "%)"
+    )
   ) %>%
-  ungroup()
-
-
-# 4- TABLA FINAL EN FORMATO gt --------------------------------------------
-
-
-# 4. Tabla final en formato gt
-
-tabla_comorbilidad_grupo_gt <- tabla_comorbilidad_grupo %>%
-  select(grupo_etario, COMORBILIDAD, resultado) %>%
+  
+  ungroup() %>%
+  
+  select(
+    grupo_etario,
+    COMORBILIDAD,
+    resultado
+  ) %>%
+  
   pivot_wider(
     names_from = COMORBILIDAD,
     values_from = resultado,
-    values_fill = "0 (0%)"
+    values_fill = "0 (0.0%)"
   ) %>%
   
   select(
@@ -71,22 +80,29 @@ tabla_comorbilidad_grupo_gt <- tabla_comorbilidad_grupo %>%
     `Sí`,
     `No`,
     `Sin datos`
-  )%>%
+  )
+
+
+# 4- TABLA FINAL EN FORMATO gt --------------------------------------------
+
+tabla_comorbilidad_grupo_gt <- tabla_comorbilidad_grupo %>%
   
   gt() %>%
+  
   cols_label(
     grupo_etario = "Grupo etario",
-    `Sí` = "Sí",
-    `No` = "No",
+    `Sí` = "Con comorbilidades",
+    `No` = "Sin comorbilidades",
     `Sin datos` = "Sin datos"
   ) %>%
+  
   cols_align(
     align = "center"
   ) %>%
+  
   tab_header(
-    title = "Frecuencia y porcentaje de comorbilidades por 
-    grupo etario.",
-    subtitle = "Unidad Centinela HRRG, 2024–2026."
+    title = "Comorbilidades según grupo etario",
+    subtitle = "Unidad Centinela HRRG, 2024–2026"
   )
 
 tabla_comorbilidad_grupo_gt
