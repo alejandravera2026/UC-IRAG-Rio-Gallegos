@@ -316,17 +316,34 @@ Fuente: Elaboración propia con base en datos del SNVS 2.0
 
 ### **6.3 Determinaciones para virus respiratorios**
 
-En esta sección se presenta la distribución temporal de las determinaciones realizadas para virus respiratorios en vigilancia, así como las determinaciones con resultado negativo.
+En esta sección se presenta la distribución temporal de las
+determinaciones realizadas para virus respiratorios en vigilancia, así
+como las determinaciones con resultado negativo.
 
-El análisis etiológico permite caracterizar la circulación viral asociada a los casos hospitalizados de IRAG e IRAG extendida, identificar períodos de mayor detección de agentes respiratorios específicos y complementar la interpretación de los indicadores de magnitud, severidad, ingreso a cuidados intensivos y mortalidad.
+El análisis etiológico permite caracterizar la circulación viral
+asociada a los casos hospitalizados de IRAG e IRAG extendida,
+identificar períodos de mayor detección de agentes respiratorios
+específicos y complementar la interpretación de los indicadores de
+magnitud, severidad, ingreso a cuidados intensivos y mortalidad.
 
-**Gráfico 6.** Determinaciones para virus respiratorios según semana epidemiológica y año. Resultados positivos para influenza, VSR y SARS-CoV-2, y determinaciones negativas. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
+**Gráfico 6.** Determinaciones para virus respiratorios según semana
+epidemiológica y año. Resultados positivos para influenza, VSR y
+SARS-CoV-2, y determinaciones negativas. Unidad Centinela de IRAG,
+Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana
+epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
 
 ### **6.4 Comorbilidades según grupo etario**
 
-La presencia de comorbilidades constituye un componente relevante para interpretar el riesgo clínico y la posible evolución desfavorable de los casos de IRAG e IRAG extendida. En esta sección se describe la distribución de los casos según presencia o ausencia de comorbilidades, estratificada por grupo etario.
+La presencia de comorbilidades constituye un componente relevante para
+interpretar el riesgo clínico y la posible evolución desfavorable de los
+casos de IRAG e IRAG extendida. En esta sección se describe la
+distribución de los casos según presencia o ausencia de comorbilidades,
+estratificada por grupo etario.
 
-**Tabla 1.** Comorbilidades según grupo etario en casos notificados de IRAG e IRAG extendida. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
+**Tabla 1.** Comorbilidades según grupo etario en casos notificados de
+IRAG e IRAG extendida. Unidad Centinela de IRAG, Hospital Regional Río
+Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a
+semana epidemiológica 8 de 2026.
 
 ```{r}
 tabla_comorbilidad_grupo_gt
@@ -334,13 +351,27 @@ tabla_comorbilidad_grupo_gt
 
 Fuente: Elaboración propia con base en a datos del SNVS 2.0
 
-La distribución evidencia una mayor proporción de comorbilidades en los grupos de mayor edad, aspecto relevante para la interpretación de los indicadores de severidad, ingreso a cuidados intensivos y mortalidad hospitalaria. Desde el punto de vista sanitario, estos resultados refuerzan la necesidad de sostener estrategias de prevención, vacunación, identificación temprana de riesgo y seguimiento diferenciado en personas mayores y pacientes con condiciones preexistentes.
+La distribución evidencia una mayor proporción de comorbilidades en los
+grupos de mayor edad, aspecto relevante para la interpretación de los
+indicadores de severidad, ingreso a cuidados intensivos y mortalidad
+hospitalaria. Desde el punto de vista sanitario, estos resultados
+refuerzan la necesidad de sostener estrategias de prevención,
+vacunación, identificación temprana de riesgo y seguimiento diferenciado
+en personas mayores y pacientes con condiciones preexistentes.
 
 **6.5 Vacunación antigripal en grupos de riesgo**
 
-La vacunación antigripal constituye una intervención prioritaria para reducir el riesgo de complicaciones, internación y formas graves de enfermedad en grupos poblacionales definidos como de mayor vulnerabilidad. En esta sección se presenta la distribución porcentual del antecedente de vacunación antigripal en dos grupos de riesgo: niños y niñas de 6 a 23 meses y personas de 65 años y más.
+La vacunación antigripal constituye una intervención prioritaria para
+reducir el riesgo de complicaciones, internación y formas graves de
+enfermedad en grupos poblacionales definidos como de mayor
+vulnerabilidad. En esta sección se presenta la distribución porcentual
+del antecedente de vacunación antigripal en dos grupos de riesgo: niños
+y niñas de 6 a 23 meses y personas de 65 años y más.
 
-**Gráfico 6.** Vacunación antigripal en grupos de riesgo. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
+**Gráfico 6.** Vacunación antigripal en grupos de riesgo. Unidad
+Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa
+Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de
+2026.
 
 ```{r}
 grafico_antigripal_riesgo
@@ -348,53 +379,28 @@ grafico_antigripal_riesgo
 
 **6.6 Vacunación materna en menores de 6 meses**
 
-En pacientes menores de 6 meses, el antecedente de vacunación materna constituye una variable relevante para interpretar el riesgo de infección respiratoria grave, particularmente en relación con influenza y virus sincicial respiratorio (VSR). 
+En pacientes menores de 6 meses, el antecedente de vacunación materna
+constituye una variable relevante para interpretar el riesgo de
+infección respiratoria grave, particularmente en relación con influenza
+y virus sincicial respiratorio (VSR).
 
-A continuación, se presentan en forma comparativa los antecedentes registrados de vacunación antigripal materna y vacunación materna contra VSR en los casos notificados por la Unidad Centinela.
+A continuación, se presentan en forma comparativa los antecedentes
+registrados de vacunación antigripal materna y vacunación materna contra
+VSR en los casos notificados por la Unidad Centinela.
 
-:::: {.columns}
-
+::::: columns
 ::: {.column width="50%"}
-
-**Tabla 2.** Vacunación antigripal materna en pacientes menores de 6 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
-
+**Tabla 2.** Vacunación antigripal materna en pacientes menores de 6
+meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos,
+provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana
+epidemiológica 8 de 2026.
 :::
 
 ::: {.column width="50%"}
-
-Tabla 3. Vacunación materna contra VSR en pacientes menores de 6 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8 de 2026.
-
-
-
-
-```{r}
-tabla_antigripal_materna
-
-
-**VIGILANCIA POR LABORATORIO**
-
-De los casos internados por IRAG e IRAG extendida, se realizaron las
-determinaciones de los agentes etiológicos (SARS-CoV-2, Influenza y VSR)
-mediante técnicas de biología molecular. En el *GRÁFICO N° 6*, muestra
-la distribución de los virus estudiados por semana y por año, que se
-observa una mayor circulación para el virus VSR, con picos máximos en
-las semanas 30 y 38 del año 2024 y las semanas 28, 32 y 33 del año 2025.
-Durante el año 2025, hubo mayor circulación del virus Influenza con
-respecto al año 2024, con un adelanto a partir de la semana 12 con picos
-constantes hasta la semana 25. Para el virus SARS-CoV-2, muestra mayor
-circulación en el año 2025 con respecto al año 2024 pero es menor con
-respecto a los otros virus Influenza y VSR.
-
-*GRÁFICO N°6*: Distribución de los agentes etiológicos estudiados por
-semana y por año. Desde la semana 18 del año 2024 hasta la semana 8 del
-año 2026. Hospital Regional Río Gallegos. Provincia de Santa Cruz.
-
-```{r}
-positividad_scatter
-
-```
-
-Fuente: Elaboración propia en base a datos del SNVS 2.0
+Tabla 3. Vacunación materna contra VSR en pacientes menores de 6 meses.
+Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de
+Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8
+de 2026.
 
 *COBERTURA DE VACUNACION MATERNA EN MENORES DE 6 MESES*
 
@@ -475,3 +481,5 @@ tabla_letalidad_gt
 ```{r}
 tabla_fallecidos_agente_gt
 ```
+:::
+:::::
