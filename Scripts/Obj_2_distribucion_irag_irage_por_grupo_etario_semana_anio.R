@@ -40,11 +40,11 @@ curva_interactiva_menores_dos <- highchart() %>%
   hc_chart(type = "column") %>%
   
   hc_title(
-    text = "Distribución semanal de casos de IRAG e IRAG extendida en menores de 2 años"
+    text = "Casos de IRAG extendida en menores de 2 años"
   ) %>%
   
   hc_subtitle(
-    text = "Casos notificados según semana epidemiológica. Unidad Centinela HRRG, 2024–2026"
+    text = "Unidad Centinela HRRG, 2024–2026"
   ) %>%
   
   hc_plotOptions(
@@ -58,11 +58,13 @@ curva_interactiva_menores_dos <- highchart() %>%
   hc_xAxis(
     categories = casos_menores_dos_anios$SEPI,
     title = list(text = NULL),
-    labels = list(rotation = -45, step = 2)
+    labels = list(rotation = -45, 
+                  step = 4)
   ) %>%
   
   hc_yAxis(
-    title = list(text = "Número de casos")
+    title = list(text = "Número de casos"),
+    gridLineColor = "#E6E6E6"
   ) %>%
   
   hc_add_series(
@@ -70,11 +72,12 @@ curva_interactiva_menores_dos <- highchart() %>%
     name = "IRAG extendida",
     color = "#7EC8E6"
   ) %>%
-  hc_add_series(
-    data = casos_menores_dos_anios$`Infección respiratoria aguda grave (IRAG)`,
-    name = "IRAG",
-    color = "#252C61"
-  )%>%
+  
+  hc_tooltip(
+    pointFormat = paste0(
+      "<span style='color:{point.color}'>●</span> ",
+      "{series.name}: <b>{point.y}</b><br/>"
+    )) %>%
   
   hc_legend(enabled = FALSE)
 
