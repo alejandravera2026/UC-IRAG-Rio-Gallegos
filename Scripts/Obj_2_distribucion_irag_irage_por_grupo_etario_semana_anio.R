@@ -106,17 +106,16 @@ curva_interactiva_2_14 <- highchart() %>%
   hc_chart(type = "column") %>%
   
   hc_title(
-    text = "Distribución semanal de casos de IRAG en población de 2 a 14 años"
+    text = "Casos de IRAG en población de 2 a 14 años"
   ) %>%
   
   hc_subtitle(
-    text = "Casos notificados según semana epidemiológica. 
-    Unidad Centinela HRRG, 2024–2026."
+    text = " Unidad Centinela HRRG, 2024–2026."
   ) %>%
   
   hc_plotOptions(
     column = list(
-      pointPadding = 0.1,
+      pointPadding = 0.08,
       groupPadding = 0.05,
       borderWidth = 0
     )
@@ -132,14 +131,24 @@ curva_interactiva_2_14 <- highchart() %>%
   ) %>%
   
   hc_yAxis(
-    title = list(text = "Número de casos")
+    title = list(text = "Número de casos"),
+    gridLineColor = "#E6E6E6",
+    max = 4.5,
+    tickInterval = 1
   ) %>%
   
   hc_add_series(
     data = casos_2_14$CASOS,
     name = "IRAG",
     color = "#252C61"
-  )%>% 
+  )%>%
+  
+  hc_tooltip(
+    pointFormat = paste0(
+      "<span style='color:{point.color}'>●</span> ",
+      "{series.name}: <b>{point.y}</b><br/>"
+    )
+  ) %>%
   
    hc_legend(enabled = FALSE)
 
@@ -169,17 +178,16 @@ curva_interactiva_15_59 <- highchart() %>%
   hc_chart(type = "column") %>%
   
   hc_title(
-    text = "Distribución semanal de casos de IRAG en población de 15 a 59 años"
+    text = "Casos de IRAG en población de 15 a 59 años"
   ) %>%
   
   hc_subtitle(
-    text = "Casos notificados según semana epidemiológica. 
-    Unidad Centinela HRRG, 2024–2026."
+    text = " Unidad Centinela HRRG, 2024–2026."
   ) %>%
   
   hc_plotOptions(
     column = list(
-      pointPadding = 0.1,
+      pointPadding = 0.08,
       groupPadding = 0.05,
       borderWidth = 0
     )
@@ -195,7 +203,10 @@ curva_interactiva_15_59 <- highchart() %>%
   ) %>%
   
   hc_yAxis(
-    title = list(text = "Número de casos")
+    title = list(text = "Número de casos"),
+    gridLineColor = "#E6E6E6",
+    max = 4,
+    tickInterval = 1
   ) %>%
   
   hc_add_series(
@@ -203,6 +214,13 @@ curva_interactiva_15_59 <- highchart() %>%
     name = "IRAG",
     color = "#252C61"
   )%>% 
+  
+  hc_tooltip(
+    pointFormat = paste0(
+      "<span style='color:{point.color}'>●</span> ",
+      "{series.name}: <b>{point.y}</b><br/>"
+    )
+  )%>%
   
   hc_legend(enabled = FALSE)
 
