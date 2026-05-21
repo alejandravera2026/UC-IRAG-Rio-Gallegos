@@ -21,7 +21,7 @@ tabla_resumen <- tabla_resumen %>%
 
 curva_uci_irag <- highchart() %>%
   
-  hc_chart(type = "spline") %>%
+  hc_chart(type = "column") %>%
   
   hc_title(
     text = "Ingresos a UCI por IRAG e IRAG extendida"
@@ -35,73 +35,31 @@ curva_uci_irag <- highchart() %>%
     categories = tabla_resumen$SEPI,
     title = list(text = NULL),
     labels = list(
-      rotation = -45,
-      step = 6
+      rotation = -45
     )
   ) %>%
   
   hc_yAxis(
-    title = list(text = "% de ingresos a UCI"),
-    labels = list(format = "{value}%"),
-    min = 0,
-    max = 100,
-    tickInterval = 10,
-    gridLineColor = "#E6E6E6"
-  ) %>%
+    title = list(text = "N° de ingresos a UCI"), allowDecimals = FALSE) %>%
+  hc_plotOptions(column = list(stacking = "normal", borderWidht = 0)) %>%
+  hc_colors(c ("#EADBC8","#4db6e2", "#252c61")) %>%
+  hc_add_series(name = "Total Ingresos a UCI", data =
+                  tabla_resumen$`Pacientes ingresados a UCI`) %>%
+  hc_add_series(name = "Casos de IRAG a UCI", data =
+                  tabla_resumen$`Casos de IRAG entre los ingresados a UCI`) %>%
+  hc_add_series(name = "Casos de IRAG extendida a UCI", data = 
+                  tabla_resumen$`Casos de IRAG extendida entre los ingresados a UCI`)%>%
   
-  hc_add_series(
-    name = "IRAG",
-    data = purrr::pmap(
-      list(
-        y = tabla_resumen$PROPORCION_IRAG_UCI,
-        n = tabla_resumen$`Casos de IRAG entre los ingresados a UCI`,
-        d = tabla_resumen$`Pacientes ingresados a UCI`
-      ),
-      function(y, n, d) list(y = y, n = n, d = d)
-    ),
-    color = "#252C61",
-    lineWidth = 2.5,
-    marker = list(
-      enabled = TRUE,
-      radius = 3
-    )
-  ) %>%
-  
-  hc_add_series(
-    name = "IRAG extendida",
-    data = purrr::pmap(
-      list(
-        y = tabla_resumen$PROPORCION_IRAGE_UCI,
-        n = tabla_resumen$`Casos de IRAG extendida entre los ingresados a UCI`,
-        d = tabla_resumen$`Pacientes ingresados a UCI`
-      ),
-      function(y, n, d) list(y = y, n = n, d = d)
-    ),
-    color = "#4DB6E2",
-    lineWidth = 2.5,
-    marker = list(
-      enabled = TRUE,
-      radius = 3
-    )
-  ) %>%
-  
-  hc_tooltip(
+   hc_tooltip(
     shared = TRUE,
-    useHTML = TRUE,
-    pointFormat = paste0(
-      "<span style='color:{point.color}'>●</span> ",
-      "{series.name}: <b>{point.y:.1f}%</b> ",
-      "({point.n}/{point.d})<br/>"
-    )
-  ) %>%
-  
-  hc_legend(
-    align = "center",
-    verticalAlign = "bottom",
-    itemStyle = list(
-      fontWeight = "normal",
-      fontSize = "11px"
-    )
-  )
-
+    pointFormat = "<span style='color:{point.color}'>●</span> 
+    {series.name}: <b>{point.y}</b> casos<br>")%>%
+  hc_legend(layout = "horizontal",
+                  align = "center",
+                  verticalAlign = "bottom",
+            reversed = FALSE
+                  )%>%
+  hc_credits(enabled = FALSE)
+                
 curva_uci_irag
+  
