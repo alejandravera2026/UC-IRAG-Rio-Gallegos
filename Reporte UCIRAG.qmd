@@ -333,6 +333,31 @@ grafico_antigripal_riesgo
 
 **6.6 Vacunación materna en menores de 6 meses**
 
+Durante el período de estudio, se evaluaron en los menores de 6 meses si
+presentaban antecedentes de vacunación materna contra el Virus Sincicial
+Respiratorio e Influenza, observándose diferencias porcentuales entre
+las vacunaciones maternas antigripal y contra el Virus Sincicial
+Respiratorio. (TABLA N° 2 Y 3)
+
+*TABLA N° 2*: Vacunación materna contra VSR. Período semana 18 año 2024
+al semana 8 año 2026. Hospital Regional Río Gallegos.
+
+```{r}
+tabla_vsr_materna
+
+```
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+*TABLA N°3*: Vacunación materna contra Influenza. Período semana 18 año
+2024 hasta semana 8 año 2026. Hospital Regional Río Gallegos.
+
+```{r}
+tabla_antigripal_materna
+
+```
+
+Fuente: Elaboración propia en base a los datos del SNVS 2.0
 En pacientes menores de 6 meses, el antecedente de vacunación materna
 constituye una variable relevante para interpretar el riesgo de
 infección respiratoria grave, particularmente en relación con influenza
@@ -351,12 +376,18 @@ epidemiológica 8 de 2026.
 :::
 
 ::: {.column width="50%"}
-Tabla 3. Vacunación materna contra VSR en pacientes menores de 6 meses.
+**Tabla 3.** Vacunación materna contra VSR en pacientes menores de 6 meses.
 Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de
 Santa Cruz. Semana epidemiológica 18 de 2024 a semana epidemiológica 8
 de 2026.
 
-*COBERTURA DE VACUNACION MATERNA EN MENORES DE 6 MESES*
+```{r}
+tabla_antigripal_materna
+tabla_vsr_materna
+```
+
+
+
 
 Durante el período de estudio, se evaluaron en los menores de 6 meses si
 presentaban antecedentes de vacunación materna contra el Virus Sincicial
