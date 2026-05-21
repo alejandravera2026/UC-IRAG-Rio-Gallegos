@@ -102,3 +102,4 @@ grafico_fallecidos_agrupado <- highchart() %>%
   )
 
 grafico_fallecidos_agrupado
+
