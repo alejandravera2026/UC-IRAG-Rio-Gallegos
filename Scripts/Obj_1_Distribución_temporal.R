@@ -42,9 +42,12 @@ curva_interactiva <-highchart() %>%
                                groupPadding = 0.05,  
                                borderWidth = 0)) %>%
   hc_xAxis(
-    categories = casos_semana_anio$SEPI, #categorías en eje X
-    title = list(text = NULL)
-    ) %>%  
+    categories = casos_semana_anio$SEPI,
+    title = list(text = NULL),
+    labels = list(
+      rotation = -45,
+      step = 4
+    )) %>%
   
   hc_yAxis(title= list(text="Números de casos")
            ) %>%
