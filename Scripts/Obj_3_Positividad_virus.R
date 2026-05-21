@@ -67,10 +67,10 @@ positividad_grafico <- positividad_semanal %>%
 
 positividad_scatter <- highchart() %>%
   
-  hc_chart(type = "scatter") %>%
+  hc_chart(type = "spline") %>%
   
   hc_title(
-    text = "Positividad semanal por virus respiratorio"
+    text = "Positividad por virus respiratorio"
   ) %>%
   
   hc_subtitle(
@@ -80,24 +80,26 @@ positividad_scatter <- highchart() %>%
   hc_xAxis(
     categories = positividad_grafico$SEPI,
     title = list(text = NULL),
-    
-    labels = list(
+      labels = list(
       rotation = -45,
       step = 4
     )
   ) %>%
   
   hc_yAxis(
-    title = list(text = "Poisitividad %"),
+    title = list(text = "Positividad (%)"),
+    labels = list(format = "{value}%"),
     min = 0,
     max = 100,
-    tickInterval = 10
+    tickInterval = 10,
+    gridLineColor = "#E6E6E6"
   ) %>%
   
   hc_plotOptions(
-    scatter = list(
+    spline = list(
       lineWidth = 2,
       marker = list(
+        enabled = TRUE,
         radius = 4,
         symbol = "circle"
       )
