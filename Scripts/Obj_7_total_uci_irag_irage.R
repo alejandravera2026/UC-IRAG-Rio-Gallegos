@@ -73,4 +73,5 @@ curva_uci_irag <- highchart() %>%
   )
 
 
+
 curva_uci_irag
