@@ -147,53 +147,108 @@ tabla_antigripal_riesgo <- vacunacion_antigripal_larga %>%
   ) %>%
   ungroup()
 
-
 #===============================================================================
 # Gráfico - vacunación antigripal en grupos de riesgo
 #===============================================================================
 
-grafico_antigripal_riesgo <- tabla_antigripal_riesgo %>%
-  ggplot(
-    aes(
-      x = grupo_riesgo_vacunacion,
-      y = porcentaje,
-      fill = Estado
+tabla_antigripal_high <- tabla_antigripal_riesgo %>%
+  mutate(
+    Estado = factor(
+      Estado,
+      levels = c("Vacunado", "No vacunado", "Sin dato")
     )
-  ) +
-  geom_col(
-    position = position_fill(reverse = FALSE),
-    width = 0.6
-  ) +
-  geom_text(
-    aes(label = etiqueta),
-    position = position_fill(vjust = 0.5, reverse = FALSE),
-    color = "white",
-    fontface = "bold",
-    size = 4
-  ) +
-  coord_flip() +
-  scale_fill_manual(
-    values = c(
-      "Vacunado" =  "#f28ce2",
-      "Sin dato" = "#d4a373",
-      "No vacunado" = "#4e79a7"
-    ),
-    breaks = c("Vacunado", "No vacunado", "Sin dato")
-  ) +
-  scale_y_continuous(
-    labels = scales::percent_format(scale = 1)
-  ) +
-  labs(
-    title = "Vacunación antigripal en grupos de riesgo",
-    subtitle = "Distribución porcentual según estado de vacunación. Unidad Centinela HRRG, 2024–2026",
-    x = NULL,
-    y = "Porcentaje (%)",
-    fill = "Estado"
-  ) +
-  theme_minimal(base_size = 13) +
-  theme(
-    plot.title = element_text(hjust = 0.5, face = "bold"),
-    legend.position = "bottom")
+  )
 
+
+grafico_antigripal_riesgo <- highchart() %>%
+  
+  hc_chart(type = "bar") %>%
+  
+  hc_title(
+    text = "Vacunación antigripal en grupos de riesgo"
+  ) %>%
+  
+  hc_subtitle(
+    text = "Unidad Centinela HRRG, 2024–2026"
+  ) %>%
+  
+  hc_xAxis(
+    categories = c("6 a 23 meses", "65 años y más"),
+    title = list(text = NULL)
+  ) %>%
+  
+  hc_yAxis(
+    title = list(text = "Porcentaje (%)"),
+    labels = list(format = "{value}%"),
+    min = 0,
+    max = 100,
+    tickInterval = 20,
+    gridLineColor = "#E6E6E6"
+  ) %>%
+  
+  hc_plotOptions(
+    series = list(
+      stacking = "normal",
+      
+      dataLabels = list(
+        enabled = TRUE,
+        format = "{point.y:.1f}%",
+        style = list(
+          color = "white",
+          fontWeight = "bold",
+          textOutline = "none"
+        )
+      )
+    )
+  ) %>%
+  
+  hc_add_series(
+    name = "Vacunado",
+    
+    data = tabla_antigripal_high %>%
+      filter(Estado == "Vacunado") %>%
+      pull(porcentaje),
+    
+    color = "#F28ce2"
+  ) %>%
+
+  hc_add_series(
+    name = "No vacunado",
+    
+    data = tabla_antigripal_high %>%
+      filter(Estado == "No vacunado") %>%
+      pull(porcentaje),
+    
+    color = "#4E79A7"
+  ) %>%
+  
+  hc_add_series(
+    name = "Sin dato",
+    
+    data = tabla_antigripal_high %>%
+      filter(Estado == "Sin dato") %>%
+      pull(porcentaje),
+    
+    color = "#D4A373"
+  ) %>%
+  
+  hc_tooltip(
+    shared = TRUE,
+    
+    pointFormat = paste0(
+      "<span style='color:{point.color}'>●</span> ",
+      "{series.name}: <b>{point.y:.1f}%</b><br/>"
+    )
+  ) %>%
+  
+  hc_legend(
+    align = "center",
+    verticalAlign = "bottom",
+    
+    itemStyle = list(
+      fontWeight = "normal",
+      fontSize = "11px"
+    )
+  )
 
 grafico_antigripal_riesgo
