@@ -1,32 +1,29 @@
 ---
 title: ""
 subtitle: ""
+
 format:
   html:
     self-contained: true
     toc: true
-    toc-title: "Indice"
+    toc-title: "Índice"
     toc-depth: 3
     toc-location: left
     smooth-scroll: true
     embed-resources: true
     css: estilos.css
-execute: 
+
+execute:
   echo: false
   warning: false
   message: false
+
 editor:
-  markdown: 
+  markdown:
     wrap: 72
 ---
 
-::: portada
-
-![](Logos/logo_salud.png){width="70%"
-fig-align="left"}
-
-:::
-
+![](Logos/logo_msa.jpg){width="100%"}
 ```{r}
 source("Scripts/1_library.R")
 source("Scripts/2_importacion.R")

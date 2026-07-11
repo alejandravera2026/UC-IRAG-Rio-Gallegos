@@ -1,11 +1,13 @@
+
+```css
 body {
   background-color: #ffffff;
-  font-family: 'Open Sans', Arial, sans-serif;
-  color: #666;
+  font-family: "Open Sans", Arial, sans-serif;
+  color: #666666;
 }
 
 h1 {
-  color:#1f78b4 ;
+  color: #1f78b4;
   text-align: center;
   font-size: 1.7em;
 }
@@ -31,31 +33,109 @@ p {
 }
 
 a {
-  color:#386cb0;
+  color: #386cb0;
   text-decoration: none;
 }
+
 a:hover {
-  color:#80b1d3;
+  color: #80b1d3;
   text-decoration: underline;
 }
 
-/*Modificaciones en el índice*/
+/* =====================================
+   MEMBRETE INSTITUCIONAL
+===================================== */
+
+.portada {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-top: -25px;
+  margin-bottom: 40px;
+  padding: 0;
+}
+
+.portada p {
+  margin: 0;
+  padding: 0;
+}
+
+.membrete-img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Elimina el espacio que Quarto agrega alrededor de la imagen */
+
+.portada figure {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.portada img {
+  width: 100%;
+  max-width: none;
+  display: block;
+}
+
+/* =====================================
+   ÍNDICE LATERAL
+===================================== */
+
 .sidebar nav#TOC .toc-title {
   color: #000000 !important;
 }
 
 .sidebar nav#TOC {
-  position: sticky;        
-  top: 100px;  
+  position: sticky;
+  top: 180px;
 }
 
-/* Color normal de los items del índice */
 .sidebar nav#TOC a {
   color: #000000 !important;
 }
 
-/* Color al pasar el mouse */
 .sidebar nav#TOC a:hover {
   color: #386cb0 !important;
 }
+/*==================================================
+  HEADER INSTITUCIONAL
+==================================================*/
 
+.header-ministerio{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    z-index: 9999;
+    background: white;
+}
+
+.header-ministerio img{
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Baja el contenido */
+
+#quarto-content{
+    padding-top: 170px;
+}
+
+/* Baja el índice */
+
+.sidebar nav#TOC{
+    position: sticky;
+    top: 180px;
+}
