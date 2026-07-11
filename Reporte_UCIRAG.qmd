@@ -11,7 +11,8 @@ format:
     toc-location: left
     smooth-scroll: true
     embed-resources: true
-    css: estilos.css
+    css: Plantillas_imagenes/estilo.css
+    include-before-body: Plantillas_imagenes/Encabezado.html
 
 execute:
   echo: false
@@ -23,7 +24,6 @@ editor:
     wrap: 72
 ---
 
-![](Logos/logo_msa.jpg){width="100%"}
 ```{r}
 source("Scripts/1_library.R")
 source("Scripts/2_importacion.R")
@@ -40,38 +40,23 @@ source("Scripts/Obj_7_total_uci_Irage.R")
 source("Scripts/Obj_8_total_fallecidos_y _total_irag_irage.R")
 source("Scripts/Obj_10_virus_terapia_fallecidos.R")
 source("Scripts/Obj_9_Letalidad.R")
-
 ```
 
 # Boletín Epidemiológico
 
-# Unidad Centinela de Infecciones Respiratorias Agudas Graves
+## Unidad Centinela de Infecciones Respiratorias Agudas Graves
 
-# Hospital Regional de Río Gallegos
+## Hospital Regional de Río Gallegos
 
 ## **1.Introducción**
 
-Las infecciones respiratorias agudas (IRAs) representan una causa
-relevante de morbimortalidad y presión asistencial, especialmente en
-menores de dos años, personas mayores de 60 años y pacientes con
-factores de riesgo. La circulación de influenza, SARS-CoV-2 y virus
-sincicial respiratorio (VSR) requiere una vigilancia epidemiológica
-integrada, oportuna y sostenida.
+Las infecciones respiratorias agudas (IRA) constituyen una causa relevante de morbimortalidad y de presión sobre los servicios de salud, especialmente en menores de dos años, personas mayores de 60 años y pacientes con factores de riesgo. La circulación de influenza, SARS-CoV-2 y virus sincicial respiratorio (VSR) requiere una vigilancia epidemiológica integrada, oportuna y sostenida, capaz de aportar información para la detección de tendencias, la caracterización de la gravedad y la organización de la respuesta asistencial.
 
-La estrategia de Unidad Centinela de Infección Respiratoria Aguda
-Grav(UC-IRAG) permite caracterizar los casos hospitalizados, monitorear
-tendencias, evaluar severidad clínica e identificar grupos de mayor
-riesgo. Esta información resulta clave para orientar decisiones
-sanitarias, fortalecer la respuesta hospitalaria y anticipar necesidades
-vinculadas a internación, cuidados críticos, laboratorio y prevención.
+La estrategia de Unidad Centinela de Infección Respiratoria Aguda Grave (UC-IRAG) permite caracterizar los casos hospitalizados, monitorear su evolución temporal, analizar la severidad clínica e identificar grupos con mayor riesgo de complicaciones. La información generada resulta clave para orientar decisiones sanitarias, fortalecer la respuesta hospitalaria y anticipar necesidades vinculadas con la internación, los cuidados críticos, el diagnóstico de laboratorio y las medidas de prevención.
 
-En la provincia de Santa Cruz, la UC-IRAG comenzó a implementarse en la
-semana epidemiológica 18 del año 2024 en el Hospital Regional Río
-Gallegos, hospital de referencia provincial con internación adulta y
-pediátrica. Este boletín presenta el análisis de los casos de IRAG e
-IRAG extendida registrados por la Unidad Centinela, considerando su
-evolución temporal, clasificación epidemiológica, severidad, ingreso a
-cuidados intensivos, mortalidad y circulación viral.
+En la provincia de Santa Cruz, la estrategia UC-IRAG comenzó a implementarse en la semana epidemiológica 18 de 2024 en el Hospital Regional de Río Gallegos, establecimiento de referencia provincial con internación de pacientes adultos y pediátricos. 
+
+El presente boletín analiza los casos de IRAG e IRAG extendida registrados por la Unidad Centinela, considerando su distribución temporal, clasificación epidemiológica, severidad, ingreso a cuidados intensivos, mortalidad y circulación de virus respiratorios.
 
 ## **2. Objetivo general**
 
@@ -83,16 +68,7 @@ semana epidemiológica 8 de 2026, con el propósito de aportar información
 oportuna para la vigilancia epidemiológica, la evaluación de severidad y
 el análisis del impacto sobre el sistema de salud.
 
-## **3. Ejes de análisis**
-
-El presente boletín analiza el comportamiento temporal de los casos de
-IRAG e IRAG extendida, la circulación de virus respiratorios bajo
-vigilancia, la distribución según grupos etarios, la presencia de
-comorbilidades y antecedentes de vacunación, así como indicadores de
-severidad clínica, ingreso a cuidados intensivos y mortalidad
-hospitalaria.
-
-## **4. Definiciones operativas y criterios de inclusión**
+## **3. Definiciones operativas y criterios de inclusión**
 
 La clasificación de los casos se realizó de acuerdo con las definiciones
 establecidas para la estrategia de vigilancia centinela de Infección
@@ -134,7 +110,7 @@ UC-IRAG, consultar la guía operativa nacional vigente:
 [Guía Operativa UC-IRAG -- Ministerio de Salud de la
 Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
 
-## **5. Nota metodológica**
+## **4. Nota metodológica**
 
 El presente informe integra información proveniente de la notificación
 nominal de casos y de la notificación agrupada semanal de la estrategia
@@ -155,14 +131,14 @@ información de vigilancia centinela hospitalaria, útil para monitorear
 tendencias, severidad e impacto, pero no como tasas poblacionales
 provinciales.
 
-## **6. Situación epidemiológica**
+## **5. Situación epidemiológica**
 
 Entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 8
 de 2026, se registraron un total de `r notificaciones_totales`
 internaciones notificadas en el marco de la estrategia UC-IRAG,
 correspondientes a casos clasificados como IRAG e IRAG extendida.
 
-### **6.1 Casos de IRAG e IRAG extendida**
+### **5.1 Casos de IRAG e IRAG extendida**
 
 **Gráfico 1.**.
 
@@ -179,7 +155,7 @@ dimensionar la magnitud de la demanda hospitalaria captada por la
 vigilancia centinela y contextualizar los indicadores posteriores de
 severidad, ingreso a cuidados intensivos y mortalidad.
 
-### **6.2 Distribución temporal según grupo etario**
+### **5.2 Distribución temporal según grupo etario**
 
 A continuación, se presenta la distribución temporal de los casos
 notificados de IRAG e IRAG extendida según grupo etario, semana
@@ -194,7 +170,7 @@ personas de 60 años y más constituyen grupos incluidos en la definición
 de IRAG extendida, por tratarse de poblaciones con mayor vulnerabilidad
 frente a las infecciones respiratorias agudas graves.
 
-#### **6.2.1 Menores de 2 años**
+#### **Menores de 2 años**
 
 **Gráfico 2.** Distribución semanal de casos de IRAG e IRAG extendida en
 menores de 2 años. Unidad Centinela de IRAG, Hospital Regional Río
@@ -207,7 +183,7 @@ curva_interactiva_menores_dos
 
 Fuente: Elaboración propia con base en datos del SNVS 2.0
 
-#### **6.2.2 Población de 2 a 14 años**
+#### **Población de 2 a 14 años**
 
 En la población de 2 a 14 años, el análisis permite observar la
 evolución semanal de los casos de IRAG notificados en una etapa de la
@@ -232,7 +208,7 @@ curva_interactiva_2_14
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-#### **6.2.3 Población de 15 a 59 años**
+#### **Población de 15 a 59 años**
 
 En la población de 15 a 59 años, el análisis permite describir la
 evolución semanal de los casos de IRAG en población adolescente, joven y
@@ -257,7 +233,7 @@ curva_interactiva_15_59
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-#### **6.2.4 Personas de 60 años y más**
+#### **Personas de 60 años y más**
 
 En las personas de 60 años y más, el análisis permite observar la
 evolución semanal de los casos de IRAG e IRAG extendida en una población
@@ -281,7 +257,7 @@ curva_interactiva_60_mas
 
 Fuente: Elaboración propia con base en datos del SNVS 2.0
 
-### **6.3. Determinaciones para virus respiratorios**
+## **6. Determinaciones para virus respiratorios**
 
 En esta sección se presenta la distribución temporal de las
 determinaciones realizadas para virus respiratorios en vigilancia, así
@@ -305,7 +281,7 @@ grafico_virus_semanal_apilado
 
 Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
 
-### **6.4. Comorbilidades según grupo etario**
+## **7. Comorbilidades según grupo etario**
 
 La presencia de comorbilidades constituye un componente relevante para
 interpretar el riesgo clínico y la posible evolución desfavorable de los
@@ -332,9 +308,9 @@ refuerzan la necesidad de sostener estrategias de prevención,
 vacunación, identificación temprana de riesgo y seguimiento diferenciado
 en personas mayores y pacientes con condiciones preexistentes.
 
-### **6.5. Porcentaje de vacunación**
+## **8. Porcentaje de vacunación**
 
-#### **6.5.1 Vacunación antigripal en grupos de riesgo**
+### **Vacunación antigripal en grupos de riesgo**
 
 La vacunación antigripal constituye una intervención prioritaria para
 reducir el riesgo de complicaciones, internación y formas graves de
@@ -357,7 +333,7 @@ Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
 Se observaron que en el grupo de 6 a 23 meses presenta mayor porcentaje
 de vacunación, en comparación al grupo de 65 años y más.
 
-#### **6.5. 2 Vacunación materna en menores de 6 meses**
+### **Vacunación materna en menores de 6 meses**
 
 En pacientes menores de 6 meses, el antecedente de vacunación materna
 constituye una variable relevante para interpretar el riesgo de
@@ -394,7 +370,7 @@ tabla_vsr_materna
 
 Fuente: Elaboración propia en base a los datos del SNVS 2.0
 
-### **6.7. Comportamiento de las internaciones respiratorias en la población adulto - pediátrico.**
+## **9. Comportamiento de las internaciones respiratorias en la población adulto - pediátrico.**
 
 Del análisis de la notificación agrupada durante el período de estudio
 establecido, muestra una proporción aproximada de ocupación de camas en
@@ -413,7 +389,7 @@ curva_internaciones_irag
 
 Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
 
-#### **6.8. Tasa de letalidad**
+## **10. Tasa de letalidad**
 
 La tasa de letalidad mostró diferencias marcadas según grupo etario. El
 grupo de 60 años y más presentó la mayor letalidad, con fallecidos sobre
@@ -437,7 +413,7 @@ de IRAG e IRAG extendida. Unidad Centinela de IRAG, Hospital Regional
 Río Gallegos, provincia de Santa Cruz. Semana epidemiológica 18 de 2024
 a semana epidemiológica 8 de 2026.
 
-### **6.9 Ingresos a UCI por IRAG e IRAG extendida**
+## **11. Ingresos a UCI por IRAG e IRAG extendida**
 
 **Gráfico 9.**
 
@@ -445,7 +421,7 @@ a semana epidemiológica 8 de 2026.
 curva_uci_irag
 ```
 
-#### **6.10. Defunciones por agente etiologico**
+## **12. Defunciones por agente etiológico**
 
 **Tabla 4.** Agentes etiológicos en fallecidos según grupo etario en
 casos notificados de IRAG e IRAG extendida. Unidad Centinela de IRAG,

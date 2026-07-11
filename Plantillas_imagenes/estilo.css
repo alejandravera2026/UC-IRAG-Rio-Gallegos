@@ -1,0 +1,91 @@
+/*==================================================
+  HEADER INSTITUCIONAL
+==================================================*/
+
+.header-ministerio{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    z-index: 9999;
+    background: white;
+}
+
+.header-ministerio img{
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Elimina espacios que agrega Quarto */
+
+body{
+    margin:0 !important;
+    padding:0 !important;
+}
+
+main.content{
+    margin-top:0 !important;
+    padding-top:0 !important;
+}
+
+#quarto-content{
+    margin-top:0 !important;
+    padding-top:0 !important;
+}
+
+#title-block-header{
+    display:none;
+}
+/* Baja el índice lateral */
+
+.sidebar nav#TOC {
+   position: sticky;
+  top: 130px !important;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding-right: 10px;
+}
+/* Mantiene visible el título del índice */
+
+.sidebar nav#TOC .toc-title {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #ffffff;
+  color: #080A40 !important;
+  font-weight: 700;
+  padding: 8px 0;
+}
+/* Color de los enlaces del índice */
+
+.sidebar nav#TOC a {
+  color: #222222 !important;
+}
+
+.sidebar nav#TOC a:hover,
+.sidebar nav#TOC a.active {
+  color: #0d6efd !important;
+}
+/*=====================================
+  TÍTULOS
+=====================================*/
+
+#quarto-document-content h1{
+    text-align:center !important;
+    color:#080A40 !important;
+}
+
+#quarto-document-content h2{
+    text-align:left !important;
+    color:#080A40 !important;
+}
+
+#quarto-document-content h3{
+    text-align:left !important;
+    color:#080A40 !important;
+}
