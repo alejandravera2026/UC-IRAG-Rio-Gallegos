@@ -48,15 +48,15 @@ source("Scripts/Obj_9_Letalidad.R")
 
 ## Hospital Regional de Río Gallegos
 
-## **1.Introducción**
+## **1. Introducción**
 
-Las infecciones respiratorias agudas (IRA) constituyen una causa relevante de morbimortalidad y de presión sobre los servicios de salud, especialmente en menores de dos años, personas mayores de 60 años y pacientes con factores de riesgo. La circulación de influenza, SARS-CoV-2 y virus sincicial respiratorio (VSR) requiere una vigilancia epidemiológica integrada, oportuna y sostenida, capaz de aportar información para la detección de tendencias, la caracterización de la gravedad y la organización de la respuesta asistencial.
+Las infecciones respiratorias agudas (IRA) constituyen una causa relevante de morbimortalidad y de demanda sobre los servicios de salud, especialmente entre los menores de dos años, las personas de 60 años o más y quienes presentan factores de riesgo o patologías de base. La vigilancia integrada de influenza, SARS-CoV-2, virus sincicial respiratorio (VSR) y otros virus respiratorios resulta fundamental para identificar tendencias, caracterizar la gravedad de los casos y evaluar su impacto sobre el sistema de salud.
 
-La estrategia de Unidad Centinela de Infección Respiratoria Aguda Grave (UC-IRAG) permite caracterizar los casos hospitalizados, monitorear su evolución temporal, analizar la severidad clínica e identificar grupos con mayor riesgo de complicaciones. La información generada resulta clave para orientar decisiones sanitarias, fortalecer la respuesta hospitalaria y anticipar necesidades vinculadas con la internación, los cuidados críticos, el diagnóstico de laboratorio y las medidas de prevención.
+La estrategia de Unidad Centinela de Infección Respiratoria Aguda Grave (UC-IRAG) permite realizar el seguimiento sistemático de los casos hospitalizados, integrar información clínica, epidemiológica y de laboratorio e identificar grupos con mayor riesgo de complicaciones. La información generada contribuye a orientar la toma de decisiones sanitarias y la organización de la respuesta hospitalaria, particularmente en relación con las internaciones, los cuidados intensivos, el diagnóstico etiológico y las medidas de prevención.
 
-En la provincia de Santa Cruz, la estrategia UC-IRAG comenzó a implementarse en la semana epidemiológica 18 de 2024 en el Hospital Regional de Río Gallegos, establecimiento de referencia provincial con internación de pacientes adultos y pediátricos. 
+En la provincia de Santa Cruz, la estrategia UC-IRAG comenzó a implementarse en la semana epidemiológica 18 de 2024 en el Hospital Regional Río Gallegos, establecimiento de referencia provincial con internación de pacientes adultos y pediátricos.
 
-El presente boletín analiza los casos de IRAG e IRAG extendida registrados por la Unidad Centinela, considerando su distribución temporal, clasificación epidemiológica, severidad, ingreso a cuidados intensivos, mortalidad y circulación de virus respiratorios.
+El presente boletín describe los casos de IRAG e IRAG extendida registrados por la Unidad Centinela, considerando su distribución temporal y etaria, la evolución clínica, el ingreso a cuidados intensivos, la mortalidad y las detecciones de virus respiratorios.
 
 ## **2. Objetivo general**
 

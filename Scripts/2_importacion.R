@@ -4,7 +4,6 @@
 # Lectura de bases, control inicial y parámetros temporales
 # ==============================================================================
 
-
 # 1- IMPORTACIÓN DE ARCHIVOS ----------------------------------------------
 
 data <- read.csv2("Data/UC_IRAG_EST20892.csv",
