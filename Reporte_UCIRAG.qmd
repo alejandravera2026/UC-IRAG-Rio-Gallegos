@@ -6,26 +6,19 @@ format:
     self-contained: true
     toc: true
     toc-title: "Indice"
-    toc-depth: 3
+    toc-depth: 4 
     toc-location: left
     smooth-scroll: true
     embed-resources: true
-    css: estilos.css
+    css: Plantillas_imagenes/estilo.css
+    include-before-body: "Plantillas_imagenes/Encabezado.html"
+  
 execute: 
   echo: false
   warning: false
   message: false
-editor:
-  markdown: 
-    wrap: 72
+  
 ---
-
-::: portada
-
-![](Logos/logo_salud.png){width="70%"
-fig-align="left"}
-
-:::
 
 ```{r}
 source("Scripts/1_library.R")
