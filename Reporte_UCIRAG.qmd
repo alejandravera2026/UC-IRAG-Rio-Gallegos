@@ -39,7 +39,7 @@ source("Scripts/Obj_9_Letalidad.R")
 
 ```
 
-# Boletín Epidemiológico
+# Boletín FEOOOOOO
 
 # Unidad Centinela de Infecciones Respiratorias Agudas Graves
 
