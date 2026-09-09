@@ -6,7 +6,7 @@
 
 # 1- SE CREA UN NUEVO OBJETO ----------------------------------------------
 
-data_obj1 <- data
+data_obj1 <- base_final
 
  # Agrupo casos por año y semana epidemiológica
 

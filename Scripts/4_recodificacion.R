@@ -6,7 +6,7 @@
 # 1- CREACIÓN DE GRUPOS ETARIOS SEGÚN LA VARIABLE EDAD_UCIRAG  ------------
      # Grupos: < 6 meses; 6 a 23 meses; 2 a 14; 15-64 y 65 años y más.
 
-data <- data %>%
+base_final <- data %>%
   mutate(
     grupo_etario = case_when(
       EDAD_DIAGNOSTICO < 2 ~ "< 2 años",
@@ -19,16 +19,21 @@ data <- data %>%
     )
   )
 
-unique(data$grupo_etario)
+
+
+unique(base_final$grupo_etario)
 
 
 # 2- VERIFICAMOS DATOS FALTANTES POR VARIABLES ----------------------------
 
-colSums(is.na(data))
+colSums(is.na(base_final))
+
 
   # Observamos la distribución de grupos etarios y sus porcentajes
 
-prop.table(table(data$grupo_etario))*100
+prop.table(table(base_final$grupo_etario))*100
+
+
 
 
 # 3- CREACIÓN DE CATEGORÍAS PARA VACUNACIÓN  ------------------------------
@@ -46,7 +51,7 @@ no_vacunado <- c("MADRE NO VACUNADA","NO VACUNADO")
 
 # 5- APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL MATERNA ------------
 
-data <- data %>%
+base_final <- base_final %>%
   
   mutate (VAC_MATERNA_VSR = case_when
           (VAC_VSR %in% aplicacion_vsr ~ "VACUNADA",
@@ -60,13 +65,14 @@ data <- data %>%
             TRUE ~ "SIN DATO")
           )
 
-
+ 
 # 6- APLICO NUEVAS CATEGORÍAS A LAS VACUNAS ANTIGRIPAL  -------------------
 
-data <- data %>% 
-  
-  mutate (VAC_ANTIGRIPAL = case_when
+base_final <- base_final %>% 
+   mutate (VAC_ANTIGRIPAL = case_when
           (VAC_ANTIGRIPAL == "NO VACUNADO" ~ "NO VACUNADO",
             VAC_ANTIGRIPAL %in% vacunado ~ "VACUNADO",
             TRUE ~ "SIN DATO")
-          )
+   )
+
+
