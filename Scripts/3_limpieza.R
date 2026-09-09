@@ -6,7 +6,7 @@
 
 # 1- ELIMINO "Casos invalidados por epidemiología" ------------------------
 
-data <- data %>%
+base_final <- base_final %>%
   filter(
     CLASIFICACION_MANUAL != "Caso invalidado por epidemiología"
   )
@@ -14,7 +14,7 @@ data <- data %>%
 
 # 2- CREO VARIABLE SEPI ---------------------------------------------------
 
-data <- data %>%
+base_final <- base_final%>%
   mutate(
     SEPI= paste(
     ANIO_MIN_INTERNACION,
@@ -27,7 +27,7 @@ data <- data %>%
 
 # 3- FILTRO PERIODO A ANALIZAR  -------------------------------------------
 
-data <- data %>%
+base_final <- base_final %>%
   filter(
     (ANIO_MIN_INTERNACION > ANIO_MINIMO | 
        (ANIO_MIN_INTERNACION == ANIO_MINIMO & 

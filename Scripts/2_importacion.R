@@ -9,6 +9,9 @@
 data <- read.csv2("Data/UC_IRAG_EST20892.csv",
                   sep = ";",
                   encoding = "latin1")
+data1 <- read.csv2("Data/UC_IRAG_SANTA_CRUZ.csv",
+                   sep = ";",
+                   encoding = "latin1")
 
 agrupada <- read_xlsx("Data/UC_IRAG_AGRUPADA.xlsx")
 
@@ -35,13 +38,13 @@ data <- data %>%
   )
 
 
-# 4- PARÁMETROS TEMPORALES PARA EL ANÁLISIS -------------------------------
-
-ANIO_MINIMO <- 2024
-SEMANA_MINIMA <- 18
-
-ANIO_MAXIMO <- 2026
-SEMANA_MAXIMA <- 8
+data1 <- data1 %>% 
+  mutate(
+    ANIO_MIN_INTERNACION=
+      as.numeric(ANIO_MIN_INTERNACION),
+    SEPI_MIN_INTERNACION = 
+      as.numeric(SEPI_MIN_INTERNACION)
+  )
 
 
 
