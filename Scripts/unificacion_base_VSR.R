@@ -541,10 +541,10 @@ table(base_final$EDAD_UC_IRAG)
         VAC_VSR == "SIN DATO" ~ "Sin dato"
       )
     ) %>%
-    count(semana_gestacion, name = "N") %>%
+    count(semana_gestacion, name = "n") %>%
     mutate(
-      total = sum(N),
-      porcentaje = round(N/total*100, 1)
+      total = sum(n),
+      porcentaje = round(n/total*100, 1)
     ) %>%
     arrange(factor(semana_gestacion, levels = c("32","34","35","36","Otra semana","Vacunada - semana desconocida","No vacunada","Sin dato"))) %>%
     select(-total)
@@ -553,14 +553,28 @@ table(base_final$EDAD_UC_IRAG)
     gt() %>%
     tab_header(
       title = md("**Estado de vacunación materna para VSR**"),
-      subtitle = "Menores de 11 meses internados por IRAG/IRAG extendida -HRRG - Total: 106 casos"
+      subtitle = "Menores de 11 meses internados por IRAG/IRAG extendida -HRRG - n: 106 casos"
     ) %>%
     cols_label(
-      semana_gestacion = "Semana de gestación / Estado",
+      semana_gestacion = "Semana de gestación/Estado",
       porcentaje = "%"
     ) %>%
     fmt_number(columns = porcentaje, decimals = 1, dec_mark = ",", sep_mark = ".") %>%
-    cols_align(columns = c(N, porcentaje), align = "center")
+    cols_align(columns = c(n, porcentaje), align = "center")
 
   tabla_final_vsr  
+
+# Se realiza el total de los casos de IRAG e IRAG extendida en menores de 11 meses
   
+vacunacion_vsr %>%
+    count(CLASIFICACION_MANUAL)
+  
+  notificaciones_totales_vsr <- vacunacion_vsr %>%
+    
+    filter(CLASIFICACION_MANUAL %in%
+             c("Infección respiratoria aguda grave (IRAG)",
+               "IRAG extendida")
+    )%>%
+    summarise(Total = n())
+
+notificaciones_totales_vsr  
