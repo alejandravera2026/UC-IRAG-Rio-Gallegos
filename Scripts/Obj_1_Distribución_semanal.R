@@ -89,10 +89,10 @@ curva_interactiva
 
 # 3- TOTALES Y PORCENTAJES ------------------------------------------------
 
-data %>%
+base_final %>%
   count(CLASIFICACION_MANUAL)
 
-notificaciones_totales <- data %>%
+notificaciones_totales <- base_final %>%
   
   filter(CLASIFICACION_MANUAL %in%
            c("Infección respiratoria aguda grave (IRAG)",
@@ -102,7 +102,7 @@ notificaciones_totales <- data %>%
 
 notificaciones_totales
 
-notificaciones_irag <- data %>%
+notificaciones_irag <- base_final %>%
   
   filter(CLASIFICACION_MANUAL %in%
            "Infección respiratoria aguda grave (IRAG)") %>%
@@ -111,7 +111,7 @@ notificaciones_irag <- data %>%
 
 notificaciones_irag
 
-notificaciones_irage <- data %>%
+notificaciones_irage <- base_final %>%
   
   filter(CLASIFICACION_MANUAL %in% "IRAG extendida") %>%
   summarise(IRAGE = n()
@@ -119,7 +119,7 @@ notificaciones_irage <- data %>%
 
 notificaciones_irage
 
-pct_IRAG <- data %>%
+pct_IRAG <- base_final %>%
   
   filter(CLASIFICACION_MANUAL %in% 
            c("Infección respiratoria aguda grave (IRAG)", 
@@ -137,7 +137,7 @@ pct_IRAG <- data %>%
 
 pct_IRAG
 
-pct_IRAGE <- data %>%
+pct_IRAGE <- base_final %>%
   
   filter(CLASIFICACION_MANUAL %in% 
            c("Infección respiratoria aguda grave (IRAG)",

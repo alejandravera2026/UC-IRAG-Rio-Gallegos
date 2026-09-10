@@ -90,7 +90,7 @@ tabla_antigripal_materna <- vacunacion_materna_larga %>%
   )
 
 tabla_antigripal_materna
-
+     
 
 #-------------------------------------------------------------------------------
 # Tabla 2 - Vacunación materna contra VSR
