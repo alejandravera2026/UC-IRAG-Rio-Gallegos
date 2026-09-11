@@ -578,3 +578,43 @@ vacunacion_vsr %>%
     summarise(Total = n())
 
 notificaciones_totales_vsr  
+
+
+a_final_vsr_anio <- vacunacion_vsr %>%
+  mutate(
+    semana_gestacion = case_when(
+      VAC_VSR == "OTRA SE" ~ "Otra semana",
+      VAC_VSR == "SE DESCONOCIDA" ~ "Vacunada - semana desconocida",
+      str_detect(VAC_VSR, "^SE") ~ str_extract(VAC_VSR, "\\d+"),
+      VAC_VSR == "MADRE NO VACUNADA" ~ "No vacunada",
+      VAC_VSR == "SIN DATO" ~ "Sin dato",
+      TRUE ~ as.character(VAC_VSR)
+    )
+  ) %>%
+  count(ANIO_MIN_INTERNACION, semana_gestacion, name = "n") %>%
+  group_by(ANIO_MIN_INTERNACION) %>%
+  mutate(`%` = round(n / sum(n) * 100, 1)) %>%
+  ungroup()
+
+a_final_vsr_anio
+
+
+library(tidyr)
+library(gt)
+
+# Formato ancho 2024 vs 2025
+
+
+
+a_final_vsr_anio <- a_final_vsr_anio%>%
+  pivot_wider(
+    names_from = ANIO_MIN_INTERNACION,
+    values_from = c(n, `%`),
+    values_fill = list(n = 0, `%` = 0)
+  ) %>%
+  gt() %>%
+  tab_header(
+    title = "Estado de vacunación materna para VSR por año",
+    subtitle = "Menores de 11 meses internados IRAG - HRRG"
+  )
+a_final_vsr_anio

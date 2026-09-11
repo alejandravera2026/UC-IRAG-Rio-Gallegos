@@ -197,18 +197,20 @@ Durante el período de estudio, se
 evaluó la vacunación materna con respecto a los casos presentados.
 
 Factores a tener en cuenta en el presente análisis: 
-1- Período establecido de estrategia de vacunación para VSR.
-2- Posible desconocimiento de la vacuna materna en el ámbito privado.
-3- Embarazos no controlados.
+período establecido de estrategia de vacunación para VSR, posible desconocimiento de la vacuna materna en el ámbito privado y/o embarazos no controlados.
+
+
 
 **Tabla 1.** Vacunación VSR materna en pacientes menores de 11
 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos,
 provincia de Santa Cruz.
 
 ```{r}
-  tabla_final_vsr 
+  tabla_ancha
 
 ```
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+Año 2026 hasta semana 32
 
