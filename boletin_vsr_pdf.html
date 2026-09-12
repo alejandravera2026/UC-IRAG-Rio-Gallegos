@@ -1,0 +1,111 @@
+---
+title: "Análisis de la situación de la vacunación materna para VSR"
+subtitle: "Unidad Centinela - IRAG - Hospital Regional Río Gallegos - SE 18/2024 a SE 32/2026"
+format:
+  pdf:
+    toc: true
+    toc-title: "Indice"
+    number-sections: true
+    geometry: margin=2.5cm
+    fontsize: 11pt
+    colorlinks: true
+    fig-width: 7
+    fig-height: 4
+execute:
+  echo: false
+  warning: false
+  message: false
+lang: es
+---
+
+```{r setup}
+knitr::opts_knit$set(root.dir = here::here())
+source(here::here("Scripts/1_library.R"), encoding = "UTF-8")
+source(here::here("Scripts/2_importacion.R"), encoding = "UTF-8")
+source(here::here("Scripts/unificacion_base_VSR.R"), encoding = "UTF-8")
+```
+
+\newpage
+
+# Análisis de la situación de la vacunación materna para Virus Sincicial Respiratorio
+
+# Unidad Centinela - IRAG e IRAG extendida. Hospital Regional de Río Gallegos
+
+## 1. Introducción
+En Argentina se incorporó en marzo de 2024 la vacunación al calendario nacional para el Virus Sincicial Respiratorio...
+
+## 2. Objetivo general
+Describir el comportamiento epidemiológico, etiológico y vacunación materna de los casos de IRAG e IRAG extendidas (IRAGE) notificados por la Unidad Centinela del Hospital Regional Río Gallegos entre la SE 18 de 2024 y la SE 32 de 2026.
+
+## 3. Ejes de análisis
+Comportamiento temporal, circulación de VSR, distribución por grupos etarios y antecedente de vacunación materna.
+
+## 4. Definiciones operativas y criterios de inclusión
+
+**IRAG:** fiebre >=38°C, tos, inicio <10 días, internación.
+
+**IRAG extendida:** <2 años o >=60 años con tos o dificultad respiratoria, inicio <10 días, internación. En <6 meses: apnea o sepsis.
+
+Guía: https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf
+
+## 5. Nota metodológica
+Información proveniente del SNVS 2.0. Período SE 18/2024 a SE 32/2026. Procesamiento en R.
+
+## 6. Situación epidemiológica
+
+Entre la SE 18 de 2024 y la SE 32 de 2026, se registraron un total de `r notificaciones_totales_vsr` internaciones notificadas en el marco de la estrategia UC-IRAG-HRRG.
+
+### 6.1 Distribución temporal según grupo etario
+
+#### 6.1.1 De 0 a 2 meses
+**Gráfico 1.** Distribución semanal de casos de IRAG e IRAG extendida de 0 a 2 meses.
+
+```{r}
+#| fig-cap: "0 a 2 meses - UC-IRAG HRRG"
+curva_0_a_2_meses
+```
+
+Fuente: Elaboración propia con base en datos del SNVS 2.0
+
+#### 6.1.2 De 3 a 5 meses
+**Gráfico 2.** Distribución semanal de casos de 3 a 5 meses.
+
+```{r}
+#| fig-cap: "3 a 5 meses - UC-IRAG HRRG"
+curva_3_a_5_meses
+```
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+#### 6.1.3 De 6 a 11 meses
+**Gráfico 3.** Distribución semanal de casos de 6 a 11 meses.
+
+```{r}
+#| fig-cap: "6 a 11 meses - UC-IRAG HRRG"
+curva_6_a_11_meses
+```
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+### 6.2 Determinaciones para Virus Sincicial Respiratorio en menores de 11 meses
+
+**Gráfico 4.** Determinaciones para VSR según SE y año.
+
+```{r}
+#| fig-cap: "Determinaciones VSR"
+grafico_virus_semanal_apilado_vsr_estatico
+```
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+### 6.3 Porcentaje de vacunación materna en menores de 11 meses
+
+**Tabla 1.** Vacunación VSR materna en pacientes menores de 11 meses.
+
+```{r}
+tabla_final_con_total
+```
+
+Fuente: Elaboración propia en base a datos del SNVS 2.0
+
+Año 2026 hasta semana 32

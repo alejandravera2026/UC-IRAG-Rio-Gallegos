@@ -12,6 +12,16 @@ format:
     embed-resources: true
     css: Plantillas_imagenes/estilo.css
     include-before-body: "Plantillas_imagenes/Encabezado.html"
+pdf:
+  toc: true
+  toc-title: "Indice"
+  number-sections: false
+  pdf-engine: xelatex
+  geometry:
+    - top=2.5cm
+    - bottom=2.5cm
+    - left=2.5cm
+    - right=2.5cm
 execute:
   echo: false
   warning: false
