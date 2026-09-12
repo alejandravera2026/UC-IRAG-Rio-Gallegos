@@ -165,7 +165,7 @@ table(base_final$EDAD_UC_IRAG)
   
   de_3_a_5_meses <- distribucion_grupo_etario_vsr %>%
     filter(
-      grupo_etario == "0 a 2 Meses",
+      grupo_etario == "3 a 5 Meses",
       CLASIFICACION_MANUAL %in% c("IRAG extendida", "Infección respiratoria aguda grave (IRAG)"))
   
   
@@ -496,255 +496,145 @@ table(base_final$EDAD_UC_IRAG)
   grafico_virus_semanal_apilado_vsr
 
   
-  #===============================================================================
-  # 1. Selección de variables y construcción de grupos de riesgo
+  
+    #===============================================================================
+  # 1.VACUNACION: SE SELECCIONA LOS GRUPOS DE EDAD EN ESTUDIO PARA VER EL ESTADO
+  #VACUNAL DE LA MADRE
   #===============================================================================
 
   
   table(base_final_vsr$VAC_VSR)
-  
-  
-  vacunada <- c("OTRA SE", "SE 32", "SE 34", "SE 35", "SE 36", "SE DESCONOCIDA")
-  
-  no_vacunada <- c("MADRE NO VACUNADA")
-  
-  
-  # 5- APLICO NUEVAS CATEGORÍAS A LAS VACUNAS VSR MATERNA ------------
-    
-  vacunacion_vsr <- base_final_vsr %>%
-    select(
-      EDAD_UC_IRAG,
-      VAC_VSR
-    ) %>%
-    mutate(
-      grupo_riesgo_vacunacion = case_when(
-        EDAD_UC_IRAG %in% c("0 a 2 Meses") ~ "De 0 a 2 meses",
-        EDAD_UC_IRAG %in% c("3 a 5 Meses") ~ "De 3 a 5 meses",
-        EDAD_UC_IRAG %in% c("6 a 11 Meses") ~ 
-          "De 6 a 11 meses",
-        TRUE ~ NA_character_
-      ),
-      grupo_riesgo_vacunacion = factor(
-        grupo_riesgo_vacunacion,
-        levels = c(
-          "De  0 a 2 meses",
-          "De 3 a 5 meses",
-          "De 6 a 11 meses"
-        )
-      )
-    ) %>%
-    filter(!is.na(grupo_riesgo_vacunacion))
-  
-  
-  #===============================================================================
-  # 2. PARTE 1 - VACUNACIÓN MATERNA EN PACIENTES MENORES DE 11 MESES
-  #===============================================================================
-  
-  vacunacion_materna_larga_vsr <- vacunacion_vsr %>%
-    filter(grupo_riesgo_vacunacion %in% c ("De 0 a 2 meses", "De 3 a 5 meses", 
-                                           " De 6 a 11 meses")) %>%
-    select(
-      `VSR materna` = VAC_VSR
-    ) %>%
-    pivot_longer(
-      cols = everything(),
-      names_to = "Vacuna",
-      values_to = "Estado"
-    ) %>%
-    mutate(
-      Estado = case_when(
-        Estado %in% c("vacunada") ~ "Vacunada",
-        Estado %in% c("No_vacunada") ~ "No_vacunada",
-        TRUE ~ "SIN DATO"
-      ),
-      Estado = factor(
-        Estado,
-        levels = c("Vacunada", "No_vacunada", "SIN DATO")
-      )
-    )
 
+  vacunacion_vsr <- base_final_vsr %>%
+    filter(EDAD_UC_IRAG %in% c("0 a 2 Meses", "3 a 5 Meses", "6 a 11 Meses"))
   
-  #-------------------------------------------------------------------------------
-  # Tabla 1 - Vacunación vsr materna
-  #-------------------------------------------------------------------------------
+  table(vacunacion_vsr$VAC_VSR)
   
-  tabla_vsr_materna <- vacunacion_materna_larga_vsr %>%
-    filter(Vacuna == "VSR materna") %>%
-    count(Estado, name = "casos") %>%
+  
+  
+  library(dplyr)
+  library(stringr)
+  
+  tabla_final_vsr <- vacunacion_vsr %>%
     mutate(
-      porcentaje = round(casos / sum(casos) * 100, 1),
-      resultado = paste0(casos, " (", porcentaje, "%)")
+      semana_gestacion = case_when(
+        VAC_VSR == "OTRA SE" ~ "Otra semana",
+        VAC_VSR == "SE DESCONOCIDA" ~ "Vacunada - semana desconocida",
+        str_detect(VAC_VSR, "^SE") ~ str_extract(VAC_VSR, "\\d+"),
+        VAC_VSR == "MADRE NO VACUNADA" ~ "No vacunada",
+        VAC_VSR == "SIN DATO" ~ "Sin dato",
+      )
     ) %>%
-    select(Estado, resultado) %>%
+    count(semana_gestacion, name = "cantidad") %>%
+    arrange(factor(semana_gestacion, levels = c("32","34","35","36","Otra semana",
+                                                "Vacunada - semana desconocida","No vacunada",
+                                                "Sin dato")))
+  
+  tabla_final_vsr
+
+  tabla_final_vsr <- vacunacion_vsr %>%
+    mutate(
+      semana_gestacion = case_when(
+        VAC_VSR == "OTRA SE" ~ "Otra semana",
+        VAC_VSR == "SE DESCONOCIDA" ~ "Vacunada - semana desconocida",
+        str_detect(VAC_VSR, "^SE") ~ str_extract(VAC_VSR, "\\d+"),
+        VAC_VSR == "MADRE NO VACUNADA" ~ "No vacunada",
+        VAC_VSR == "SIN DATO" ~ "Sin dato"
+      )
+    ) %>%
+    count(semana_gestacion, name = "n") %>%
+    mutate(
+      total = sum(n),
+      porcentaje = round(n/total*100, 1)
+    ) %>%
+    arrange(factor(semana_gestacion, levels = c("32","34","35","36","Otra semana","Vacunada - semana desconocida","No vacunada","Sin dato"))) %>%
+    select(-total)
+  
+  tabla_final_vsr <- tabla_final_vsr %>%
     gt() %>%
-    cols_label(
-      Estado = "Estado",
-      resultado = "Resultado"
-    ) %>%
-    cols_align(
-      align = "center"
-    ) %>%
     tab_header(
-      title = "Vacunación VSR materna.",
-      subtitle = "Pacientes menores de 11 meses. Unidad Centinela HRRG, 2024–2026."
-    )
-  
-  tabla_vsr_materna
-  
-  
-  #-------------------------------------------------------------------------------
-  # Tabla 2 - Vacunación materna contra VSR
-  #-------------------------------------------------------------------------------
-  
-  tabla_vsr_materna <- vacunacion_materna_larga %>%
-    filter(Vacuna == "VSR materna") %>%
-    count(Estado, name = "casos") %>%
-    mutate(
-      porcentaje = round(casos / sum(casos) * 100, 1),
-      resultado = paste0(casos, " (", porcentaje, "%)")
+      title = md("**Estado de vacunación materna para VSR**"),
+      subtitle = "Menores de 11 meses internados por IRAG/IRAG extendida -HRRG - n: 106 casos"
     ) %>%
-    select(Estado, resultado) %>%
-    gt() %>%
     cols_label(
-      Estado = "Estado",
-      resultado = "Resultado"
+      semana_gestacion = "Semana de gestación/Estado",
+      porcentaje = "%"
     ) %>%
-    cols_align(
-      align = "center"
-    ) %>%
-    tab_header(
-      title = "Vacunación materna contra VSR.",
-      subtitle = "Pacientes menores de 6 meses. Unidad Centinela HRRG, 2024–2026."
+    fmt_number(columns = porcentaje, decimals = 1, dec_mark = ",", sep_mark = ".") %>%
+    cols_align(columns = c(n, porcentaje), align = "center")
+
+  tabla_final_vsr  
+
+# Se realiza el total de los casos de IRAG e IRAG extendida en menores de 11 meses
+  
+vacunacion_vsr %>%
+    count(CLASIFICACION_MANUAL)
+  
+  notificaciones_totales_vsr <- vacunacion_vsr %>%
+    
+    filter(CLASIFICACION_MANUAL %in%
+             c("Infección respiratoria aguda grave (IRAG)",
+               "IRAG extendida")
+    )%>%
+    summarise(Total = n())
+
+notificaciones_totales_vsr  
+
+
+# Se separa por año la vacunación materna
+
+a_final_vsr_anio <- vacunacion_vsr %>%
+  mutate(
+    semana_gestacion = case_when(
+      VAC_VSR == "OTRA SE" ~ "Otra semana",
+      VAC_VSR == "SE DESCONOCIDA" ~ "Vacunada - semana desconocida",
+      str_detect(VAC_VSR, "^SE") ~ str_extract(VAC_VSR, "\\d+"),
+      VAC_VSR == "MADRE NO VACUNADA" ~ "No vacunada",
+      VAC_VSR == "SIN DATO" ~ "Sin dato",
+      TRUE ~ as.character(VAC_VSR)
     )
-  
-  tabla_vsr_materna
-  
-  
-  
-  #===============================================================================
-  # 3. PARTE 2 - VACUNACIÓN ANTIGRIPAL EN GRUPOS DE RIESGO
-  #===============================================================================
-  
-  vacunacion_antigripal_larga <- vacunacion_base %>%
-    filter(grupo_riesgo_vacunacion %in% c("6 a 23 meses", "65 años y más")) %>%
-    select(
-      grupo_riesgo_vacunacion,
-      VAC_ANTIGRIPAL
-    ) %>%
-    mutate(
-      Estado = case_when(
-        VAC_ANTIGRIPAL =="VACUNADO" ~ "Vacunado",
-        VAC_ANTIGRIPAL %in% c("NO VACUNADA", "NO VACUNADO") ~ "No vacunado",
-        TRUE ~ "Sin dato"
-      ))
-  
-  
-  tabla_antigripal_riesgo <- vacunacion_antigripal_larga %>%
-    count(grupo_riesgo_vacunacion, Estado, name = "casos") %>%
-    group_by(grupo_riesgo_vacunacion) %>%
-    mutate(
-      porcentaje = round(casos / sum(casos) * 100, 1),
-      etiqueta = paste0(round(porcentaje, 1), "%")
-    ) %>%
-    ungroup()
-  
-  #===============================================================================
-  # Gráfico - vacunación antigripal en grupos de riesgo
-  #===============================================================================
-  
-  tabla_antigripal_high <- tabla_antigripal_riesgo %>%
-    mutate(
-      Estado = factor(
-        Estado,
-        levels = c("Vacunado", "No vacunado", "Sin dato")
-      )
+  ) %>%
+  count(ANIO_MIN_INTERNACION, semana_gestacion, name = "n") %>%
+  group_by(ANIO_MIN_INTERNACION) %>%
+  ungroup()
+
+
+# 2. Ahora SI la ancha, con OTRO nombre
+library(dplyr)
+library(tidyr)
+library(gt)
+
+tabla_final <- a_final_vsr_anio %>%
+  mutate(semana_gestacion = trimws(as.character(semana_gestacion))) %>%
+  select(semana_gestacion, ANIO_MIN_INTERNACION, n) %>%
+  group_by(semana_gestacion, ANIO_MIN_INTERNACION) %>%
+  summarise(n = sum(n), .groups = "drop") %>%
+  pivot_wider(
+    names_from = ANIO_MIN_INTERNACION,
+    values_from = n,
+    names_prefix = "n_",
+    values_fill = 0
+  ) %>%
+  # Esto te junta todos los "32" en uno solo
+  group_by(semana_gestacion) %>%
+  summarise(across(starts_with("n_"), sum), .groups="drop")
+
+# Le agregamos el TOTAL
+tabla_final_con_total <- tabla_final %>%
+  bind_rows(
+    data.frame(
+      semana_gestacion = "Total de casos de IRAG/IRAGe en < 11 meses",
+      n_2024 = sum(tabla_final$n_2024),
+      n_2025 = sum(tabla_final$n_2025),
+      n_2026 = sum(tabla_final$n_2026)
     )
-  
-  
-  grafico_antigripal_riesgo <- highchart() %>%
-    
-    hc_chart(type = "bar") %>%
-    
-    hc_title(
-      text = "Vacunación antigripal en grupos de riesgo"
-    ) %>%
-    
-    hc_subtitle(
-      text = "Unidad Centinela HRRG, 2024–2026"
-    ) %>%
-    
-    hc_xAxis(
-      categories = c("6 a 23 meses", "65 años y más"),
-      title = list(text = NULL)
-    ) %>%
-    
-    hc_yAxis(
-      title = list(text = "Porcentaje (%)"),
-      labels = list(format = "{value}%"),
-      min = 0,
-      max = 100,
-      tickInterval = 20,
-      gridLineColor = "#E6E6E6",
-      reversedStacks = FALSE
-    ) %>%
-    
-    hc_plotOptions(
-      series = list(
-        stacking = "normal",
-        
-        dataLabels = list(
-          enabled = TRUE,
-          format = "{point.y:.1f}%",
-          style = list(
-            color = "white",
-            fontWeight = "bold",
-            textOutline = "none"
-          )
-        )
-      )
-    ) %>%
-    
-    hc_add_series(
-      name = "Vacunado",
-      
-      data = tabla_antigripal_high %>%
-        filter(Estado == "Vacunado") %>%
-        pull(porcentaje),
-      
-      color = "#2e7d32"
-    ) %>%
-    
-    hc_add_series(
-      name = "No vacunado",
-      
-      data = tabla_antigripal_high %>%
-        filter(Estado == "No vacunado") %>%
-        pull(porcentaje),
-      
-      color = "#e67d32"
-    ) %>%
-    
-    hc_tooltip(
-      shared = TRUE,
-      
-      pointFormat = paste0(
-        "<span style='color:{point.color}'>●</span> ",
-        "{series.name}: <b>{point.y:.1f}%</b><br/>"
-      )
-    ) %>%
-    
-    hc_legend(
-      align = "center",
-      verticalAlign = "bottom",
-      
-      itemStyle = list(
-        fontWeight = "normal",
-        fontSize = "11px"
-      )
-    )
-  
-  grafico_antigripal_riesgo
-  
-  
-  
-  
+  ) %>%
+  arrange(match(semana_gestacion, c("32","34","35","36","Otra semana","Vacunada - semana desconocida","No vacunada","Sin dato","TOTAL")))
+
+tabla_final_con_total <- tabla_final_con_total %>% 
+  gt() %>%
+  tab_header(
+    title = "Estado de vacunación materna para VSR por año",
+    subtitle = "Menores de 11 meses internados IRAG - HRRG"
+  )
+tabla_final_con_total

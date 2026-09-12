@@ -6,7 +6,7 @@
 # 1- CREACIÓN DE GRUPOS ETARIOS SEGÚN LA VARIABLE EDAD_UCIRAG  ------------
      # Grupos: < 6 meses; 6 a 23 meses; 2 a 14; 15-64 y 65 años y más.
 
-base_final <- data %>%
+base_final <- base_final %>%
   mutate(
     grupo_etario = case_when(
       EDAD_DIAGNOSTICO < 2 ~ "< 2 años",
