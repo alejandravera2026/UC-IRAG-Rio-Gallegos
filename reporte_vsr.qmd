@@ -1,21 +1,24 @@
 ---
 title: ""
 subtitle: ""
+format:
+  html:
     self-contained: true
     toc: true
     toc-title: "Indice"
-    toc-depth: 4 
+    toc-depth: 4
     toc-location: left
     smooth-scroll: true
     embed-resources: true
     css: Plantillas_imagenes/estilo.css
     include-before-body: "Plantillas_imagenes/Encabezado.html"
-  
-execute: 
+execute:
   echo: false
   warning: false
   message: false
 ---
+  
+
 
 
 ```{r}
