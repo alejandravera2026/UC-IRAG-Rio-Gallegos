@@ -496,7 +496,8 @@ table(base_final$EDAD_UC_IRAG)
   grafico_virus_semanal_apilado_vsr
 
   
-  #===============================================================================
+  
+    #===============================================================================
   # 1.VACUNACION: SE SELECCIONA LOS GRUPOS DE EDAD EN ESTUDIO PARA VER EL ESTADO
   #VACUNAL DE LA MADRE
   #===============================================================================
@@ -580,6 +581,8 @@ vacunacion_vsr %>%
 notificaciones_totales_vsr  
 
 
+# Se separa por año la vacunación materna
+
 a_final_vsr_anio <- vacunacion_vsr %>%
   mutate(
     semana_gestacion = case_when(
@@ -593,28 +596,45 @@ a_final_vsr_anio <- vacunacion_vsr %>%
   ) %>%
   count(ANIO_MIN_INTERNACION, semana_gestacion, name = "n") %>%
   group_by(ANIO_MIN_INTERNACION) %>%
-  mutate(`%` = round(n / sum(n) * 100, 1)) %>%
   ungroup()
 
-a_final_vsr_anio
 
-
+# 2. Ahora SI la ancha, con OTRO nombre
+library(dplyr)
 library(tidyr)
 library(gt)
 
-# Formato ancho 2024 vs 2025
-
-
-
-a_final_vsr_anio <- a_final_vsr_anio%>%
+tabla_final <- a_final_vsr_anio %>%
+  mutate(semana_gestacion = trimws(as.character(semana_gestacion))) %>%
+  select(semana_gestacion, ANIO_MIN_INTERNACION, n) %>%
+  group_by(semana_gestacion, ANIO_MIN_INTERNACION) %>%
+  summarise(n = sum(n), .groups = "drop") %>%
   pivot_wider(
     names_from = ANIO_MIN_INTERNACION,
-    values_from = c(n, `%`),
-    values_fill = list(n = 0, `%` = 0)
+    values_from = n,
+    names_prefix = "n_",
+    values_fill = 0
   ) %>%
+  # Esto te junta todos los "32" en uno solo
+  group_by(semana_gestacion) %>%
+  summarise(across(starts_with("n_"), sum), .groups="drop")
+
+# Le agregamos el TOTAL
+tabla_final_con_total <- tabla_final %>%
+  bind_rows(
+    data.frame(
+      semana_gestacion = "Total de casos de IRAG/IRAGe en < 11 meses",
+      n_2024 = sum(tabla_final$n_2024),
+      n_2025 = sum(tabla_final$n_2025),
+      n_2026 = sum(tabla_final$n_2026)
+    )
+  ) %>%
+  arrange(match(semana_gestacion, c("32","34","35","36","Otra semana","Vacunada - semana desconocida","No vacunada","Sin dato","TOTAL")))
+
+tabla_final_con_total <- tabla_final_con_total %>% 
   gt() %>%
   tab_header(
     title = "Estado de vacunación materna para VSR por año",
     subtitle = "Menores de 11 meses internados IRAG - HRRG"
   )
-a_final_vsr_anio
+tabla_final_con_total
