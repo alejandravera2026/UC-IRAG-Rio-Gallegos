@@ -31,12 +31,12 @@ format:
         \fancypagestyle{plain}{\pagestyle{fancy}}
         \makeatletter
         \def\@maketitle{
-          \vspace*{0.3cm}
+          \vspace*{0.2cm}
           \begin{flushleft}
           {\LARGE\bfseries INFORME TÉCNICO\par}
-          \vspace{0.2cm}
+          \vspace{0.1cm}
           {\large\bfseries Casos confirmados de VSR en menores de 1 año y antecedente de vacunación materna\par}
-          \vspace{0.2cm}
+          \vspace{0.1cm}
           {\normalsize Río Gallegos, 14 de septiembre de 2026\par}
           \end{flushleft}
           \vspace{0cm}
