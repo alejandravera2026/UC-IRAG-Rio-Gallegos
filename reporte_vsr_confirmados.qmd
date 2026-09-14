@@ -231,9 +231,7 @@ Nota: se incluyen únicamente los tres casos con antecedente de vacunación mate
 
 Los resultados corresponden a los casos captados por la Unidad Centinela del Hospital Regional Río Gallegos y no representan la totalidad de los casos de la provincia de Santa Cruz.
 
-El Hospital Regional Río Gallegos, como establecimiento de alta complejidad y referencia para las zonas centro y sur de la provincia, recibe pacientes derivados de otras localidades. Por ello, los casos analizados no deben interpretarse como casos exclusivamente residentes en Río Gallegos. La base analizada no incluye la localidad de residencia o procedencia, por lo que no fue posible describir su distribución territorial.
-
-Por otra parte, la base utilizada no dispone de la fecha de aplicación de la vacuna materna contra VSR, por lo que no fue posible describir esta variable ni calcular el intervalo entre vacunación y nacimiento.
+La base utilizada no dispone de la fecha de aplicación de la vacuna materna contra VSR, por lo que no fue posible describir esta variable ni calcular el intervalo entre vacunación y nacimiento.
 
 El antecedente de vacunación materna se describe según la información consignada en los registros, manteniendo diferenciados los casos sin
 dato. La información disponible no permite establecer los motivos de ausencia de vacunación materna ni su relación con el período de campaña, el acceso a controles prenatales o posibles omisiones en el registro de dosis aplicadas en el ámbito privado.
