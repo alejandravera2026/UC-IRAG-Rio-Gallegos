@@ -1,0 +1,248 @@
+---
+title: "dummy"
+lang: es
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    pdf-engine: xelatex
+    geometry:
+      - top=2.2cm
+      - bottom=2.5cm
+      - left=3cm
+      - right=2.5cm
+      - headsep=0.2cm
+    include-in-header:
+      text: |
+        \usepackage[table]{xcolor}
+        \usepackage{colortbl}
+        \usepackage{float}
+        \floatplacement{table}{H}
+        \usepackage{fancyhdr}
+        \usepackage{graphicx}
+        \usepackage{adjustbox}
+        \setlength{\headheight}{35pt}
+        \pagestyle{fancy}
+        \fancyhf{}
+        \fancyhead[L]{\includegraphics[height=1.1cm]{Plantillas_imagenes/Logo_salud.png}}
+        \fancyhead[R]{}
+        \fancyfoot[R]{\footnotesize pág. \thepage}
+        \renewcommand{\headrulewidth}{0.2pt}
+        \fancypagestyle{plain}{\pagestyle{fancy}}
+        \makeatletter
+        \def\@maketitle{
+          \vspace*{0.3cm}
+          \begin{flushleft}
+          {\LARGE\bfseries INFORME TÉCNICO\par}
+          \vspace{0.2cm}
+          {\large\bfseries Casos confirmados de VSR en menores de 1 año y antecedente de vacunación materna\par}
+          \vspace{0.2cm}
+          {\normalsize Río Gallegos, 14 de septiembre de 2026\par}
+          \end{flushleft}
+          \vspace{0cm}
+        }
+        \makeatother
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+
+source("Scripts/1_library.R")
+source("Scripts/2_importacion.R")
+source("Scripts/unificacion_base_VSR.R")
+source("analisis_VSR_menores_1_anio.R")
+```
+
+## **1. Introducción**
+
+En respuesta a la solicitud de información sobre menores de un año con
+complicaciones respiratorias asociadas al Virus Sincicial Respiratorio
+(VSR), se presenta un análisis de los casos confirmados internados por
+IRAG e IRAG extendida en el Hospital Regional Río Gallegos.
+
+Se priorizaron los registros de la Unidad Centinela por su mayor
+completitud para las variables de interés. Los resultados corresponden
+a los casos captados por esta unidad y no representan la totalidad de
+los casos de la provincia de Santa Cruz.
+
+El análisis comprende 46 casos registrados entre la semana
+epidemiológica 18 de 2024 y la semana epidemiológica 32 de 2026.
+Se describe su distribución por año y grupo etario, el antecedente
+de vacunación materna contra VSR y la semana gestacional de aplicación
+consignada en los registros.
+
+## **2. Metodología**
+
+Se realizó un análisis descriptivo de los registros nominales de la
+Unidad Centinela del Hospital Regional Río Gallegos, exportados del
+Sistema Nacional de Vigilancia de la Salud (SNVS 2.0).
+
+Se incluyeron registros de menores de un año con clasificación de IRAG
+o IRAG extendida, resultado positivo para VSR y el mencionado hospital como establecimiento de internación. 
+
+El período analizado comprendió
+desde la SE 18 de 2024 hasta la SE 32 de 2026, según el año y la
+semana epidemiológica de internación consignados en la base.
+
+Se verificó que los 46 registros seleccionados tuvieran identificadores de evento completos y sin repeticiones. La edad en meses se agrupó en los intervalos solicitados: 0–3, 4–6 y 7–11 meses. 
+
+El antecedente de vacunación materna se clasificó como madre vacunada,
+madre no vacunada o sin dato, según la información registrada en la
+base. Entre los casos con antecedente de vacunación materna, se
+describió la semana gestacional de aplicación consignada.
+
+El procesamiento se realizó en R. Los resultados se presentan mediante
+frecuencias absolutas por año. Los períodos de 2024 y 2026 son parciales,
+por lo que los recuentos anuales corresponden a períodos de distinta
+extensión.
+
+Para consultar las definiciones de IRAG e IRAG extendida, los criterios
+de inclusión y los procedimientos de vigilancia de la estrategia,
+véase la [Guía Operativa UC-IRAG -- Ministerio de Salud de la Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
+
+## **3. Resultados**
+
+Durante el período analizado se identificaron 46 casos confirmados
+de VSR en menores de un año internados por IRAG o IRAG extendida en el Hospital Regional Río Gallegos: 30 en 2024, 15 en 2025 y 1 en 2026 (hasta SE 32, datos parciales).
+
+### **3.1. Distribución por año y grupo etario**
+
+Del total de casos, 18 correspondieron al grupo de 0–3 meses, 11 al de 4–6 meses y 17 al de 7–11 meses.
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: "Casos confirmados de VSR en menores de un año, según grupo etario y año. Hospital Regional Río Gallegos, SE 18/2024 a SE 32/2026."
+#| tbl-pos: H
+#| echo: false
+
+tabla_casos_edad %>%
+  dplyr::bind_rows(
+    tabla_casos_edad %>%
+      dplyr::summarise(dplyr::across(where(is.numeric), sum)) %>%
+      dplyr::mutate(grupo_etario_solicitado = "Total")
+  ) %>%
+  gt::gt() %>%
+  gt::cols_label(grupo_etario_solicitado = "Grupo etario") %>%
+  gt::cols_align(align = "left", columns = grupo_etario_solicitado) %>%
+  gt::cols_align(align = "center", columns = c(`2024`, `2025`, `2026`, Total)) %>%
+  gt::tab_options(
+    table.width = gt::pct(100),
+    table.font.size = gt::px(10),
+    column_labels.font.weight = "bold",
+    data_row.padding = gt::px(4),
+    table.border.top.style = "none",
+    table.border.top.width = gt::px(1.5),
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    table.border.bottom.width = gt::px(1.5)
+  ) %>%
+  gt::tab_style(style = gt::cell_text(weight = "bold"), locations = gt::cells_column_labels()) %>%
+  gt::tab_style(style = gt::cell_text(weight = "bold"), locations = gt::cells_body(rows = grupo_etario_solicitado == "Total"))
+```
+Fuente: Elaboración propia con base en datos del SNVS 2.0. Nota: los datos de 2024 comprenden desde la SE 18 y los de 2026 hasta la SE 32.
+
+
+### **3.2. Antecedente de vacunación materna contra VSR**
+
+Entre los 46 casos confirmados de VSR, se registraron 3 con antecedente de madre vacunada, 40 de madre no vacunada y 3 sin dato sobre vacunación materna. El único caso incluido en 2026 no contaba con información sobre este antecedente.
+
+```{r}
+#| label: tbl-2
+#| tbl-cap: "Antecedente de vacunación materna contra VSR en menores de un año con infección confirmada, según año. Hospital Regional Río Gallegos, SE 18/2024 a SE 32/2026."
+#| tbl-pos: H
+#| echo: false
+
+tabla_vacunacion_anual %>%
+  dplyr::mutate(
+    antecedente_vacunacion_materna = as.character(antecedente_vacunacion_materna)
+  ) %>%
+  dplyr::bind_rows(
+    tabla_vacunacion_anual %>%
+      dplyr::summarise(dplyr::across(where(is.numeric), sum)) %>%
+      dplyr::mutate(antecedente_vacunacion_materna = "Total")
+  ) %>%
+  gt::gt() %>%
+  gt::cols_label(antecedente_vacunacion_materna = "Antecedente materno") %>%
+  gt::cols_align(align = "left", columns = antecedente_vacunacion_materna) %>%
+  gt::cols_align(align = "center", columns = c(`2024`, `2025`, `2026`, Total)) %>%
+  gt::tab_options(
+    table.width = gt::pct(100),
+    table.font.size = gt::px(10),
+    column_labels.font.weight = "bold",
+    data_row.padding = gt::px(4),
+    table.border.top.style = "none",
+    table.border.top.width = gt::px(1.5),
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    table.border.bottom.width = gt::px(1.5)
+  ) %>%
+  gt::tab_style(style = gt::cell_text(weight = "bold"), locations = gt::cells_column_labels()) %>%
+  gt::tab_style(style = gt::cell_text(weight = "bold"), locations = gt::cells_body(rows = antecedente_vacunacion_materna == "Total"))
+```
+
+Fuente: Elaboración propia con base en datos del SNVS 2.0.
+
+### **3.3. Semana gestacional de vacunación materna**
+
+Entre los tres casos con antecedente de vacunación materna, dos tenían registrada la aplicación en la semana gestacional 32, correspondientes a 2024, y uno en la semana 36, correspondiente a 2025.
+
+
+```{r}
+#| label: tbl-3
+#| tbl-cap: "Semana gestacional de aplicación de la vacuna materna entre los casos con antecedente de vacunación, según año. Hospital Regional Río Gallegos, SE 18/2024 a SE 32/2026."
+#| tbl-pos: H
+#| echo: false
+
+tabla_semana_gestacional %>%
+  dplyr::mutate(
+    semana_gestacional_vacunacion = paste(semana_gestacional_vacunacion, "semanas")
+  ) %>%
+  dplyr::bind_rows(
+    tabla_semana_gestacional %>%
+      dplyr::summarise(dplyr::across(c(`2024`, `2025`, `2026`, Total), sum)) %>%
+      dplyr::mutate(semana_gestacional_vacunacion = "Total")
+  ) %>%
+  gt::gt() %>%
+  gt::cols_label(semana_gestacional_vacunacion = "Semana gestacional") %>%
+  gt::cols_align(align = "left", columns = semana_gestacional_vacunacion) %>%
+  gt::cols_align(align = "center", columns = c(`2024`, `2025`, `2026`, Total)) %>%
+  gt::tab_options(
+    table.width = gt::pct(100),
+    table.font.size = gt::px(10),
+    column_labels.font.weight = "bold",
+    data_row.padding = gt::px(4),
+    table.border.top.style = "none",
+    table.border.top.width = gt::px(1.5),
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    table.border.bottom.width = gt::px(1.5)
+  ) %>%
+  gt::tab_style(style = gt::cell_text(weight = "bold"), locations = gt::cells_column_labels()) %>%
+  gt::tab_style(style = gt::cell_text(weight = "bold"), locations = gt::cells_body(rows = semana_gestacional_vacunacion == "Total"))
+```
+Fuente: Elaboración propia con base en datos del SNVS 2.0. 
+Nota: se incluyen únicamente los tres casos con antecedente de vacunación materna registrado.
+
+## **4. Limitaciones**
+
+Los resultados corresponden a los casos captados por la Unidad Centinela del Hospital Regional Río Gallegos y no representan la totalidad de los casos de la provincia de Santa Cruz.
+
+El Hospital Regional Río Gallegos, como establecimiento de alta complejidad y referencia para las zonas centro y sur de la provincia, recibe pacientes derivados de otras localidades. Por ello, los casos analizados no deben interpretarse como casos exclusivamente residentes en Río Gallegos. La base analizada no incluye la localidad de residencia o procedencia, por lo que no fue posible describir su distribución territorial.
+
+Por otra parte, la base utilizada no dispone de la fecha de aplicación de la vacuna materna contra VSR, por lo que no fue posible describir esta variable ni calcular el intervalo entre vacunación y nacimiento.
+
+El antecedente de vacunación materna se describe según la información consignada en los registros, manteniendo diferenciados los casos sin
+dato. La información disponible no permite establecer los motivos de ausencia de vacunación materna ni su relación con el período de campaña, el acceso a controles prenatales o posibles omisiones en el registro de dosis aplicadas en el ámbito privado.
+
+Estos resultados no permiten estimar la cobertura de vacunación en personas gestantes ni evaluar la efectividad o el impacto poblacional de la estrategia de vacunación.
+
+\noindent\rule{8cm}{0.4pt}
+
+**Elaboración técnica**
+
+Área de Epidemiología MSyA  
+Coordinación Provincial de Redes de Laboratorio

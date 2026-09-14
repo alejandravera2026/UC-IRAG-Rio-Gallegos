@@ -13,15 +13,29 @@ format:
     css: Plantillas_imagenes/estilo.css
     include-before-body: "Plantillas_imagenes/Encabezado.html"
 pdf:
-  toc: true
-  toc-title: "Indice"
-  number-sections: false
-  pdf-engine: xelatex
-  geometry:
-    - top=2.5cm
-    - bottom=2.5cm
-    - left=2.5cm
-    - right=2.5cm
+    toc: true
+    toc-title: "Índice"
+    number-sections: false
+    pdf-engine: xelatex
+    geometry:
+      - top=2.5cm
+      - bottom=2.5cm
+      - left=2.5cm
+      - right=2.5cm
+    include-in-header:
+      text: |
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhf{}
+        \fancyfoot[R]{pág.\thepage}
+        \renewcommand{\headrulewidth}{0pt}
+        \renewcommand{\footrulewidth}{0pt}
+        \fancypagestyle{plain}{
+          \fancyhf{}
+          \fancyfoot[R]{pág.\thepage}
+          \renewcommand{\headrulewidth}{0pt}
+          \renewcommand{\footrulewidth}{0pt}
+        }
 execute:
   echo: false
   warning: false
@@ -41,68 +55,76 @@ source("scripts/unificacion_base_VSR.R")
 
 # Análisis de la situación de la vacunación materna para Virus Sincicial Respiratorio
 
-# Unidad Centinela -IRAG e IRAG extendida. Hospital Regional de Río Gallegos
+## **Elaboración técnica**
+### Coordinación provincial de redes de laboratorio
+### Epidemiología MSyA
 
 ## **1. Introducción**
 
-En Argentina incorporó en marzo de 2024, la vacunación al calendario nacional para el Virus Sincicial Respiratorio, lo que subraya la importancia de realizar estudios de carga de enfermedad, efectividad e impacto de la vacunación para documentar la reducción de hospitalizaciones en recién nacidos y lactantes.
+La introducción de la vacuna contra VSR en el calendario de la persona gestante representa un hito en la prevención de infecciones respiratorias graves en recién nacidos y lactantes. Sin embargo, su impacto real depende de la cobertura alcanzada, la oportunidad de la vacunación y la dinámica estacional del virus. La evaluación de estas variables requiere de una vigilancia centinela sostenida y nominalizada.
 
-Considerando la importancia de contar con establecimientos de salud que aporten información de calidad, particularmente para los mencionados estudios de la vacuna de VSR, y los antecedentes y desafíos que se han presentado en la implementación de las distintas estrategias de vigilancia.
+Desde la SE 18/2024, el Hospital Regional Río Gallegos funciona como Unidad Centinela de IRAG e IRAG extendida, permitiendo el seguimiento longitudinal de las internaciones pediátricas, el estudio etiológico por laboratorio y el registro del antecedente vacunal materno. Este abordaje integral es indispensable para interpretar el riesgo residual en lactantes cuyas madres no fueron vacunadas, ya sea por encontrarse fuera del período de campaña, por falta de acceso o por embarazos no controlados.
 
-La estrategia de Unidad Centinela de Infección Respiratoria Aguda Grave (UC-IRAG) permite consolidar la información generada para contribuir a la toma de decisiones sanitarias y a la organización de la respuesta hospitalarias, particularmente las internaciones.
-
-En la provincia de Santa Cruz, la estrategia UC-IRAG comenzó a implementarse en la semana epidemiológica 18 de 2024 en el Hospital Regional Río Gallegos, establecimiento de referencia provincial por ser de mayor densidad poblacionalque refleja una información orientativa de la evolución de los casos.
-
-El presente informe describe los casos de IRAG e IRAG extendida en niños menores de 11 meses registrados por la Unidad Centinela, considerando su distribución temporal y etaria, la detección de Virus Sincicial Respiratorio y el estado vacunal materno considerando los períodos establecidos en la campaña de vacunación para VSR.
+A continuación, se presenta el análisis de `r notificaciones_totales_vsr` internaciones en menores de 11 meses registradas hasta la SE 32/2026 en el marco de la estrategia UC-IRAG-HRRG, con el objetivo de aportar evidencia local para la toma de decisiones sanitarias y la evaluación del impacto de la estrategia de vacunación materna.
 
 ## **2. Objetivo general**
 
-Describir el comportamiento epidemiológico, etiológico y vacunación materna de los casos de infecciones respiratorias agudas graves (IRAG) e IRAG extendidas (IRAGE) notificados por la Unidad Centinela del Hospital Regional Río Gallegos entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 32 de 2026, con el propósito de aportar información oportuna para la vigilancia epidemiológica y el análisis del impacto sobre el sistema de salud.
+Describir la situación de la vacunación materna para Virus Sincicial Respiratorio (VSR) en los casos de infecciones respiratorias agudas graves (IRAG) e IRAG extendidas (IRAGE) en menores de 11 meses notificados por la Unidad Centinela del Hospital Regional Río Gallegos entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 32 de 2026, con el propósito de caracterizar la cobertura, oportunidad y brechas de acceso a la vacunación durante la gestación y aportar evidencia para la evaluación del impacto de la estrategia.
 
 ## **3. Ejes de análisis**
 
-El presente informe analiza el comportamiento temporal de los casos de IRAG e IRAG extendida, la circulación de Virus Sincicial Respiratorio, la distribución según grupos etarios, antecedentes materno de vacunación según semana de gestación.
+El presente informe se estructura en torno a los siguientes ejes, con foco en la vacunación materna:
+
+- Situación de la vacunación materna: proporción de lactantes menores de 11 meses internados por IRAG/IRAGE cuyas madres recibieron la vacuna contra VSR durante la gestación.
+
+- Oportunidad de la vacunación: distribución del antecedente vacunal según trimestre y semana de gestación (32 a 36 semanas) y tiempo transcurrido entre vacunación y nacimiento.
+
+- Brechas y motivos de no vacunación: caracterización de los casos sin antecedente vacunal según ocurrencia fuera del período de campaña estacional (enero-agosto), falta de acceso, embarazo no controlado o no registro.
+
+- Relación con la circulación de VSR: correlación temporal entre casos confirmados para VSR y antecedente de vacunación materna por grupo etario priorizado (0 a 2, 3 a 5 y 6 a 11 meses), período de mayor vulnerabilidad para formas graves.
+
 
 ## **4. Definiciones operativas y criterios de inclusión**
 
 La clasificación de los casos se realizó de acuerdo con las definiciones establecidas para la estrategia de vigilancia centinela de Infección Respiratoria Aguda Grave (IRAG).
 
-### **IRAG**
+IRAG
+Se considera caso de IRAG a todo paciente, de cualquier edad, con infección respiratoria aguda que presenta fiebre referida o constatada mayor o igual a 38 °C, tos, inicio del cuadro en los 10 días previos y requerimiento de internación por criterio clínico.
 
-Se considera caso de IRAG a todo paciente, de cualquier edad, con infección respiratoria aguda que presenta:
-
--   fiebre referida o constatada mayor o igual a 38 °C;
--   tos;
--   inicio del cuadro en los 10 días previos;
--   requerimiento de internación por criterio clínico.
-
-### **IRAG extendida**
-
-Se considera caso de IRAG extendida a pacientes menores de 2 años o personas de 60 años o más que presentan:
-
--   infección respiratoria definida por tos o dificultad respiratoria;
--   inicio del cuadro en los 10 días previos;
--   requerimiento de internación por criterio clínico.
+IRAG extendida
+Se considera caso de IRAG extendida a pacientes menores de 2 años o personas de 60 años o más que presentan infección respiratoria definida por tos o dificultad respiratoria, inicio del cuadro en los 10 días previos y requerimiento de internación por criterio clínico.
 
 En lactantes menores de 6 meses, también se consideran criterios clínicos relevantes la presencia de apnea o sepsis, entendida como fiebre o hipotermia, shock y cuadro grave sin causa aparente.
 
 Estas definiciones permiten diferenciar los casos captados por la definición clásica de IRAG de aquellos incorporados mediante la estrategia ampliada de IRAG extendida, lo cual resulta fundamental para interpretar adecuadamente la magnitud, severidad e impacto de los eventos analizados.
 
-Para mayor detalle sobre las definiciones operativas, criterios de inclusión, circuito de notificación e indicadores de la estrategia UC-IRAG, consultar la guía operativa nacional vigente:
+Para mayor detalle sobre las definiciones operativas, criterios de inclusión, circuito de notificación e indicadores de la estrategia UC-IRAG, consultar la guía operativa nacional vigente: [Guía Operativa UC-IRAG -- Ministerio de Salud de la Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
 
-[Guía Operativa UC-IRAG -- Ministerio de Salud de la Nación](https://www.argentina.gob.ar/sites/default/files/guia-uc-irag-vff.pdf)
+Definición operativa para el análisis de vacunación materna VSR
+
+Para el presente informe se consideró:
+
+Caso con antecedente de vacunación materna: lactante menor de 11 meses internado por IRAG o IRAG extendida cuya madre recibió vacuna contra VSR entre las 32 y 36 semanas de gestación, con intervalo mayor o igual a 14 días previos al nacimiento.
+
+Caso sin antecedente de vacunación materna: lactante menor de 11 meses sin registro de vacunación materna, o vacunada fuera del intervalo recomendado (menor de 32 o mayor de 36 semanas), o con intervalo menor de 14 días entre vacunación y parto.
+
+Sin dato / no consta: casos donde no se pudo relevar el antecedente en historia clínica, carnet o sistema NOMIVAC.
+
+Período de campaña: para Argentina 2024-2026, la campaña estacional de vacunación VSR en personas gestantes se establece entre enero y agosto inclusive.
+
+El análisis de la situación vacunal se presenta estratificado por grupo etario del lactante de 0 a 2 meses, de 3 a 5 meses y de 6 a 11 meses.
 
 ## **5. Nota metodológica**
 
-El presente informe integra información proveniente de la notificación nominal de casos registradas en el Sistema Nacional de Vigilancia de la Salud ---SNVS 2.0---.
+El presente informe integra información proveniente de la notificación nominal de casos registrados en el Sistema Nacional de Vigilancia de la Salud, SNVS 2.0.
 
-El período evaluado comprende desde la semana epidemiológica 18 de 2024 hasta la semana epidemiológica 32 de 2026. El procesamiento de los datos, se realizó mediante el software R, incluyendo procedimientos de limpieza, depuración, clasificación y análisis descriptivo, con el propósito de garantizar trazabilidad, consistencia y reproducibilidad en la construcción de los indicadores.
+El período evaluado comprende desde la semana epidemiológica 18 de 2024 hasta la semana epidemiológica 32 de 2026. El procesamiento de los datos se realizó mediante el software R, incluyendo procedimientos de limpieza, depuración, clasificación y análisis descriptivo del antecedente de vacunación materna para VSR.
 
-Para la construcción de los indicadores se aplicaron los criterios de inclusión y exclusión establecidos por la vigilancia específica de Visrus Sincical Respiratorio. Los resultados deben interpretarse como información de vigilancia centinela hospitalaria, útil para monitorear tendencias, severidad e impacto, pero no como tasas poblacionales provinciales.
+Los resultados deben interpretarse como información de vigilancia centinela hospitalaria del Hospital Regional Río Gallegos, útil para monitorear tendencias, severidad, circulación de VSR y brechas de vacunación materna, pero no como tasas poblacionales provicniales.
 
 ## **6. Situación epidemiológica**
 
-Entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 32 de 2026, se registraron un total de `r notificaciones_totales_vsr` internaciones notificadas en el marco de la estrategia UC-IRAG-HRRG.
+Entre la semana epidemiológica 18 de 2024 y la semana epidemiológica 32 de 2026, se registraron un total de `r notificaciones_totales_vsr` internaciones por IRAG e IRAG extendida en menores de 11 meses notificadas en el marco de la estrategia UC-UCIRAG-HRRG. Este universo constituye la base para el análisis de la situación materna para VSR.
 
 ### **6.1 Distribución temporal según grupo etario**
 
@@ -113,9 +135,65 @@ A continuación, se presenta la distribución temporal de los casos notificados 
 **Gráfico 1.** Distribución semanal de casos de IRAG e IRAG extendida de 0 a 2 meses . Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz.
 
 ```{r}
-  curva_interactiva_0_a_2_meses
-```
+#| fig-width: 7
+#| fig-height: 3
+#| out-width: "80%"
+#| fig-align: center
 
+if (knitr::is_html_output()) {
+
+  curva_interactiva_0_a_2_meses
+
+} else {
+
+  casos_0_a_2_meses %>%
+    tidyr::pivot_longer(
+      cols = -SEPI,
+      names_to = "Clasificación",
+      values_to = "Casos"
+    ) %>%
+    ggplot2::ggplot(
+      ggplot2::aes(
+        x = SEPI,
+        y = Casos,
+        fill = Clasificación
+      )
+    ) +
+    ggplot2::geom_col(width = 0.8) +
+    ggplot2::scale_fill_manual(
+      values = c(
+        "IRAG extendida" = "#7EC8E6",
+        "Infección respiratoria aguda grave (IRAG)" = "#252C61"
+      )
+    ) +
+    ggplot2::scale_y_continuous(
+      breaks = scales::breaks_width(1),
+      expand = ggplot2::expansion(mult = c(0, 0.08))
+    ) +
+    ggplot2::labs(
+      title = "Casos de IRAG e IRAG extendida de 0 a 2 meses",
+      subtitle = "Unidad Centinela IRAG, 2024–2026",
+      x = NULL,
+      y = "Número de casos",
+      fill = NULL
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      plot.title =ggplot2::element_text(hjust = 0.5),
+      plot.subtitle = 
+      ggplot2::element_text(hjust = 0.5),
+  panel.grid.major = ggplot2::element_blank(),
+  panel.grid.minor = ggplot2::element_blank(),
+  axis.line = ggplot2::element_line(color = "#666666"),
+  axis.text.x = ggplot2::element_text(
+    angle = 45,
+    hjust = 1,
+    size = 7
+  ),
+  legend.position = "bottom"
+)
+}
+```
 Fuente: Elaboración propia con base en datos del SNVS 2.0
 
 #### **6.1.2 De 3 a 5 meses**
@@ -123,17 +201,130 @@ Fuente: Elaboración propia con base en datos del SNVS 2.0
 **Gráfico 2.** Distribución semanal de casos de IRAG e IRAG extendida de 3 a 5 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz.
 
 ```{r}
+#| fig-width: 7
+#| fig-height: 3
+#| out-width: "80%"
+#| fig-align: center
+  if (knitr::is_html_output()) {
+
   curva_interactiva_3_a_5_meses
+
+} else {
+
+  casos_3_a_5_meses %>%
+    tidyr::pivot_longer(
+      cols = -SEPI,
+      names_to = "Clasificación",
+      values_to = "Casos"
+    ) %>%
+    ggplot2::ggplot(
+      ggplot2::aes(
+        x = SEPI,
+        y = Casos,
+        fill = Clasificación
+      )
+    ) +
+    ggplot2::geom_col(width = 0.8) +
+    ggplot2::scale_fill_manual(
+      values = c(
+        "IRAG extendida" = "#7EC8E6",
+        "Infección respiratoria aguda grave (IRAG)" = "#252C61"
+      )
+    ) +
+    ggplot2::scale_y_continuous(
+      breaks = scales::breaks_width(1),
+      expand = ggplot2::expansion(mult = c(0, 0.08))
+    ) +
+    ggplot2::labs(
+      title = "Casos de IRAG e IRAG extendida de 3 a 5 meses",
+      subtitle = "Unidad Centinela IRAG, 2024–2026",
+      x = NULL,
+      y = "Número de casos",
+      fill = NULL
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      plot.title =ggplot2::element_text(hjust = 0.5),
+      plot.subtitle = 
+      ggplot2::element_text(hjust = 0.5),
+  panel.grid.major = ggplot2::element_blank(),
+  panel.grid.minor = ggplot2::element_blank(),
+  axis.line = ggplot2::element_line(color = "#666666"),
+  axis.text.x = ggplot2::element_text(
+    angle = 45,
+    hjust = 1,
+    size = 7
+  ),
+  legend.position = "bottom"
+)
+}
 ```
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
 
+{{<pagebreak>}}
 #### **6.1.3 De 6 a 11 meses**
 
 **Gráfico 3.** Distribución semanal de casos de IRAG e IRAG extendida de 6 a 11 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz.
 
 ```{r}
-curva_interactiva_6_a_11_meses
+#| fig-width: 7
+#| fig-height: 3
+#| out-width: "80%"
+#| fig-align: center
+if (knitr::is_html_output()) {
+
+  curva_interactiva_6_a_11_meses
+
+} else {
+
+  casos_6_a_11_meses %>%
+    tidyr::pivot_longer(
+      cols = -SEPI,
+      names_to = "Clasificación",
+      values_to = "Casos"
+    ) %>%
+    ggplot2::ggplot(
+      ggplot2::aes(
+        x = SEPI,
+        y = Casos,
+        fill = Clasificación
+      )
+    ) +
+    ggplot2::geom_col(width = 0.8) +
+    ggplot2::scale_fill_manual(
+      values = c(
+        "IRAG extendida" = "#7EC8E6",
+        "Infección respiratoria aguda grave (IRAG)" = "#252C61"
+      )
+    ) +
+    ggplot2::scale_y_continuous(
+      breaks = scales::breaks_width(1),
+      expand = ggplot2::expansion(mult = c(0, 0.08))
+    ) +
+    ggplot2::labs(
+      title = "Casos de IRAG e IRAG extendida de 6 a 11 meses",
+      subtitle = "Unidad Centinela IRAG, 2024–2026",
+      x = NULL,
+      y = "Número de casos",
+      fill = NULL
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      plot.title =ggplot2::element_text(hjust = 0.5),
+      plot.subtitle = 
+      ggplot2::element_text(hjust = 0.5),
+  panel.grid.major = ggplot2::element_blank(),
+  panel.grid.minor = ggplot2::element_blank(),
+  axis.line = ggplot2::element_line(color = "#666666"),
+  axis.text.x = ggplot2::element_text(
+    angle = 45,
+    hjust = 1,
+    size = 7
+  ),
+  legend.position = "bottom"
+)
+}
 ```
 
 Fuente: Elaboración propia en base a datos del SNVS 2.0
@@ -142,26 +333,102 @@ Fuente: Elaboración propia en base a datos del SNVS 2.0
 
 En esta sección se presenta la distribución temporal de las determinaciones realizadas para Virus Sincicial Respiratorio en vigilancia, así como las determinaciones con resultado negativo.
 
-**Gráfico 4.** Determinaciones para Virus Sincicial Respiratorio según semana epidemiológica y año. Resultados positivos VSR y determinaciones negativas. Unidad Centinela de IRAG,Hospital Regional Río Gallegos, provincia de Santa Cruz.
+**Gráfico 4.** Determinaciones para Virus Sincicial Respiratorio 
+Unidad Centinela de IRAG,Hospital Regional Río Gallegos, provincia de Santa Cruz.
 
 ```{r}
+#| fig-align: center
+#| out-width: "80%"
+
+ if (knitr::is_html_output()) {
+
   grafico_virus_semanal_apilado_vsr
+
+} else {
+
+  virus_semanal_grafico_vsr %>%
+    tidyr::pivot_longer(
+      cols = c(VSR, Negativos),
+      names_to = "Resultado",
+      values_to = "Determinaciones"
+    ) %>%
+    ggplot2::ggplot(
+      ggplot2::aes(
+        x = SEPI,
+        y = Determinaciones,
+        fill = Resultado
+      )
+    ) +
+    ggplot2::geom_col(width = 0.8) +
+    ggplot2::scale_fill_manual(
+      values = c(
+        "VSR" = "#009E73",
+        "Negativos" = "#D9D9D9"
+      ),
+      breaks = c("VSR", "Negativos"),
+      labels = c ("VSR positivo", "VSR negativo")
+    ) +
+    ggplot2::scale_x_discrete(
+      breaks = function(x) x[seq(1, length(x), by = 8)]
+    ) +
+    ggplot2::scale_y_continuous(
+      breaks = scales::breaks_pretty(n = 5),
+      expand = ggplot2::expansion(mult = c(0, 0.08))
+    ) +
+    ggplot2::labs(
+  title = "Determinaciones de VSR por semana epidemiológica",
+  subtitle = paste0(
+    "Niños de 0 a 11 meses. Resultados positivos y negativos.\n",
+    "Unidad Centinela de IRAG, HRRG, 2024–2026"
+  ),
+  x = NULL,
+  y = "Número de determinaciones",
+  fill = NULL
+    ) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(
+        hjust = 0.5,
+        size = 12,
+        color = "#444444"
+        ),
+      plot.subtitle = ggplot2::element_text(
+        hjust = 0.5,
+        size = 9.5,
+        face = "plain",
+        color = "#707070"),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(color = "#666666"),
+      axis.text.x = ggplot2::element_text(
+        angle = 45,
+        hjust = 1,
+        size = 7
+      ),
+      legend.position = "bottom"
+    )
+}
 ```
 
-Fuente: Elaboración propia en base a los datos del SNVS 2.0 y drive
+Fuente: Elaboración propia en base a los datos del SNVS 2.0 y registros del laboratorio HRRG.
 
-### **6.3 Porcentaje de vacunación materna en menores de 11 meses**
+### **6.3 Antecedente de vacunación materna contra el VSR**
 
-En pacientes menores de 11 meses, el antecedente de vacunación materna para Virus Sincicial Respiratorio constituye una variable relevante para interpretar el riesgo de infección respiratoria grave. Durante el período de estudio, se evaluó la vacunación materna con respecto a los casos presentados.
+En pacientes menores de 11 meses internados por IRAG e IRAG extendida, el antecedente de vacunación materna para VSR constituye una variable trazadora para evaluar la implementación de la estrategia.
 
-Factores a tener en cuenta en el presente análisis: período establecido de estrategia de vacunación para VSR, posible desconocimiento de la vacuna materna en el ámbito privado y/o embarazos no controlados.
+Durante el período SE 18/2024 a SE 32/2026 se observó una tendencia creciente en la proporción con antecedente vacunal: 13,2% en 2024, 33,3% en 2025 y 40,0% en 2026.
 
-**Tabla 1.** Vacunación VSR materna en pacientes menores de 11 meses. Unidad Centinela de IRAG, Hospital Regional Río Gallegos, provincia de Santa Cruz.
+Factores a considerar: periodo estacional enero-agosto, posible subregistro en ámbito privado y embarazos no controlados.
+
 
 ```{r}
-tabla_final_con_total
+#| tbl-pos: H
+tabla_estado_vacunacion
 ```
 
-Fuente: Elaboración propia en base a datos del SNVS 2.0
 
-Año 2026 hasta semana 32
+```{r}
+#| tbl-pos: H
+tabla_semana_vacunacion
+```
+

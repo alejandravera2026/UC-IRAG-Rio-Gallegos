@@ -22,7 +22,7 @@ agrupada_2026  <- read.csv("Data/AG_UC_IRAG_[EST20892]_2026_04_16.csv",
 
 # 2- CONTROL INICIAL DE OBJETOS -------------------------------------------
 
-names(data)
+names(data1)
 names(agrupada)
 names(agrupada_2026)
 

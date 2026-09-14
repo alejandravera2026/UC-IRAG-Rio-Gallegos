@@ -97,7 +97,10 @@ table(base_final$EDAD_UC_IRAG)
   
   curva_interactiva_0_a_2_meses <- highchart() %>%
     
-    hc_chart(type = "column") %>%
+    hc_chart(
+      type = "column",
+      height = 400
+      ) %>%
     
     hc_title(
       text = "Casos de IRAG e IRAG extendida de 0 a 2 meses"
@@ -120,12 +123,15 @@ table(base_final$EDAD_UC_IRAG)
       
       labels = list(
         rotation = -45,
-        step = 2
+        step = 4
       )
     ) %>%
     
     hc_yAxis(
       title = list(text = "Número de casos"),
+      min = 0,
+      aloowDecimals = FALSE,
+      tichInterval = 1,
       gridLineColor = "#E6E6E6"
     ) %>%
     
@@ -604,37 +610,308 @@ library(dplyr)
 library(tidyr)
 library(gt)
 
-tabla_final <- a_final_vsr_anio %>%
-  mutate(semana_gestacion = trimws(as.character(semana_gestacion))) %>%
-  select(semana_gestacion, ANIO_MIN_INTERNACION, n) %>%
-  group_by(semana_gestacion, ANIO_MIN_INTERNACION) %>%
-  summarise(n = sum(n), .groups = "drop") %>%
-  pivot_wider(
-    names_from = ANIO_MIN_INTERNACION,
-    values_from = n,
-    names_prefix = "n_",
-    values_fill = 0
-  ) %>%
-  # Esto te junta todos los "32" en uno solo
-  group_by(semana_gestacion) %>%
-  summarise(across(starts_with("n_"), sum), .groups="drop")
+# TABLA 1: ANTECEDENTE DE VACUNACIÓN MATERNA POR AÑO
 
-# Le agregamos el TOTAL
-tabla_final_con_total <- tabla_final %>%
-  bind_rows(
-    data.frame(
-      semana_gestacion = "Total de casos de IRAG/IRAGe en < 11 meses",
-      n_2024 = sum(tabla_final$n_2024),
-      n_2025 = sum(tabla_final$n_2025),
-      n_2026 = sum(tabla_final$n_2026)
+tabla_estado_anual <- vacunacion_vsr %>%
+  mutate(
+    anio = as.character(ANIO_MIN_INTERNACION),
+    estado_materno = case_when(
+      VAC_VSR == "MADRE NO VACUNADA" ~
+        "Sin antecedente de vacunación materna",
+      
+      VAC_VSR == "SIN DATO" | is.na(VAC_VSR) ~
+        "Sin información",
+      
+      TRUE ~
+        "Con antecedente de vacunación materna"
     )
   ) %>%
-  arrange(match(semana_gestacion, c("32","34","35","36","Otra semana","Vacunada - semana desconocida","No vacunada","Sin dato","TOTAL")))
+  count(
+    anio,
+    estado_materno,
+    name = "n"
+  ) %>%
+  group_by(anio) %>%
+  mutate(
+    conocidos = sum(
+      n[estado_materno != "Sin información"]
+    ),
+    
+    porcentaje = if_else(
+      estado_materno == "Sin información",
+      NA_real_,
+      n / conocidos * 100
+    ),
+    
+    resultado = if_else(
+      is.na(porcentaje),
+      as.character(n),
+      paste0(
+        n,
+        " (",
+        format(
+          round(porcentaje, 1),
+          nsmall = 1,
+          decimal.mark = ",",
+          trim = TRUE
+        ),
+        " %)"
+      )
+    )
+  ) %>%
+  ungroup() %>%
+  select(
+    estado_materno,
+    anio,
+    resultado
+  ) %>%
+  tidyr::pivot_wider(
+    names_from = anio,
+    values_from = resultado,
+    values_fill = "0"
+  )
 
-tabla_final_con_total <- tabla_final_con_total %>% 
+
+# TOTAL DE NIÑOS INTERNADOS POR AÑO
+
+fila_total <- vacunacion_vsr %>%
+  mutate(
+    anio = as.character(ANIO_MIN_INTERNACION)
+  ) %>%
+  count(
+    anio,
+    name = "resultado"
+  ) %>%
+  mutate(
+    estado_materno = "Total de niños internados",
+    resultado = as.character(resultado)
+  ) %>%
+  select(
+    estado_materno,
+    anio,
+    resultado
+  ) %>%
+  tidyr::pivot_wider(
+    names_from = anio,
+    values_from = resultado,
+    values_fill = "0"
+  )
+
+
+# ORDEN DE LAS FILAS
+
+tabla_estado_anual <- tabla_estado_anual %>%
+  bind_rows(fila_total) %>%
+  mutate(
+    estado_materno = factor(
+      estado_materno,
+      levels = c(
+        "Con antecedente de vacunación materna",
+        "Sin antecedente de vacunación materna",
+        "Sin información",
+        "Total de niños internados"
+      )
+    )
+  ) %>%
+  arrange(estado_materno)
+
+
+# PRESENTACIÓN DE LA TABLA
+
+tabla_estado_vacunacion <- tabla_estado_anual %>%
   gt() %>%
   tab_header(
-    title = "Estado de vacunación materna para VSR por año",
-    subtitle = "Menores de 11 meses internados IRAG - HRRG"
+    title = "Tabla 1. Antecedente de vacunación materna contra VSR por año",
+    subtitle = paste0(
+      "Niños de 0 a 11 meses internados por ",
+      "IRAG/IRAG extendida. HRRG, 2024–2026"
+    )
+  ) %>%
+  cols_label(
+    .list = list(
+      "estado_materno" = "Antecedente registrado",
+      "2024" = "2024",
+      "2025" = "2025",
+      "2026" = "2026"
+    )
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = tidyselect::all_of(
+      "estado_materno"
+    )
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = tidyselect::all_of(
+      c("2024", "2025", "2026")
+    )
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(
+      columns = everything()
+    )
+  ) %>%
+  tab_options(
+    source_notes.font.size = px(10)
+  ) %>%
+  tab_source_note(
+    source_note = gt::md(
+      paste0(
+        "Nota: los porcentajes se calcularon entre los casos ",
+        "con información conocida. Los datos de 2026 corresponden ",
+        "al período disponible."
+      )
+    )
+  )%>%
+  tab_source_note(
+    source_note = gt::md(
+      paste0(
+        "Fuente: Elaboración propia con base en datos del SNVS 2.0,",
+        "NOMIVAC y registros de laboratorio HRRG."
+      )
+    )
+  )%>%
+  tab_options(
+    source_notes.font.size = px(10)
   )
-tabla_final_con_total
+
+# MOSTRAR LA TABLA
+
+tabla_estado_vacunacion
+
+# TABLA 2: SEMANA GESTACIONAL DE VACUNACIÓN MATERNA
+
+tabla_semana_anual <- a_final_vsr_anio %>%
+  filter(
+    !semana_gestacion %in% c(
+      "No vacunada",
+      "Sin dato"
+    )
+  ) %>%
+  mutate(
+    anio = as.character(ANIO_MIN_INTERNACION),
+    semana_gestacion = case_when(
+      semana_gestacion == "32" ~ "32 semanas",
+      semana_gestacion == "34" ~ "34 semanas",
+      semana_gestacion == "35" ~ "35 semanas",
+      semana_gestacion == "36" ~ "36 semanas",
+      semana_gestacion == "Otra semana" ~
+        "Otra semana gestacional",
+      semana_gestacion == "Vacunada - semana desconocida" ~
+        "Semana gestacional desconocida",
+      TRUE ~ semana_gestacion
+    )
+  ) %>%
+  group_by(
+    semana_gestacion,
+    anio
+  ) %>%
+  summarise(
+    n = sum(n),
+    .groups = "drop"
+  ) %>%
+  tidyr::pivot_wider(
+    names_from = anio,
+    values_from = n,
+    values_fill = 0
+  )
+
+
+# TOTAL CON ANTECEDENTE DE VACUNACIÓN MATERNA
+
+fila_total_vacunadas <- tabla_semana_anual %>%
+  summarise(
+    across(
+      where(is.numeric),
+      sum
+    )
+  ) %>%
+  mutate(
+    semana_gestacion =
+      "Total con antecedente de vacunación materna"
+  ) %>%
+  select(
+    semana_gestacion,
+    everything()
+  )
+
+
+# ORDEN DE LAS FILAS
+
+tabla_semana_anual <- tabla_semana_anual %>%
+  bind_rows(fila_total_vacunadas) %>%
+  mutate(
+    semana_gestacion = factor(
+      semana_gestacion,
+      levels = c(
+        "32 semanas",
+        "34 semanas",
+        "35 semanas",
+        "36 semanas",
+        "Otra semana gestacional",
+        "Semana gestacional desconocida",
+        "Total con antecedente de vacunación materna"
+      )
+    )
+  ) %>%
+  arrange(semana_gestacion)
+
+
+# PRESENTACIÓN DE LA TABLA
+tabla_semana_vacunacion <- tabla_semana_anual %>%
+  gt() %>%
+  tab_header(
+    title = "Tabla 2. Semana gestacional de vacunación materna por año",
+    subtitle = paste0(
+      "Niños de 0 a 11 meses con antecedente de vacunación ",
+      "materna. HRRG, 2024–2026"
+    )
+  ) %>%
+  cols_label(
+    .list = list(
+      "semana_gestacion" = "Semana gestacional registrada",
+      "2024" = "2024",
+      "2025" = "2025",
+      "2026" = "2026"
+    )
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = tidyselect::all_of(
+      "semana_gestacion"
+    )
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = tidyselect::all_of(
+      c("2024", "2025", "2026")
+    )
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(
+      columns = everything()
+    )
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(
+      rows = semana_gestacion ==
+        "Total con antecedente de vacunación materna"
+    )
+  ) %>%
+  tab_options(
+    source_notes.font.size = px(10)
+  ) %>%
+  tab_source_note(
+    source_note = gt::md(
+      paste0(
+        "Nota: se incluyen únicamente los registros ",
+        "con antecedente de vacunación materna."
+      )
+    )
+  )
+
+tabla_semana_vacunacion
