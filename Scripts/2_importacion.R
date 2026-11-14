@@ -15,7 +15,7 @@ data1 <- read.csv2("Data/UC_IRAG_SANTA_CRUZ.csv",
 
 agrupada <- read_xlsx("Data/UC_IRAG_AGRUPADA.xlsx")
 
-agrupada_2026  <- read.csv("Data/AG_UC_IRAG_[EST20892]_2026_04_16.csv",
+agrupada_2026  <- read.csv("Data/AG_UC_IRAG_[SANTA_CRUZ]_2026_11_11.csv",
                            sep = ";", 
                            encoding = "latin1")
 
@@ -45,6 +45,19 @@ data1 <- data1 %>%
     SEPI_MIN_INTERNACION = 
       as.numeric(SEPI_MIN_INTERNACION)
   )
+
+
+#1. Histórico: solo 2024 y 2025 del primer archivo
+data_historico <- data %>%
+  filter(ANIO_MIN_INTERNACION < 2026)
+
+# 2. Actual: todo 2026 hasta SE 32 del segundo archivo
+data_actual <- data1 %>%
+  filter(ANIO_MIN_INTERNACION == 2026 & SEPI_MIN_INTERNACION <= 43)
+
+# 3. Unificación final sin duplicados
+base_final <- bind_rows(data_historico, data_actual) %>%
+  distinct() # por si hay filas exactamente iguales repetidas
 
 
 

@@ -6,7 +6,7 @@
 
 # 1- SE CREA UN NUEVO OBJETO ----------------------------------------------
 
-data_obj1 <- base_final
+data_obj1 <- base_etario
 
  # Agrupo casos por año y semana epidemiológica
 
@@ -89,10 +89,10 @@ curva_interactiva
 
 # 3- TOTALES Y PORCENTAJES ------------------------------------------------
 
-base_final %>%
+base_etario %>%
   count(CLASIFICACION_MANUAL)
 
-notificaciones_totales <- base_final %>%
+notificaciones_totales <- base_etario %>%
   
   filter(CLASIFICACION_MANUAL %in%
            c("Infección respiratoria aguda grave (IRAG)",
@@ -102,7 +102,7 @@ notificaciones_totales <- base_final %>%
 
 notificaciones_totales
 
-notificaciones_irag <- base_final %>%
+notificaciones_irag <- base_etario %>%
   
   filter(CLASIFICACION_MANUAL %in%
            "Infección respiratoria aguda grave (IRAG)") %>%
@@ -111,7 +111,7 @@ notificaciones_irag <- base_final %>%
 
 notificaciones_irag
 
-notificaciones_irage <- base_final %>%
+notificaciones_irage <- base_etario %>%
   
   filter(CLASIFICACION_MANUAL %in% "IRAG extendida") %>%
   summarise(IRAGE = n()
@@ -119,7 +119,7 @@ notificaciones_irage <- base_final %>%
 
 notificaciones_irage
 
-pct_IRAG <- base_final %>%
+pct_IRAG <- base_etario %>%
   
   filter(CLASIFICACION_MANUAL %in% 
            c("Infección respiratoria aguda grave (IRAG)", 
@@ -137,7 +137,7 @@ pct_IRAG <- base_final %>%
 
 pct_IRAG
 
-pct_IRAGE <- base_final %>%
+pct_IRAGE <- base_etario %>%
   
   filter(CLASIFICACION_MANUAL %in% 
            c("Infección respiratoria aguda grave (IRAG)",

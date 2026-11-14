@@ -7,7 +7,7 @@
 
 # 1- REDODIFICACIÓN DE COMORBILIDAD Y ORDEN DE GRUPOS ETARIOS -------------
 
-comorbilidad_base <- data %>%
+comorbilidad_base <- base_etario %>%
   mutate(
     COMORBILIDAD = case_when(
       PRESENCIA_COMORBILIDADES == 1 ~ "Sí",

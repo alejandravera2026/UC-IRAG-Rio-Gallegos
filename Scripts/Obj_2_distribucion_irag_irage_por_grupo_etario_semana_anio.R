@@ -7,7 +7,7 @@
 
 # 1- SELECCIONO VARIABLES PARA ANALIZAR  ----------------------------------
 
-distribucion_grupo_etario <- data %>%
+distribucion_grupo_etario <- base_etario %>%
   select(CLASIFICACION_MANUAL, grupo_etario, SEPI)
 
 

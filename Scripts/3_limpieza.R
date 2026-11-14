@@ -23,7 +23,15 @@ base_final <- base_final%>%
               "0")
     )
     )
+#PERIODO DE ANALISIS
 
+ANIO_MINIMO <- 2024
+
+SEMANA_MINIMA <- 18
+
+ANIO_MAXIMO <- 2026
+
+SEMANA_MAXIMA <- 43
 
 # 3- FILTRO PERIODO A ANALIZAR  -------------------------------------------
 
@@ -39,16 +47,16 @@ base_final <- base_final %>%
     
 # 4- CREO BASE LIMPIA -----------------------------------------------------
 
-data <- data
+base_limpia <- base_final
 
 
 # 5- CONTROL FINAL DE BASE ANALÍTICA --------------------------------------
 
-dim(data)
+dim(base_limpia)
 
-table(data$CLASIFICACION_MANUAL)
+table(base_limpia$CLASIFICACION_MANUAL)
 
-table(data$ANIO_MIN_INTERNACION)
+table(base_limpia$ANIO_MIN_INTERNACION)
 
 
 

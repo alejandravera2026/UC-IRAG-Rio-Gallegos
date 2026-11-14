@@ -9,7 +9,7 @@
 # 1- SELECCIÓN DE VARIABLES
 #============================================================================
 
-virus_base <- data %>% 
+virus_base <- base_etario %>% 
   select(
     SEPI,
     VSR_FINAL,

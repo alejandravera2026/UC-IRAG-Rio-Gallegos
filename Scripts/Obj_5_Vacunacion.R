@@ -9,7 +9,7 @@
 # 1. Selección de variables y construcción de grupos de riesgo
 #===============================================================================
 
-vacunacion_base <- data %>%
+vacunacion_base <- base_vac_materna %>%
   select(
     EDAD_UC_IRAG,
     VAC_ANTIGRIPAL,
@@ -133,7 +133,7 @@ vacunacion_antigripal_larga <- vacunacion_base %>%
   ) %>%
   mutate(
     Estado = case_when(
-      VAC_ANTIGRIPAL =="VACUNADO" ~ "Vacunado",
+      VAC_ANTIGRIPAL %in% c("CONSTATADA", "REFERIDA") ~ "Vacunado",
       VAC_ANTIGRIPAL %in% c("NO VACUNADA", "NO VACUNADO") ~ "No vacunado",
       TRUE ~ "Sin dato"
     ))
